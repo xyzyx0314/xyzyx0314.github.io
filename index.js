@@ -324,3 +324,11 @@ function open6() {
   }
 }
 
+window.onhashchange=function(event){
+  var url = window.location.href;
+  // 去掉hash部分
+  var newUrl = url.split("#")[0];
+  console.log(newUrl);
+  // 修改url
+  history.pushState(null, null, newUrl);
+}

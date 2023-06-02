@@ -1,0 +1,289 @@
+<body>
+
+  <!-- <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" class="scrollspy-example-2" tabindex="0"> -->
+  <div class="p-m" id="p-m">
+    <div class="p-top">
+      <div class="row">
+        <div class="p-top-postion">
+          <h class="p-top-link" onclick="loadHome()">Journey</h>
+          /
+          <h class="p-top-link" onclick="loadNote()">笔记</h>
+          /
+          <h class="p-top-link" onclick="loadNoteProblem()"> 题解 </h>
+          /
+          <h class="p-top-link" onclick="loadABC301()"> Panasonic Programming Contest 2023（AtCoder Beginner Contest 301）
+          </h>
+        </div>
+      </div>
+    </div>
+    <div class="p-title2" id="item">Panasonic Programming Contest 2023（AtCoder Beginner Contest 301）</div>
+    <div class="p-title5">D - Bitmask</div>
+    <div class="p-title5">E - Pac-Takahashi</div>
+
+    <div class="p-problem">
+      <div class="p-title3" id="item-A">D - Bitmask</div>
+      <div class="p-title4" id="item-A-1">题面：</div>
+      <div class="p-word">
+        <p class="p-word-title">Description</p>
+        <div>
+          0, 1, ? からなる文字列 S および整数 N が与えられます。S に含まれる ? をそれぞれ 0 または 1 に置き換えて2 進整数とみなしたときに得られる値の集合を
+          T とします。 たとえば、S= ?0? のとき、T={000(2) ​,001(2)​,100(2),101(2)}={0,1,4,5} です。
+        </div>
+        <div>
+          T に含まれる
+          N 以下の値のうち最大のものを (
+          10 進整数として) 出力してください。
+          N 以下の値が
+          T に含まれない場合は、代わりに -1 を出力してください。
+        </div>
+        <br>
+        <p class="p-word-title">Input</p>
+        <div>
+          入力は以下の形式で標準入力から与えられる。
+        </div>
+        <div>
+          S
+        </div>
+        <div>
+          N
+        </div>
+        <br>
+        <p class="p-word-title">Output</p>
+        <div>
+          答えを出力せよ
+        </div>
+      </div>
+      <div class="p-title4" id="item-A-2">题意：</div>
+      <div class="p-word">
+        <div>
+          给定一个整数N和一个由0、1和?组成的字符串S。设T是一组可以通过替换每个?S'中有e或1和将结果解释为二进制整数。例如，如果S =?0?,我们haveT ={000(2), 001(2), 100(2),
+          101(2)} ={0、1、4、5)。打印(以十进制整数形式)T中小于或等于N的最大值。如果T中不包含小于或等于N的值，则打印-1。
+        </div>
+      </div>
+      <div class="p-title4" id="item-A-3">思路：</div>
+      <div class="p-word">
+        <div>
+          字符串计数
+        </div>
+      </div>
+      <div class="p-title4" id="item-A-4">代码：</div>
+      <div class="p-code">
+        <pre><code class="cpp">
+                  <xmp>
+    #include <bits/stdc++.h>
+    using namespace std; 
+    const int inf=0x3f3f3f3f;
+    const long long INF=0x3f3f3f3f3f3f3f3f;
+    const int maxn=2e5+50;
+    const int mod=998244353;
+    const int Mod=1e9+7;
+    typedef long long ll;
+    int main()
+    {
+      std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+      
+      string s;
+      cin >> s;
+      ll n;
+      cin >> n;
+      
+      int sz = s.size();
+      ll ans = 0;
+      
+      reverse(s.begin(), s.end());
+      for(int i = sz - 1; i >= 0; i--) if(s[i] == '1') ans += (1ll << i);
+      if(ans > n)
+      {
+        cout << -1 << '\n';
+        return 0;
+      }
+      
+      ans = 0;
+      for(int i = sz - 1; i >= 0; i--)
+      {
+        if(s[i] != '?')
+        {
+          if(s[i] == '1') ans += (1ll << i);
+          continue;
+        }
+        
+        ll mi = (1ll << i);
+        for(int j = i - 1; j >= 0; j--) if(s[j] == '1') mi += (1ll << j);
+        
+        if(ans + mi <= n) ans += (1ll << i);		
+      }
+      
+      cout << ans; 
+    }</xmp>
+              </code></pre>
+      </div>
+
+    </div>
+
+    <div class="p-problem">
+      <div class="p-title3" id="item-B">E - Pac-Takahashi</div>
+      <div class="p-title4" id="item-B-1">题面：</div>
+      <div class="p-word">
+        <div class="p-word-title">Description</div>
+        <div>
+          H 行 W 列のグリッドがあります。 上から i 行目、左から j 列目のマス目を (i,j) と表します。 グリッドの各マスはスタートマス、ゴールマス、空マス、壁マス、お菓子マスのいずれかです。 (i,j) が何のマスであるかは文字 A i,j​  によって表されA i,j​ = S のときスタートマス、 A i,j​ = G のときゴールマス、 A i,j​ = . のとき空マス、 A i,j​ = # のとき壁マス、 A i,j​ = o のときお菓子マスです。 ここで、スタートマスとゴールマスはちょうど 1 つずつあり、お菓子マスは 18 個以下であることが保証されます。
+        </div>
+        <div>
+          高橋くんは現在スタートマスにいます。 高橋くんは、上下左右に隣接するマスであって壁マスでないマスに移動することを繰り返し行えます。 高橋くんは今から 
+          T 回以下の移動によってゴールマスに到達したいです。 そのようなことは可能かどうか判定してください。 可能な場合は、最終的にゴールマスにいるという条件のもとで、移動の途中に訪れるお菓子マスの数の最大値を求めてください。 ただし、
+          1 つのお菓子マスに複数回訪れた場合でも、カウントするのは 
+          1 回のみです。
+        </div>
+        <br>
+        <div class="p-word-title">Input</div>
+        <div>
+          第一行H，W，T
+        </div>
+        <div>
+          接下来一个H*W的矩阵
+        </div>
+        <br>
+
+        <div class="p-word-title">Output</div>
+        <div>
+          If it is impossible to reach the goal square in at most T moves, print -1. Otherwise, print the maximum number of candy squares that can be visited on the way to the goal square, where Takahashi must finish.
+        </div>
+      </div>
+      <div class="p-title4" id="item-B-2">题意：</div>
+      <div class="p-word">
+        <div>
+          从S走到G，必须T步，要求经过的‘o’最多
+        </div>
+      </div>
+      <div class="p-title4" id="item-B-3">思路：</div>
+      <div class="p-word">
+        <div>
+          数据不大，bfs配合状压
+        </div>
+        <div>
+          才不是某位毕业多年学长的一眼三个for，当然正要说三个for，状压那边确实是三个for
+        </div>
+      </div>
+      <div class="p-title4" id="item-B-4">代码：</div>
+      <div class="p-code">
+        <pre><code class="cpp">
+                  <xmp>
+      #include <bits/stdc++.h>
+      using namespace std; 
+      const int inf=0x3f3f3f3f;
+      const long long INF=0x3f3f3f3f3f3f3f3f;
+      const int maxn=2e5+50;
+      const int mod=998244353;
+      const int Mod=1e9+7;
+      typedef long long ll;
+      #define int long long
+      char c[305][305];
+      bool vis[305][305];
+      int d[] {0, 1, 0, -1, 0};
+      ll h,w,t,sx,sy,tx,ty;
+      vector <pair<int,int>> v;
+      vector <vector<int>>bfs(ll sx,ll sy)
+      {
+        memset(vis,0,sizeof(vis));
+        vector <vector<int>> res(305,vector<int>(305,inf));
+        queue <pair<ll,ll>> q;
+        q.push({sx,sy});
+        res[sx][sy]=0;
+        while (q.size())
+        {
+          ll x=q.front().first; 
+          ll y=q.front().second;
+          q.pop();
+          if (vis[x][y]) continue;
+          vis[x][y]=1;
+          for (int i=0; i<=3; i++)
+          {
+            int nx=x+d[i],ny=y+d[i+1];
+            if (nx<1 || nx>h || ny<1 || ny>w || c[nx][ny]=='#' || vis[nx][ny]) continue;
+            if (res[nx][ny]>res[x][y]+1)
+            {
+              res[nx][ny]=res[x][y]+1;
+              q.push({nx,ny});
+            } 
+          }
+        }
+        return res;
+      }
+      
+      signed main()
+      {
+        std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        cin >> h >> w >> t;
+        for (int i=1; i<=h; i++) 
+        {
+          cin >> c[i]+1;
+          for (int j=1; j<=w; j++)
+          {
+            if (c[i][j]=='S') { sx=i; sy=j; }
+            if (c[i][j]=='G') { tx=i; ty=j; }
+            if (c[i][j]=='o') { v.push_back({i,j}); }			
+          }
+        }
+        ll cnt=v.size();
+        vector < vector<vector<int>>> dist(cnt);
+        
+        for (int i=0; i<cnt; i++)
+          dist[i]=bfs(v[i].first,v[i].second);
+          vector<vector<int>> dp(1 << cnt, vector<int>(cnt, inf));
+          for (int i=0; i<=cnt-1; i++) dp[1<<i][i]=dist[i][sx][sy];
+        ll st=1<<cnt;
+        for (int i=1; i<st; i++)
+        {
+          for (int j=0; j<cnt; j++)
+          {
+            if (dp[i][j]==inf) continue;
+            for (int k=0; k<cnt; k++)
+            {
+              if ((i>>k)&1) continue;
+              dp[i|(1<<k)][k]=min(dp[i|(1<<k)][k],dp[i][j]+dist[j][v[k].first][v[k].second]);
+            }
+          }
+        }
+        ll ans=-1;
+        vector<vector <int>> flag=bfs(sx,sy);
+        
+        if (flag[tx][ty]<=t) ans=0;
+        for (int i=1; i<st; i++)
+        {
+          for (int j=0; j<cnt; j++)
+          {
+            if (dp[i][j]+dist[j][tx][ty]<=t)
+            {
+              
+              ll tmp=0;
+              for (int k=0; k<cnt; k++)
+              {
+                if (i >> k & 1) tmp++;
+              }
+              ans=max(ans,tmp);
+            }
+          }
+        }
+        cout << ans << "\n";
+      }</xmp>
+              </code></pre>
+      </div>
+
+    </div>
+
+    <div class="p-bot">
+      <div class="p-date">
+        <div>
+          首次发布时间:2023年5月26日
+        </div>
+        <div>
+          最后修改时间:2023年5月26日
+        </div>
+        <div>
+          发布者:@Journey
+        </div>
+      </div>
+    </div>
+    <div class="copyright colorfulword">Copyright © CKZ</div>
+  </div>
+</body>

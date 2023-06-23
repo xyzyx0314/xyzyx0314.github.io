@@ -70,36 +70,36 @@ function loadHome()
 function loadNote()
 {
   load();
-  xmlhttp.open("GET","html/note.html",true);
+  xmlhttp.open("GET","html/note/note.html",true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/note_list.html",true);
+  xmlhttp2.open("GET","html/note/note_list.html",true);
   xmlhttp2.send();
 }
 
 function loadNoteWeb()
 {
   load();
-  xmlhttp.open("GET","html/noteWeb.html",true);
+  xmlhttp.open("GET","html/note/noteWeb.html",true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/note_list.html",true);
+  xmlhttp2.open("GET","html/note/note_list.html",true);
   xmlhttp2.send();
 }
 
 function loadNoteProblem()
 {
   load();
-  xmlhttp.open("GET","html/noteProblem.html",true);
+  xmlhttp.open("GET","html/note/noteProblem.html",true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/note_list.html",true);
+  xmlhttp2.open("GET","html/note/note_list.html",true);
   xmlhttp2.send();
 }
 
 function loadNoteBoard()
 {
   load();
-  xmlhttp.open("GET","html/noteBoard.html",true);
+  xmlhttp.open("GET","html/note/noteBoard.html",true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/note_list.html",true);
+  xmlhttp2.open("GET","html/note/note_list.html",true);
   xmlhttp2.send();
 }
 
@@ -110,9 +110,9 @@ function loadNoteBoard()
 function loadNoteDaily()
 {
   load();
-  xmlhttp.open("GET","html/noteDaily.html",true);
+  xmlhttp.open("GET","html/note/noteDaily.html",true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/note_list.html",true);
+  xmlhttp2.open("GET","html/note/note_list.html",true);
   xmlhttp2.send();
 }
 

@@ -51,3 +51,13 @@ function loadXL20230625()
   xmlhttp2.open("GET","html/XL/XL20230625_list.html",true);
   xmlhttp2.send();
 }
+
+function loadJT20230717()
+{
+  load();
+  xmlhttp.open("GET","html/XL/JT20230717.html",true);
+  xmlhttp.send();
+  
+  xmlhttp2.open("GET","html/XL/JT20230717_list.html",true);
+  xmlhttp2.send();
+}

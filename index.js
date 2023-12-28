@@ -199,7 +199,7 @@ function loadBoardGraph()
 
 function loadHZNUOJ()
 {
-  window.open("https://acm.hznu.edu.cn/OJ/userinfo.php?user=2021212205006");
+  window.open("https://map.qweather.com/index.html?lat=32.34&lon=105.55&level=6&layer=tmp");
 } 
 function loadCF()
 {

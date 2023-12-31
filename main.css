@@ -1,0 +1,25 @@
+
+body {
+    opacity: 0.85;
+    background-color: var(--color1);
+    background-image: url('../img/background.svg#svgView(preserveAspectRatio(none))');
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    color: var(--color5);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.md-md{
+    flex: 13;
+    background-color: black;
+}
+
+.md-bt{
+    flex: 1;
+    background-color: rgb(255, 0, 0);
+}

@@ -1,17 +1,25 @@
 
 body {
-    opacity: 0.85;
+    /* opacity: 0.85;
     background-color: var(--color1);
     background-image: url('../img/background.svg#svgView(preserveAspectRatio(none))');
     background-size: 100% 100%;
     background-attachment: fixed;
-    color: var(--color5);
+    color: var(--color5); */
+
+    background-color: rgb(0, 179, 255);
 }
 
 .container {
+    margin-top: -8px;
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-bottom: -8px;
+
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background-color: rgb(0, 179, 255);
 }
 
 .md-md{

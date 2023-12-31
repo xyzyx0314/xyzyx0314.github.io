@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>图片切换</title>
+    <style>
+        /* 设置图片的宽度和高度 */
+        img {
+            width: 300px;
+            height: 200px;
+        }
+        /* 设置按钮的样式 */
+        button {
+            margin: 10px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+        /* 设置按钮的悬停效果 */
+        button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 创建一个div容器，用来放置图片和按钮 -->
+    <div id="container">
+        <!-- 显示图片，初始为picture.jpg -->
+        <img id="image" src="picture.jpg" alt="图片">
+        <!-- 创建一个更换图片的按钮 -->
+        <button id="change">更换图片</button>
+        <!-- 创建一个文件输入框，用来上传图片，初始为隐藏 -->
+        <input id="upload" type="file" accept="image/*" hidden>
+    </div>
+    <!-- 引入JavaScript代码 -->
+    <script>
+        // 获取图片元素
+        var image = document.getElementById("image");
+        // 获取更换图片按钮元素
+        var change = document.getElementById("change");
+        // 获取文件输入框元素
+        var upload = document.getElementById("upload");
+        // 为更换图片按钮添加点击事件
+        change.addEventListener("click", function() {
+            // 点击按钮时，触发文件输入框的点击事件
+            upload.click();
+        });
+        // 为文件输入框添加改变事件
+        upload.addEventListener("change", function() {
+            // 获取用户选择的文件
+            var file = this.files[0];
+            // 如果文件存在且是图片类型
+            if (file && file.type.startsWith("image/")) {
+                // 创建一个文件读取器对象
+                var reader = new FileReader();
+                // 为文件读取器添加加载事件
+                reader.addEventListener("load", function() {
+                    // 将图片元素的src属性设置为文件的数据URL
+                    image.src = this.result;
+                });
+                // 读取文件为数据URL
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

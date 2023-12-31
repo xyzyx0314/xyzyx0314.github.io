@@ -1,32 +1,5 @@
-
-
-
-var btn = document.getElementById("btn");
-var fnight=0;
-function night() {
-  if (fnight==0){    
-    document.documentElement.style.setProperty("--color1", "rgb(44, 48, 83)");
-    document.documentElement.style.setProperty("--color2", "rgba(32, 35, 62, 0.8)");
-    document.documentElement.style.setProperty("--color3", "rgb(32, 35, 62)");
-    document.documentElement.style.setProperty("--color4", "#000000ef");
-    document.documentElement.style.setProperty("--color5", "rgb(183, 189, 250)");
-    document.documentElement.style.setProperty("--color6", "#5f90da");
-    fnight=1;
-  }
-  else{
-    document.documentElement.style.setProperty("--color1", "#FAFAFA");
-    document.documentElement.style.setProperty("--color2", "rgba(255, 255, 255, 0.1)");
-    document.documentElement.style.setProperty("--color3", "#f0f0f7");
-    document.documentElement.style.setProperty("--color4", "#888888ef");
-    document.documentElement.style.setProperty("--color5", "#000000");
-    document.documentElement.style.setProperty("--color6", "#335a94");
-    fnight=0;
-  }
-};
-
-
+/*load*/
 var xmlhttp,xmlhttp2;
-
 function load(){
   document.getElementById('m-md-top').scrollTop=0;
   if (window.XMLHttpRequest)
@@ -67,268 +40,88 @@ function loadHome()
   xmlhttp2.open("GET","html/home_list.html",true);
   xmlhttp2.send();
 }
-function loadNote()
-{
-  load();
-  xmlhttp.open("GET","html/note/note.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/note/note_list.html",true);
-  xmlhttp2.send();
-}
 
-function loadNoteWeb()
-{
-  load();
-  xmlhttp.open("GET","html/note/noteWeb.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/note/note_list.html",true);
-  xmlhttp2.send();
-}
-
-function loadNoteProblem()
-{
-  load();
-  xmlhttp.open("GET","html/note/noteProblem.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/note/note_list.html",true);
-  xmlhttp2.send();
-}
-
-function loadNoteBoard()
-{
-  load();
-  xmlhttp.open("GET","html/note/noteBoard.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/note/note_list.html",true);
-  xmlhttp2.send();
-}
-
-
-
-
-
-function loadNoteDaily()
-{
-  load();
-  xmlhttp.open("GET","html/note/noteDaily.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/note/note_list.html",true);
-  xmlhttp2.send();
-}
-
-
-function loadConnect()
-{
-  load();
-  xmlhttp.open("GET","html/connect.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/connect_list.html",true);
-  xmlhttp2.send();
-}
-function loadReward()
-{
-  load();
-  xmlhttp.open("GET","html/reward.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/reward_list.html",true);
-  xmlhttp2.send();
-}
-
-function loadWeek1()
-{
-  load();
-  xmlhttp.open("GET","html/week1.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/week1_list.html",true);
-  xmlhttp2.send();
-}
-function loadWeek2()
-{
-  load();
-  xmlhttp.open("GET","html/week2.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/week2_list.html",true);
-  xmlhttp2.send();
-}  
-function loadWeek3()
-{
-  load();
-  xmlhttp.open("GET","html/week3.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/week3_list.html",true);
-  xmlhttp2.send();
-}
-function loadWeek4()
-{
-  load();
-  xmlhttp.open("GET","html/week4.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/week4_list.html",true);
-  xmlhttp2.send();
-}
-
-function loadCF1820()
-{
-  load();
-  xmlhttp.open("GET","html/cf1820.html",true);
-  xmlhttp.send();
-  
-  xmlhttp2.open("GET","html/cf1820_list.html",true);
-  xmlhttp2.send();
-}
-
-function loadABC301()
-{
-  load();
-  xmlhttp.open("GET","html/ABC301.html",true);
-  xmlhttp.send();
-  
-  xmlhttp2.open("GET","html/ABC301_list.html",true);
-  xmlhttp2.send();
-}
-
-function loadBoardGraph()
-{
-  load();
-  xmlhttp.open("GET","html/board_Graph.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/board_Graph_list.html",true);
-  xmlhttp2.send();
-}
+var key = "d290f13b29404c43a83f2fa2031330c9";
+// 获取当前地理位置的经纬度
+navigator.geolocation.getCurrentPosition(function(position) {
+  var lat = position.coords.latitude;
+  var lon = position.coords.longitude;
+  // 调用GeoApi，获取当前地区的城市id
+  $.ajax({
+    url: "https://geoapi.qweather.com/v2/city/lookup",
+    data: {
+      key: key,
+      location: lon + "," + lat
+    },
+    dataType: "json",
+    success: function(data) {
+      if (data.code == "200") {
+        // 取第一个城市信息
+        var city = data.location[0];
+        var name = city.name; // 城市名称
+        var id = city.id; // 城市id
+        // 显示城市名称
+        $("#city").text(name);
+        // 调用城市天气预报API，获取当前城市的实时天气
+        $.ajax({
+          url: "https://devapi.qweather.com/v7/weather/now",
+          data: {
+            key: key,
+            location: id
+          },
+          dataType: "json",
+          success: function(data) {
+            if (data.code == "200") {
+              // 取实时天气信息
+              var now = data.now;
+              var temp = now.temp; // 温度
+              var text = now.text; // 天气状况
+              // 显示温度和天气状况
+              $("#temp").text(temp + "℃");
+              $("#text").text(text);
+            } else {
+              // 处理错误情况
+              alert("获取实时天气失败，错误码：" + data.code);
+            }
+          }
+        });
+      } else {
+        // 处理错误情况
+        alert("获取城市信息失败，错误码：" + data.code);
+      }
+    }
+  });
+});
 
 
-function loadHZNUOJ()
-{
-  window.open("https://map.qweather.com/index.html?lat=32.34&lon=105.55&level=6&layer=tmp");
-} 
-function loadCF()
-{
-  window.open("https://codeforces.com/");
-}
-function loadVJ()
-{
-  window.open("https://vjudge.net/group/hznuacm21");
-}
-function loadLuogu()
-{
-  window.open("https://www.luogu.com.cn/");
-}     
-function loadAT()
-{
-  window.open("https://atcoder.jp/");
-}     
-function loadGE()
-{
-  window.open("https://csacademy.com/app/graph_editor/");
-}     
-function loadQuanta()
-{
-  window.open("https://mooc.hznu.edu.cn/#/");
-}
-
-function loadGithub()
-{
-  window.open("https://github.com/xyzyx0314");
-}
-function load404()
-{
-  load();
-  xmlhttp.open("GET","html/404.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/home_list.html",true);
-  xmlhttp2.send();
-}
-
-function locked(){
-  document.getElementById('lockscreen').style.display = 'flex';
-  document.getElementById('m-top').style.display='none';
-  document.getElementById('m-lt').style.display='none';
-  document.getElementById('m-md').style.display='none';
-  document.getElementById('m-rt').style.display = 'none';
-  document.getElementById('m-rtbt').style.display='none';
-}
-function openblog(){
-  document.getElementById('lockscreen').style.display='none';
-  document.getElementById('m-top').style.display='block';
-  document.getElementById('m-lt').style.display='block';
-  document.getElementById('m-md').style.display='block';
-  document.getElementById('m-rt').style.display = 'block';
-  document.getElementById('m-rtbt').style.display='block';
-}
 
 
-function open1() {
-  var x=document.getElementById("lt-img1");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
-function open2() {
-  var x=document.getElementById("lt-img2");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
-function open3() {
-  var x=document.getElementById("lt-img3");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
-function open4() {
-  var x=document.getElementById("lt-img4");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
-function open5() {
-  var x=document.getElementById("lt-img5");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
-function open6() {
-  var x=document.getElementById("lt-img6");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
+/*锁屏 */
+// function locked(){
+//   document.getElementById('lockscreen').style.display = 'flex';
+//   document.getElementById('m-top').style.display='none';
+//   document.getElementById('m-lt').style.display='none';
+//   document.getElementById('m-md').style.display='none';
+//   document.getElementById('m-rt').style.display = 'none';
+//   document.getElementById('m-rtbt').style.display='none';
+// }
+// function openblog(){
+//   document.getElementById('lockscreen').style.display='none';
+//   document.getElementById('m-top').style.display='block';
+//   document.getElementById('m-lt').style.display='block';
+//   document.getElementById('m-md').style.display='block';
+//   document.getElementById('m-rt').style.display = 'block';
+//   document.getElementById('m-rtbt').style.display='block';
+// }
 
-window.onhashchange=function(event){
-  var url = window.location.href;
-  // 去掉hash部分
-  var newUrl = url.split("#")[0];
-  console.log(newUrl);
-  // 修改url
-  history.pushState(null, null, newUrl);
-}
+
+
+/*网址去除锚点 */
+// window.onhashchange=function(event){
+//   var url = window.location.href;
+//   // 去掉hash部分
+//   var newUrl = url.split("#")[0];
+//   console.log(newUrl);
+//   // 修改url
+//   history.pushState(null, null, newUrl);
+// }

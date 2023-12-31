@@ -1,112 +1,29 @@
+<!-- login.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>和风天气示例</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="css/styles.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <link href="css/login.css" rel="stylesheet">
     <script src="index.js"></script>
-    <style>
-        /* 设置图片的宽度和高度 */
-        img {
-            width: 300px;
-            height: 200px;
-        }
-        /* 设置按钮的样式 */
-        button {
-            margin: 10px;
-            padding: 5px 10px;
-            border: none;
-            background-color: #f0f0f0;
-            cursor: pointer;
-        }
-        /* 设置按钮的悬停效果 */
-        button:hover {
-            background-color: #e0e0e0;
-        }
-    </style>
 </head>
 <body>
 
-    <!-- 创建一个div容器，用来放置图片和按钮 -->
-    <div id="container">
-        <!-- 显示图片，初始为picture.jpg -->
-        <img id="image" src="picture.jpg" alt="图片">
-        <!-- 创建一个更换图片的按钮 -->
-        <button id="change">更换图片</button>
-        <!-- 创建一个文件输入框，用来上传图片，初始为隐藏 -->
-        <input id="upload" type="file" accept="image/*" hidden>
-    </div>
-    <!-- 引入JavaScript代码 -->
-    <script>
-        // 获取图片元素
-        var image = document.getElementById("image");
-        // 获取更换图片按钮元素
-        var change = document.getElementById("change");
-        // 获取文件输入框元素
-        var upload = document.getElementById("upload");
-        // 为更换图片按钮添加点击事件
-        change.addEventListener("click", function() {
-            // 点击按钮时，触发文件输入框的点击事件
-            upload.click();
-        });
-        // 为文件输入框添加改变事件
-        upload.addEventListener("change", function() {
-            // 获取用户选择的文件
-            var file = this.files[0];
-            // 如果文件存在且是图片类型
-            if (file && file.type.startsWith("image/")) {
-                // 创建一个文件读取器对象
-                var reader = new FileReader();
-                // 为文件读取器添加加载事件
-                reader.addEventListener("load", function() {
-                    // 将图片元素的src属性设置为文件的数据URL
-                    image.src = this.result;
-                });
-                // 读取文件为数据URL
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
-    
-    <!-- 中间文章 -->
-    <div class="m-md" id="m-md">
-        <div class="m-md-out box-hide-scrollbar" id="m-md-top">
-        <div class="p-page" id="p-page">
-        </div>
-        </div>
-    </div>
-    <div class="m-bt" id="m-bt">
-        <div class="m-bt-map" onclick="loadMap()">
-            <!-- <img src="img\luogu.svg" /> -->
-            地图
-        </div>
-        <div class="m-bt-weather" onclick="loadWeather()">
-            <!-- <img src="img\luogu.svg" /> -->
-            天气
-        </div>
-        <div class="m-bt-history" onclick="loadHistory()">
-            <!-- <img src="img\luogu.svg" /> -->
-            历史
-        </div>
-        <div class="m-bt-set" onclick="loadSet()">
-            <!-- <img src="img\luogu.svg" /> -->
-            设置 3
-        </div>
-    </div>
-
-
-    <div id="container">
-        <div id="city"></div>
-        <div id="temp"></div>
-        <div id="text"></div>
-    </div>
-    <div class="qweather-list__row visible-740">
-        <div class="c-img-map">
-                <img src="https://imagery.qweather.net/imagery/tmp/2023/12/28/18/au.jpg">
-            <div class="img-map__title">
-                <h3 class="qweather-title">温度</h3>
+    <div class="container">
+        <div class="container-child">
+            <h1>欢迎登录</h1>
+            <div class="input-box">
+                <label for="username">用户名：</label>
+                <input type="text" id="username" placeholder="请输入用户名">
             </div>
-    </div>     
+            <div class="input-box">
+                <label for="password">密码：</label>
+                <input type="password" id="password" placeholder="请输入密码">
+            </div>
+            <div class="input-box">
+                <button id="login-btn">登录</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -4,15 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <title>主页面</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="main.css" rel="stylesheet">
+    <link href="map.css" rel="stylesheet">
+    <script src="main.js"></script>
+    <script src="index.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="md-md">
-
+            <div class="m-md" id="m-md">
+                <div class="m-md-out box-hide-scrollbar" id="m-md-top">
+                    <div class="p-page" id="p-page">
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="md-bt">
-            <div>asd</div>
+            <div class="md-bt-button md-bt-map" onclick="map()">
+                <img src="img/map1.svg">
+                <div class="md-bt-font1">地图</div>
+            </div>
+            <div class="md-bt-button md-bt-weather" onclick="weather()">
+                <img src="img/weather1.svg">
+                <div class="md-bt-font2">天气</div>
+
+            </div>
+            <div class="md-bt-button md-bt-history" onclick="history()">
+                <img src="img/history1.svg">
+                <div class="md-bt-font3">历史</div>
+
+            </div>
+            <div class="md-bt-button md-bt-setting" onclick="setting()">
+                <img src="img/setting1.svg">
+                <div class="md-bt-font4">设置</div>
+
+            </div>
         </div>
     </div>
 </body>

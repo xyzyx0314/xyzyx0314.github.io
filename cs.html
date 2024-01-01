@@ -1,67 +1,112 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-CN">
 <head>
-    <title>Bootstrap5 实例</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <title>天气云图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        #canvas {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .cloud {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 200px;
+            height: 60px;
+            background: #fff;
+            border-radius: 50%;
+            animation: move 10s linear infinite;
+        }
+
+        .cloud::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200px;
+            height: 60px;
+            background: inherit;
+            border-radius: inherit;
+        }
+
+        .cloud::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 60px;
+            background: inherit;
+            border-radius: inherit;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100vw);
+            }
+        }
+
+        .info {
+            position: absolute;
+            bottom: 10%;
+            left: 10%;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .info img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .info span {
+            margin-right: 20px;
+        }
+    </style>
 </head>
-
-<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
-
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-        <div class="container-fluid">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#section1">Section 1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#section2">Section 2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#section3">Section 3</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div id="section1" class="container-fluid bg-success text-white" style="padding:100px 20px;">
-        <h1>Section 1</h1>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and
-            look at the navigation bar while scrolling!</p>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and
-            look at the navigation bar while scrolling!</p>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="cloud"></div>
+    <div class="info">
+        <img src="https://dev.qweather.com/docs/icon/c/101.png" alt="晴">
+        <span>温度：12°C</span>
+        <span>湿度：45%</span>
+        <span>风速：3m/s</span>
     </div>
-
-    <div id="section2" class="container-fluid bg-warning" style="padding:100px 20px;">
-        <h1>Section 2</h1>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and
-            look at the navigation bar while scrolling!</p>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and
-            look at the navigation bar while scrolling!</p>
-    </div>
-
-    <div id="section3" class="container-fluid bg-secondary text-white" style="padding:100px 20px;">
-        <h1>Section 3</h1>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and
-            look at the navigation bar while scrolling!</p>
-        <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and
-            look at the navigation bar while scrolling!</p>
-    </div>
-
+    <script>
+        // 获取canvas元素
+        var canvas = document.getElementById("canvas");
+        // 获取canvas的绘图上下文
+        var ctx = canvas.getContext("2d");
+        // 设置canvas的宽度和高度
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        // 定义天空的颜色渐变
+        var gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient.addColorStop(0, "#87ceeb");
+        gradient.addColorStop(1, "#b0e0e6");
+        // 填充天空背景
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    </script>
 </body>
-<script>
-    document.getElementById("mao").onclick = function () {
-        // 获取当前url
-        var url = window.location.href;
-        // 去掉hash部分
-        var newUrl = url.split("#")[0];
-        console.log(newUrl);
-        // 修改url
-        history.pushState(null, null, newUrl);
-    };
-</script>
-
 </html>

@@ -1,0 +1,28 @@
+{
+  "name": "reveal.js",
+  "version": "3.4.1",
+  "description": "VANE-intro",
+  "homepage": "https://owm.io",
+  "subdomain": "revealjs",
+  "main": "js/reveal.js",
+  "scripts": {
+    "start": "static &"
+  },
+  "author": {
+    "name": "VANE-intro",
+    "email": "info@openweathermap.org",
+    "web": "https://owm.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/owm-inc/VANE-intro"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "dependencies": {
+    "node-static": "^0.7.9"
+  },
+  "devDependencies": {},
+  "license": "MIT"
+}

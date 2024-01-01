@@ -64,10 +64,14 @@ function load(){
 }
 
 
+
+
+
 function map() {
-  load();
-  xmlhttp.open("GET","html/map.html",true);
-  xmlhttp.send();
+  // load();
+  // xmlhttp.open("GET","VANE-intro-master\apps\leaflet-owm.html",true);
+  // xmlhttp.send();
+  window.location.href = "leaflet-owm.html";
   totInit();
   // 获取 img 元素
   let img = document.querySelector(".md-bt-map img");
@@ -80,7 +84,7 @@ function map() {
     div.style.color = "var(--color2)";
   }
 
-  getdate();
+  // getdate();
 }
 function weather() {
   load();

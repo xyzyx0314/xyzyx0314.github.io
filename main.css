@@ -23,11 +23,6 @@ body {
     background-color: lightgreen;
     border: 1px solid black; */
 
-    margin-top: -8px;
-    margin-left: -8px;
-    margin-right: -8px;
-    margin-bottom: -8px;
-
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -35,12 +30,52 @@ body {
 }
 
 .md-md{
-    flex: 20;
+    height: 95%;
     background-color: #FFFFFF;
 }
 
+
+/* map css */
+.md-md-map {
+    position: absolute;
+    background-color: #000000;
+}
+.map-map {
+    margin-top: 0%;
+    position: absolute;
+}
+#map-map {
+    width:100%;
+    height: 95%;
+    position: absolute;
+}
+
+.map-mapset {
+    width:100%;
+    height: 95%;
+    position: absolute;
+
+}
+/* weather css */
+.md-md-weather {
+    position: absolute;
+}
+
+/* history css */
+.md-md-history {
+    position: absolute;
+}
+
+/* setting css */
+.md-md-setting {
+    position: absolute;
+}
+
+
+
+/* 按钮css */
 .md-bt{
-    flex: 1;
+    height: 5%;
     background-color: #F7F7F7;
     display: flex;
     justify-content: space-between;
@@ -48,33 +83,14 @@ body {
 }
 
 .md-bt-button {
-    width: 25%;
+    width: 100%;
     text-align: center;
     /* background-color: #4CAF50;     */
-    border: none;
     color: white;
-    padding: 15px 10px;
-    margin: 1px;
 }
 .md-bt-button img {
-    padding-top: 5%;
-    width: 35%;
-    height: 35%;
+    /* background-color: #4CAF50;  */
+    width: 55%;
+    height: 75%;
     /* border-radius: 15%; */
-}
-.md-bt-font1 {
-    color: var(--color1);
-    font-size: 40px;
-}
-.md-bt-font2 {
-    color: var(--color1);
-    font-size: 40px;
-}
-.md-bt-font3 {
-    color: var(--color1);
-    font-size: 40px;
-}
-.md-bt-font4 {
-    color: var(--color1);
-    font-size: 40px;
 }

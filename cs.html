@@ -1,112 +1,68 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>天气云图</title>
+    <meta charset="utf-8">
+    <title>使用本地存储实现永久更换图像的功能</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-        }
-
-        #canvas {
-            width: 100vw;
-            height: 100vh;
-        }
-
-        .cloud {
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            width: 200px;
-            height: 60px;
-            background: #fff;
-            border-radius: 50%;
-            animation: move 10s linear infinite;
-        }
-
-        .cloud::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200px;
-            height: 60px;
-            background: inherit;
-            border-radius: inherit;
-        }
-
-        .cloud::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200px;
-            height: 60px;
-            background: inherit;
-            border-radius: inherit;
-        }
-
-        @keyframes move {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(100vw);
-            }
-        }
-
-        .info {
-            position: absolute;
-            bottom: 10%;
-            left: 10%;
-            display: flex;
-            align-items: center;
-            color: #fff;
-            font-weight: bold;
-        }
-
-        .info img {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-        }
-
-        .info span {
-            margin-right: 20px;
+        img {
+            width: 300px;
+            height: 200px;
         }
     </style>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
-    <div class="cloud"></div>
-    <div class="info">
-        <img src="https://dev.qweather.com/docs/icon/c/101.png" alt="晴">
-        <span>温度：12°C</span>
-        <span>湿度：45%</span>
-        <span>风速：3m/s</span>
-    </div>
+    <img id="img" src="default.jpg"> <!-- 默认图片 -->
+    <input id="file" type="file" accept="image/*"> <!-- 选择图片的按钮 -->
     <script>
-        // 获取canvas元素
-        var canvas = document.getElementById("canvas");
-        // 获取canvas的绘图上下文
-        var ctx = canvas.getContext("2d");
-        // 设置canvas的宽度和高度
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        // 定义天空的颜色渐变
-        var gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        gradient.addColorStop(0, "#87ceeb");
-        gradient.addColorStop(1, "#b0e0e6");
-        // 填充天空背景
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // 获取图片对象和文件对象
+        var img = document.getElementById("img");
+        var file = document.getElementById("file");
+
+        // 定义一个函数，用于将图片转换为base64编码的字符串
+        function getBase64Image(img) {
+            var canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+            var dataURL = canvas.toDataURL("image/png");
+            return dataURL;
+        }
+
+        // 定义一个函数，用于将base64编码的字符串转换为图片
+        function base64ToImage(base64) {
+            var image = new Image();
+            image.src = base64;
+            return image;
+        }
+
+        // 定义一个函数，用于从本地存储中读取图片链接，并设置给图片对象
+        function loadImage() {
+            var imageSrc = localStorage.getItem("imageSrc"); // 从本地存储中获取图片链接
+            if (imageSrc) { // 如果存在图片链接
+                var image = base64ToImage(imageSrc); // 将图片链接转换为图片对象
+                img.src = image.src; // 设置图片对象的src属性为图片链接
+            }
+        }
+
+        // 定义一个函数，用于将图片链接保存到本地存储中
+        function saveImage() {
+            var imageSrc = getBase64Image(img); // 将图片对象转换为图片链接
+            localStorage.setItem("imageSrc", imageSrc); // 将图片链接保存到本地存储中
+        }
+
+        // 为文件对象绑定onchange事件，当用户选择了图片时触发
+        file.onchange = function() {
+            var reader = new FileReader(); // 创建一个文件读取器对象
+            reader.readAsDataURL(file.files[0]); // 读取用户选择的文件
+            reader.onload = function(e) { // 当文件读取完成时触发
+                img.src = e.target.result; // 设置图片对象的src属性为文件的内容
+                saveImage(); // 调用保存图片的函数
+            }
+        }
+
+        // 调用加载图片的函数
+        loadImage();
     </script>
 </body>
 </html>

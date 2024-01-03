@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<!-- main.html -->
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Leaflet-OpenWeatherMap Example</title>
+    <!-- <title>Leaflet-OpenWeatherMap Example</title> -->
     <meta charset="utf-8" />
     <style>
         html, body, #map {
@@ -14,7 +15,8 @@
     <link rel="stylesheet" href="VANE-intro-master\leaflet\leaflet.css" />
     <link rel="stylesheet" href="VANE-intro-master\apps\css/leaflet-owm.css" />
     <link rel="stylesheet" href="VANE-intro-master\apps\css\iconLayers.css" />
-
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="main.css" rel="stylesheet">
     <link href="map.css" rel="stylesheet">
     <script src="main.js"></script>
@@ -27,7 +29,7 @@
             <div id="map"></div>
         </div>
         <div class="md-bt">
-            <div class="md-bt-button md-bt-map" onclick="map()">
+            <div class="md-bt-button md-bt-map" onclick="loadmap()">
                 <img src="img/map1.svg">
                 <div class="md-bt-font1">地图</div>
             </div>
@@ -41,7 +43,7 @@
                 <div class="md-bt-font3">历史</div>
 
             </div>
-            <div class="md-bt-button md-bt-setting" onclick="setting()">
+            <div class="md-bt-button md-bt-setting" onclick="loadsetting()">
                 <img src="img/setting1.svg">
                 <div class="md-bt-font4">设置</div>
 
@@ -69,7 +71,7 @@
         providers['Satellite'] = {
             title: 'MODIS',
             icon: 'img/layers-satellite.png',
-            layer: L.tileLayer('http://{s}.sat.owm.io/sql/{z}/{x}/{y}?select=b1,b4,b3&from=modis&order=last&color=modis&appid=d22d9a6a3ff2aa523d5917bbccc89211', {
+            layer: L.tileLayer('http://{s}.sat.owm.io/sql/{z}/{x}/{y}?select=b1,b4,b3&from=modis&order=last&color=modis&appid=0a493121bc6ffc545b03b6199168172d', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://owm.io">VANE</a>'
             })
@@ -83,29 +85,29 @@
         
         //http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=d9cfe451d5a775abaf178aec4951b4b0
 
-        var Temp = L.tileLayer('http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=d22d9a6a3ff2aa523d5917bbccc89211', {
+        var Temp = L.tileLayer('http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=0a493121bc6ffc545b03b6199168172d', {
             maxZoom: 18,
             attribution: '&copy; <a href="http://owm.io">VANE</a>',
             id: 'temp'
         }),
 
-        Precipitation = L.tileLayer('http://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=d22d9a6a3ff2aa523d5917bbccc89211', {
+        Precipitation = L.tileLayer('http://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=0a493121bc6ffc545b03b6199168172d', {
             maxZoom: 18,
             attribution: '&copy; <a href="http://owm.io">VANE</a>'
         }),
 
-        Wind = L.tileLayer('http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=d22d9a6a3ff2aa523d5917bbccc89211', {
+        Wind = L.tileLayer('http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=0a493121bc6ffc545b03b6199168172d', {
             maxZoom: 18,
             attribution: '&copy; <a href="http://owm.io">VANE</a>'
         }),
 
-        Pressure = L.tileLayer('http://tile.openweathermap.org/map/pressure_new/{z}/{x}/{y}.png?appid=d22d9a6a3ff2aa523d5917bbccc89211', {
+        Pressure = L.tileLayer('http://tile.openweathermap.org/map/pressure_new/{z}/{x}/{y}.png?appid=0a493121bc6ffc545b03b6199168172d', {
             maxZoom: 18,
             attribution: '&copy; <a href="http://owm.io">VANE</a>'
         }),
 
 
-        Clouds = L.tileLayer('http://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=d22d9a6a3ff2aa523d5917bbccc89211', {
+        Clouds = L.tileLayer('http://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=0a493121bc6ffc545b03b6199168172d', {
             maxZoom: 18,
             attribution: '&copy; <a href="http://owm.io">VANE</a>'
         });
@@ -125,7 +127,6 @@
 
         L.control.iconLayers(layers).addTo(map);
     </script>
-
 
 </body>
 </html>

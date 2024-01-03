@@ -1,58 +1,23 @@
-<!-- login.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>登录页面</title>
-    <link href="login.css" rel="stylesheet">
-    <script src="login.js"></script>
-</head>
-<body>
-
-    <div class="container">
-        <div class="container-child">
-            <h1>欢迎登录</h1>
-            <div class="input-box">
-                <label for="username">用户名：</label>
-                <input type="text" id="username" placeholder="请输入用户名">
-            </div>
-            <div class="input-box">
-                <label for="password">密码：</label>
-                <input type="password" id="password" placeholder="请输入密码">
-            </div>
-            <div class="input-box">
-                <button id="login-btn">登录</button>
-            </div>
-        </div>
-    </div>
+    <meta charset="utf-8">
+    <title>输出界面尺寸</title>
     <script>
-        // 定义一个固定的账户和密码
-        var account = "user";
-        var pwd = "pw123!";
-
-        // 获取登录按钮元素
-        var loginBtn = document.getElementById("login-btn");
-            // 为登录按钮添加点击事件
-            loginBtn.addEventListener("click", function() {
-            // 调用checkLogin函数，检查登录信息
-            checkLogin();
-        });
-
-        // 定义一个检查登录信息的函数
-        function checkLogin() {
-            // 获取用户输入的用户名和密码
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            // 判断用户名和密码是否正确
-            if (username == account && password == pwd) {
-                // 如果正确，跳转到main.html页面
-                window.location.href = "main.html";
-            } else {
-                // 如果错误，弹出提示框
-                alert("用户名或密码错误，请重新输入！");
-            }
+        // 定义一个函数，用alert显示当前窗口的宽度和高度
+        function showSize() {
+            // 获取窗口的宽度和高度，兼容不同浏览器
+            var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            // 拼接提示信息
+            var message = "当前界面的尺寸是：" + width + "px × " + height + "px";
+            // 弹出提示框
+            alert(message);
         }
     </script>
+</head>
+<body>
+    <!-- 添加一个按钮，点击后调用showSize函数 -->
+    <button onclick="showSize()">点击显示界面尺寸</button>
 </body>
 </html>

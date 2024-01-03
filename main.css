@@ -44,11 +44,6 @@ body {
     margin-top: 0%;
     position: absolute;
 }
-#map-map {
-    width:100%;
-    height: 95%;
-    position: absolute;
-}
 
 .map-mapset {
     width:100%;
@@ -57,9 +52,68 @@ body {
 
 }
 /* weather css */
+
+.weather-weatherset {
+    width:100%;
+    height: 95%;
+    display: flex;
+    position: absolute;
+
+}
 .md-md-weather {
     position: absolute;
+    background-color: #000000;
 }
+
+
+
+.weatherset-top{
+    height: 5%;
+    background-color: #F7F7F7;
+    display: flex;
+    justify-content: space-between;
+}
+
+.weather-top-button {
+    width: 50%;
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+
+.weather-top-button img {
+    padding-top: 2%;
+    width: 25%;
+    height: 45%;
+}
+
+.weather-bing {
+    width: 100%;
+    height: 90%;
+}
+
+.weather-bing-title {
+
+    margin-left: 5%;
+    margin-right: 5%;
+    border: #000000 dashed 4px;
+    background-color: rgb(209, 255, 173);
+    font-size: 80px;
+}
+.weather-bing img{
+    margin-left: 8%;
+    background-color: #000000;
+
+}
+
+.weather-QRcode {
+    height: 50%;
+}
+
+.qrcode {
+    height: 50%;
+    width: 50%;
+}
+
 
 /* history css */
 .md-md-history {
@@ -90,7 +144,7 @@ body {
 }
 .md-bt-button img {
     /* background-color: #4CAF50;  */
-    width: 55%;
-    height: 75%;
+    width: 25%;
+    height: 45%;
     /* border-radius: 15%; */
 }

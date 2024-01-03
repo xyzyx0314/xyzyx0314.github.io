@@ -1,5 +1,30 @@
 
 function totInit() {
+
+  var map = document.getElementById("map");
+  var mapset = document.getElementById("map-mapset");
+  var weather = document.getElementById("weather");
+  var weatherset = document.getElementById("weather-weatherset");
+  var weathertoday = document.getElementById("weather-today");
+  var weatherbing = document.getElementById("weather-bing");
+
+  var history = document.getElementById("history");
+  var setting = document.getElementById("setting");
+
+  //的所有元素
+  map.style.display = "none";
+  mapset.style.display = "none";
+
+  weather.style.display = "none";
+  weatherset.style.display = "none";
+  weathertoday.style.display = "none";
+  weatherbing.style.display = "none";
+
+  history.style.display = "none";
+  setting.style.display = "none";
+
+
+
   // 获取 img 元素
   let img1 = document.querySelector(".md-bt-map img");
   // 获取 img 元素的 src 属性
@@ -42,19 +67,8 @@ function totInit() {
 function loadmap() {
   totInit();
   // 获取所有的<div>元素
-  var map = document.getElementById("map");
   var mapset = document.getElementById("map-mapset");
-  var weather = document.getElementById("weather");
-  var history = document.getElementById("history");
-  var setting = document.getElementById("setting");
-  // 隐藏除了地图以外的所有元素
-  map.style.display = "none";
-  mapset.style.display = "none";
-  weather.style.display = "none";
-  history.style.display = "none";
-  setting.style.display = "none";
   // 显示地图元素
-  map.style.display = "block";
   mapset.style.display = "block";
       // 获取 img 元素
       let img = document.querySelector(".md-bt-map img");
@@ -68,19 +82,11 @@ function loadmap() {
 function loadweather() {
   totInit();
   // 获取所有的<div>元素
-  var map = document.getElementById("map");
-  var mapset = document.getElementById("map-mapset");
-  var weather = document.getElementById("weather");
-  var history = document.getElementById("history");
-  var setting = document.getElementById("setting");
-  // 隐藏除了地图以外的所有元素
-  map.style.display = "none";
-  mapset.style.display = "none";
-  weather.style.display = "none";
-  history.style.display = "none";
-  setting.style.display = "none";
-  // 显示地图元素
-  weather.style.display = "block";
+  var weatherset = document.getElementById("weather-weatherset");
+  var weathertoday = document.getElementById("weather-today");
+  var weatherbing = document.getElementById("weather-bing");
+  weatherset.style.display = "block";
+  weathertoday.style.display = "block";
     // 获取 img 元素
     let img = document.querySelector(".md-bt-weather img");
     // 获取 img 元素的 src 属性
@@ -91,20 +97,72 @@ function loadweather() {
     }
 }
 
+
+function loadweathertoday() {
+  var weathertoday = document.getElementById("weather-today");
+  var weatherbing = document.getElementById("weather-bing");
+  
+  weathertoday.style.display = "block";
+  weatherbing.style.display = "none";
+}
+
+function loadweatherbing() {
+  
+  var weathertoday = document.getElementById("weather-today");
+  var weatherbing = document.getElementById("weather-bing");
+  
+  weathertoday.style.display = "none";
+  weatherbing.style.display = "block";
+}
+
+function loadbing() {  
+  var bing = document.getElementById("Bingpicture");
+  
+  bing.style.display = "block";
+}
+
+// var qrcode = new QRCode("qrcode", {
+//   width: 200,
+//   height: 200
+// });
+// function loadQRcode() {
+
+//   // var qrcode=getElementById("qrcode");
+//   alert("ASD");
+//   var url = getElementById("url").val();
+//   alert(url);
+//   if(url){
+//     qrcode.makeCode(url);
+//   }else{
+//     alert("请输入网址");
+//   }
+// }
+
+$(function(){
+  // 创建一个二维码对象
+  var qrcode = new QRCode("qrcode", {
+    width: 500,
+    height: 500
+  });
+  // 点击生成按钮时，获取输入的网址，调用二维码对象的makeCode方法，生成二维码
+  $("#generate").click(function(){
+    var url = $("#url").val();
+    if(url){
+      qrcode.makeCode(url);
+    }else{
+      url = "www.hznu.edu.cn";
+      qrcode.makeCode(url);
+      // alert("请输入网址");
+    }
+  });
+});
+
+
+
 function loadhistory() {
   totInit();
   // 获取所有的<div>元素
-  var map = document.getElementById("map");
-  var mapset = document.getElementById("map-mapset");
-  var weather = document.getElementById("weather");
   var history = document.getElementById("history");
-  var setting = document.getElementById("setting");
-  // 隐藏除了地图以外的所有元素
-  map.style.display = "none";
-  mapset.style.display = "none";
-  weather.style.display = "none";
-  history.style.display = "none";
-  setting.style.display = "none";
   // 显示地图元素
   history.style.display = "block";
   // 获取 img 元素
@@ -119,19 +177,7 @@ function loadhistory() {
 
 function loadsetting() {
   totInit();
-  // 获取所有的<div>元素
-  var map = document.getElementById("map");
-  var mapset = document.getElementById("map-mapset");
-  var weather = document.getElementById("weather");
-  var history = document.getElementById("history");
   var setting = document.getElementById("setting");
-  // 隐藏除了地图以外的所有元素
-  map.style.display = "none";
-  mapset.style.display = "none";
-  weather.style.display = "none";
-  history.style.display = "none";
-  setting.style.display = "none";
-  // 显示地图元素
   setting.style.display = "block";
   // 获取 img 元素
   let img = document.querySelector(".md-bt-setting img");
@@ -142,3 +188,5 @@ function loadsetting() {
     img.setAttribute("src", "img/setting2.svg");
   }
 }
+
+

@@ -141,8 +141,8 @@ function loadbing() {
 $(function(){
   // 创建一个二维码对象
   var qrcode = new QRCode("qrcode", {
-    width: 500,
-    height: 500
+    width: 100,
+    height: 100
   });
   // 点击生成按钮时，获取输入的网址，调用二维码对象的makeCode方法，生成二维码
   $("#generate").click(function(){

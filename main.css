@@ -142,9 +142,11 @@ body {
 
 .setting-person {
     flex: 2;
+    border-bottom: #F7F7F7 dashed 5px;
 }
 .setting-person-font {
-    font-size: 60px;
+    font-size: 20px;
+    border-bottom: #F7F7F7 dashed 5px;
 }
 .setting-person-picture {
 }
@@ -153,6 +155,10 @@ body {
     border-radius: 100%;
     width: 100px;
 }
+.setting-person-button {
+    width: 100px;
+}
+
 
 /* 按钮css */
 .md-bt{

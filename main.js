@@ -232,3 +232,8 @@ function setPageClose() {
   var setpage4 = document.getElementById("setting-page4");
   setpage4.style.display = "none";
 }
+
+function CCCLOSE(){
+        var tmp = document.getElementById("changecity-map");
+      tmp.style.display = "none";
+}

@@ -182,6 +182,16 @@ body {
 
 
 
+html,body,#changecity-map{
+    height:80%;
+  }
+
+
+
+
+
+
+
 .colorfulword {
     background: -webkit-linear-gradient(135deg,
         #0eaf6d,

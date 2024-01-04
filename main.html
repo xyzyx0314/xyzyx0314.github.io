@@ -8,6 +8,8 @@
   
   <script src="main.js"></script>
   <script src="index.js"></script>
+  <script src="weather.js"></script>
+
 
   <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
 
@@ -41,7 +43,7 @@
   <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=b556f62b89a6b24871453d90532cbc16"></script>
   <script type="text/javascript">
       var map = new AMap.Map('map-map', {
-          resizeEnable: true
+          resizeEnable: true,
       });
       AMap.plugin('AMap.Geolocation', function() {
         var geolocation = new AMap.Geolocation({
@@ -79,16 +81,35 @@
         $("#map-mapset").attr("src", newSrc);
         // alert(data.position);
 
-        if(data.accuracy){
-          str.push('精度：' + data.accuracy + ' 米');
-        }//如为IP精确定位结果则没有精度信息
-        str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
-        document.getElementById('result').innerHTML = str.join('<br>');
+        // if(data.accuracy){
+          // str.push('精度：' + data.accuracy + ' 米');
+        // }//如为IP精确定位结果则没有精度信息
+        // str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
+        // document.getElementById('result').innerHTML = str.join('<br>');
       }
       //解析定位错误信息
       function onError(data) {
           document.getElementById('status').innerHTML='定位失败'
           document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
+      }
+      function changemapcity(pos) {
+        alert("new"+pos);
+        
+        document.getElementById('status').innerHTML='定位成功'
+        var str = [];
+        str.push('定位结果：' + pos);
+
+
+        // 更改地图定位
+        // 获取 src 属性的值
+        var src = $("#map-mapset").attr("src");
+        // 使用正则表达式匹配经纬度
+        var regex = /dest=(\d+\.\d+),(\d+\.\d+)/;
+        // 使用 replace 方法替换经纬度为 data.position 的内容
+        var newSrc = src.replace(regex, "dest=" + pos);
+        // 设置新的 src 属性的值
+        $("#map-mapset").attr("src", newSrc);
+        alert();
       }
   </script>
   
@@ -134,7 +155,7 @@
   
   <!-- 设置所需代码 -->
 
-  <div class="setting-settingset" id="setting-settingset" style="display: block;">
+  <div class="setting-settingset" id="setting-settingset" style="display: none;">
     <div class="setting-person setting-container">
       <div class="setting-person-picture">
         <div class="setting-person-font">心晴头像</div>
@@ -154,20 +175,44 @@
   <div class="setting-page setting-page-password" style="display: none;" id="setting-page1">
     <div class="setting-page-title">修改密码</div>
 
+
     <div class="setting-page-button">
       <div class="setting-page-enter" onclick="setPageEnter()"> 确认 </div>
       <div class="setting-page-close" onclick="setPageClose()"> 关闭 </div>
     </div>
   </div>
+
+  <div id="changecity-map" style="display: block;" ></div>
+  <script>
+    var map2 = new AMap.Map('changecity-map', {
+      resizeEnable: true,
+      center: [120.01809,30.292206],
+      zoom: 12
+    });
+    //为地图注册click事件获取鼠标点击出的经纬度坐标
+    map2.on('click', function(e) {
+      changemapcity(e.lnglat);
+      
+      // var tmp = document.getElementById("changecity-map");
+      // tmp.style.display = "none";
+      // document.getElementById("lnglat").value = e.lnglat.getLng() + ',' + e.lnglat.getLat()
+    });
+  </script>
+  
+  <div class="setting-page-close" onclick="CCCLOSE()"> 关闭 </div>
 
   <div class="setting-page setting-page-changecity" style="display: none;" id="setting-page2">
     <div class="setting-page-title">切换城市</div>
-
     <div class="setting-page-button">
       <div class="setting-page-enter" onclick="setPageEnter()"> 确认 </div>
       <div class="setting-page-close" onclick="setPageClose()"> 关闭 </div>
     </div>
   </div>
+
+
+
+
+
 
   <div class="setting-page setting-page-addcity" style="display: none;" id="setting-page3">
     <div class="setting-page-title">增加城市</div>

@@ -11,7 +11,7 @@ function totInit() {
   var history = document.getElementById("history");
   var setting = document.getElementById("setting");
 
-  //的所有元素
+  //所有元素
   map.style.display = "none";
   mapset.style.display = "none";
 
@@ -178,6 +178,8 @@ function loadhistory() {
 function loadsetting() {
   totInit();
   var setting = document.getElementById("setting");
+  var settingset = document.getElementById("setting-settingset");
+  settingset.style.display = "block";
   setting.style.display = "block";
   // 获取 img 元素
   let img = document.querySelector(".md-bt-setting img");

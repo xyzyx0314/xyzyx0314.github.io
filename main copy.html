@@ -28,7 +28,6 @@
 <body>
     <div class="container">
         <img id="img" src="wea/wea (1).svg" alt="图片">
-        <button id="prev">上一张</button>
         <button id="next">下一张</button>
     </div>
     <script>
@@ -42,17 +41,6 @@
         // 定义一个函数，根据索引更新图片的src属性
         function updateImg() {
             img.src = "wea/wea (" + index + ").svg";
-        }
-        // 给上一张按钮添加点击事件
-        prev.onclick = function() {
-            // 索引减一
-            index--;
-            // 如果索引小于1，就设置为28
-            if (index < 1) {
-                index = 28;
-            }
-            // 更新图片
-            updateImg();
         }
         // 给下一张按钮添加点击事件
         next.onclick = function() {

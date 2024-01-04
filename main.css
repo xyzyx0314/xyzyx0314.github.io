@@ -58,7 +58,6 @@ body {
     height: 95%;
     display: flex;
     position: absolute;
-
 }
 .md-md-weather {
     position: absolute;
@@ -133,8 +132,27 @@ body {
 .md-md-setting {
     position: absolute;
 }
+.setting-settingset {
+    width:100%;
+    height: 95%;
+    display: flex;
+    position: absolute;
+    /* background-color: #000000; */
+}
 
-
+.setting-person {
+    flex: 2;
+}
+.setting-person-font {
+    font-size: 60px;
+}
+.setting-person-picture {
+}
+.setting-person-picture img {    
+    background-color: rgb(218, 237, 237);
+    border-radius: 100%;
+    width: 100px;
+}
 
 /* 按钮css */
 .md-bt{

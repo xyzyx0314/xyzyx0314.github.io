@@ -18,6 +18,9 @@
   <link href="setting.css" rel="stylesheet">
   <script src="qrcode.min.js"></script>
 
+  
+  
+
   <script> 
     window._AMapSecurityConfig = {
       securityJsCode: '6c569d1bdc12c850627523a56f4c3b3e',
@@ -29,7 +32,7 @@
 
 
   
-  <!-- 地图所以代码 -->
+  <!-- 地图所需代码 -->
   <div class="map-map" id='map-map' style="display: none;"></div>
   <div class="info map-map" style="display: none;">
       <h4 id='status'></h4><hr>
@@ -92,7 +95,8 @@
   
   <iframe style="display: none;" id="map-mapset" class="map-mapset" src="https://m.amap.com/navi/?dest=116.470098,39.992838&destName=默认城市&hideRouteIcon=1&key=b556f62b89a6b24871453d90532cbc16" frameborder="0"></iframe>
 
-  <div class="weather-weatherset" id="weather-weatherset" style="display: block;">
+  <!-- 天气所需代码 -->
+  <div class="weather-weatherset" id="weather-weatherset" style="display: none;">
     <div class="weatherset-top">
       <div class="weather-top-button" onclick="loadweathertoday()">
         <h1></h1>
@@ -104,28 +108,69 @@
       </div>
     </div>
     <div class="weather-today" id="weather-today" style="display: none;">
-      asd
 
-    </div>
-    
-    <div class="weather-bing" id="weather-bing" style="display: block;">    
+
+
+
+    </div>    
+    <div class="weather-bing" id="weather-bing" style="display: none;">    
       <div class="weather-QRcode">
-
-        <h1>网址二维码生成器</h1>
+        <h1>二维码生成器</h1>
         <p>请输入一个网址，点击生成按钮，即可在下方看到网址的二维码。</p>
         <input type="text" id="url" placeholder="www.hznu.edu.cn" style="width: 300px;">
         <button id="generate" onclick="loadQRcode()">生成3</button>
         <div class="qrcode" id="qrcode"></div>
-
-
       </div>      
       <div class="weather-bing-title" onclick="loadbing()">点击获得 Bing 每日一图</div>
       <div class="weather-bing-picture">
         <img id="Bingpicture" src="https://api.xygeng.cn/bing/view" alt="" style="display: none;">
-
       </div>
     </div>
   </div>
+
+
+  <!-- 历史所需代码 -->
+
+  
+  <!-- 设置所需代码 -->
+
+
+  <div class="setting-settingset" id="setting-settingset" style="display: block;">
+    <div class="setting-person">
+      <div class="setting-person-picture">
+        <div class="setting-person-font">心晴头像</div>
+        <img id="img" src="wea/wea (1).svg" alt="图片">
+        <button id="next">换一个</button>
+      </div>
+    </div>    
+  </div>
+  <script>
+    // 获取图片元素
+    var img = document.getElementById("img");
+    // 获取按钮元素
+    var prev = document.getElementById("prev");
+    var next = document.getElementById("next");
+    // 定义一个变量，表示当前图片的索引
+    var index = 1;
+    // 定义一个函数，根据索引更新图片的src属性
+    function updateImg() {
+      img.src = "wea/wea (" + index + ").svg";
+    }
+    // 给下一张按钮添加点击事件
+    next.onclick = function() {
+      // 索引加一
+      index++;
+      // 如果索引大于28，就设置为1
+      if (index > 28) {
+        index = 1;
+      }
+      // 更新图片
+      updateImg();
+    }
+  </script>
+
+
+
 
 
 
@@ -150,7 +195,7 @@
       <!-- 这里放置设置的内容 -->
       <div class="md-md-setting" id="setting" style="display: none;">
     
-        <div>setting</div>
+        <!-- <div>setting</div> -->
       </div>       
     </div>
 

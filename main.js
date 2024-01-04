@@ -10,6 +10,7 @@ function totInit() {
 
   var history = document.getElementById("history");
   var setting = document.getElementById("setting");
+  var settingset = document.getElementById("setting-settingset");
 
   //所有元素
   map.style.display = "none";
@@ -21,7 +22,9 @@ function totInit() {
   weatherbing.style.display = "none";
 
   history.style.display = "none";
+  
   setting.style.display = "none";
+  settingset.style.display = "none";
 
 
 
@@ -198,8 +201,10 @@ function settingpassword() {
   setpage1.style.display = "block";
 }
 function settingchangecity() {
-  var setpage2 = document.getElementById("setting-page2");
-  setpage2.style.display = "block";
+  var open1 = document.getElementById("changecity-map");
+  open1.style.display = "block";
+  var open2 = document.getElementById("changecity-map-close");
+  open2.style.display = "block";
 }
 function settingaddcity() {
   var setpage3 = document.getElementById("setting-page3");
@@ -233,7 +238,12 @@ function setPageClose() {
   setpage4.style.display = "none";
 }
 
-function CCCLOSE(){
-        var tmp = document.getElementById("changecity-map");
-      tmp.style.display = "none";
+
+
+function closeChangeCity(){
+  var close1 = document.getElementById("changecity-map-close");
+  close1.style.display = "none";
+
+  var close2 = document.getElementById("changecity-map");
+  close2.style.display = "none";
 }

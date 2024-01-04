@@ -93,13 +93,10 @@
           document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
       }
       function changemapcity(pos) {
-        alert("new"+pos);
-        
+        alert("new"+pos);        
         document.getElementById('status').innerHTML='定位成功'
         var str = [];
         str.push('定位结果：' + pos);
-
-
         // 更改地图定位
         // 获取 src 属性的值
         var src = $("#map-mapset").attr("src");
@@ -164,7 +161,9 @@
       </div>
     </div>
     <div class="setting-password setting-container" onclick="settingpassword()"> 修改密码 </div>   
-    <div class="setting-changecity setting-container" onclick="settingchangecity()"> 切换城市 </div>    
+    <div class="setting-changecity setting-container" onclick="settingchangecity()"> 切换城市 </div>
+    
+    
     <div class="setting-addcity setting-container" onclick="settingaddcity()"> 增加城市 </div>    
     <div class="setting-load setting-container" onclick="settingload()"> 自动登录 </div>    
     <div class="setting-container2 copyright colorfulword">Copyright © CKZ</div>
@@ -174,15 +173,16 @@
   <!-- 设置子页面 -->
   <div class="setting-page setting-page-password" style="display: none;" id="setting-page1">
     <div class="setting-page-title">修改密码</div>
-
-
     <div class="setting-page-button">
       <div class="setting-page-enter" onclick="setPageEnter()"> 确认 </div>
       <div class="setting-page-close" onclick="setPageClose()"> 关闭 </div>
     </div>
   </div>
 
-  <div id="changecity-map" style="display: block;" ></div>
+
+
+  <!-- 改默认城市 -->
+  <div id="changecity-map" style="display: none;" ></div>
   <script>
     var map2 = new AMap.Map('changecity-map', {
       resizeEnable: true,
@@ -197,9 +197,11 @@
       // tmp.style.display = "none";
       // document.getElementById("lnglat").value = e.lnglat.getLng() + ',' + e.lnglat.getLat()
     });
-  </script>
-  
-  <div class="setting-page-close" onclick="CCCLOSE()"> 关闭 </div>
+  </script>  
+  <div class="changecity-map-close" id="changecity-map-close" onclick="closeChangeCity()" style="display: none;"> 关闭1 </div>
+
+
+
 
   <div class="setting-page setting-page-changecity" style="display: none;" id="setting-page2">
     <div class="setting-page-title">切换城市</div>
@@ -214,7 +216,7 @@
 
 
 
-  <div class="setting-page setting-page-addcity" style="display: none;" id="setting-page3">
+  <!-- <div class="setting-page setting-page-addcity" style="display: none;" id="setting-page3">
     <div class="setting-page-title">增加城市</div>
 
     <div class="setting-page-button">
@@ -230,7 +232,7 @@
       <div class="setting-page-enter" onclick="setPageEnter()"> 确认 </div>
       <div class="setting-page-close" onclick="setPageClose()"> 关闭 </div>
     </div>
-  </div>
+  </div> -->
 
 
 

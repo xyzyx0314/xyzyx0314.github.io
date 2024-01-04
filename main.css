@@ -183,10 +183,17 @@ body {
 
 
 html,body,#changecity-map{
-    height:80%;
-  }
+    height:95%;
+}
 
-
+.changecity-map-close {
+    position: absolute;
+    background-color: #a5ffd0;
+    margin-top: 5%;
+    margin-left: 5%;
+    font-size: 12px;
+    border: #147b96 dashed 2px;
+}
 
 
 

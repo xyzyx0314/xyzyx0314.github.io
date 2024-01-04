@@ -159,6 +159,7 @@ $(function(){
 
 
 
+
 function loadhistory() {
   totInit();
   // 获取所有的<div>元素
@@ -192,3 +193,42 @@ function loadsetting() {
 }
 
 
+function settingpassword() {
+  var setpage1 = document.getElementById("setting-page1");
+  setpage1.style.display = "block";
+}
+function settingchangecity() {
+  var setpage2 = document.getElementById("setting-page2");
+  setpage2.style.display = "block";
+}
+function settingaddcity() {
+  var setpage3 = document.getElementById("setting-page3");
+  setpage3.style.display = "block";
+}
+function settingload() {
+  var setpage4 = document.getElementById("setting-page4");
+  setpage4.style.display = "block";
+}
+
+
+function setPageEnter() {
+  var setpage1 = document.getElementById("setting-page1");
+  setpage1.style.display = "none";
+  var setpage2 = document.getElementById("setting-page2");
+  setpage2.style.display = "none";
+  var setpage3 = document.getElementById("setting-page3");
+  setpage3.style.display = "none";
+  var setpage4 = document.getElementById("setting-page4");
+  setpage4.style.display = "none";
+}
+
+function setPageClose() {
+  var setpage1 = document.getElementById("setting-page1");
+  setpage1.style.display = "none";
+  var setpage2 = document.getElementById("setting-page2");
+  setpage2.style.display = "none";
+  var setpage3 = document.getElementById("setting-page3");
+  setpage3.style.display = "none";
+  var setpage4 = document.getElementById("setting-page4");
+  setpage4.style.display = "none";
+}

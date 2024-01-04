@@ -134,16 +134,66 @@
   
   <!-- 设置所需代码 -->
 
-
   <div class="setting-settingset" id="setting-settingset" style="display: block;">
-    <div class="setting-person">
+    <div class="setting-person setting-container">
       <div class="setting-person-picture">
         <div class="setting-person-font">心晴头像</div>
         <img id="img" src="wea/wea (1).svg" alt="图片">
         <button class="setting-person-button" id="next">换一个</button>
       </div>
-    </div>    
+    </div>
+    <div class="setting-password setting-container" onclick="settingpassword()"> 修改密码 </div>   
+    <div class="setting-changecity setting-container" onclick="settingchangecity()"> 切换城市 </div>    
+    <div class="setting-addcity setting-container" onclick="settingaddcity()"> 增加城市 </div>    
+    <div class="setting-load setting-container" onclick="settingload()"> 自动登录 </div>    
+    <div class="setting-container2 copyright colorfulword">Copyright © CKZ</div>
   </div>
+
+
+  <!-- 设置子页面 -->
+  <div class="setting-page setting-page-password" style="display: none;" id="setting-page1">
+    <div class="setting-page-title">修改密码</div>
+
+    <div class="setting-page-button">
+      <div class="setting-page-enter" onclick="setPageEnter()"> 确认 </div>
+      <div class="setting-page-close" onclick="setPageClose()"> 关闭 </div>
+    </div>
+  </div>
+
+  <div class="setting-page setting-page-changecity" style="display: none;" id="setting-page2">
+    <div class="setting-page-title">切换城市</div>
+
+    <div class="setting-page-button">
+      <div class="setting-page-enter" onclick="setPageEnter()"> 确认 </div>
+      <div class="setting-page-close" onclick="setPageClose()"> 关闭 </div>
+    </div>
+  </div>
+
+  <div class="setting-page setting-page-addcity" style="display: none;" id="setting-page3">
+    <div class="setting-page-title">增加城市</div>
+
+    <div class="setting-page-button">
+      <div class="setting-page-enter" onclick="setPageEnter()"> 确认 </div>
+      <div class="setting-page-close" onclick="setPageClose()"> 关闭 </div>
+    </div>
+  </div>
+
+  <div class="setting-page setting-page-load" style="display: none;" id="setting-page4">
+    <div class="setting-page-title">自动登录</div>
+
+    <div class="setting-page-button">
+      <div class="setting-page-enter" onclick="setPageEnter()"> 确认 </div>
+      <div class="setting-page-close" onclick="setPageClose()"> 关闭 </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
   <script>
     // 获取图片元素
     var img = document.getElementById("img");

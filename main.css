@@ -114,27 +114,27 @@ body {
     text-align: center;
     /* background-color: #000000; */
 }
-.weather-today-mess1 {
-    color: #F7F7F7;
-    font-size: 200%;
-    text-align: center;
-    /* background-color: #000000; */
-}
-.weather-today-mess2 {
-    color: #F7F7F7;
-    font-size: 200%;
-    text-align: center;
-    /* background-color: #000000; */
-}
-.weather-today-mess3 {
+.weather-today-mess {
     color: #F7F7F7;
     font-size: 200%;
     text-align: center;
     /* background-color: #000000; */
 }
 
+.weather-today-future {
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    color: #F7F7F7;
+    font-size: 200%;
+    border-bottom: #F7F7F7 solid 1px;
+}
 
-
+.weather-today-weather {
+    color: #F7F7F7;
+    font-size: 200%;
+    margin-left: 15%;
+}
 
 
 

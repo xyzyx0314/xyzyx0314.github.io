@@ -28,7 +28,9 @@
       securityJsCode: '6c569d1bdc12c850627523a56f4c3b3e',
     }
   </script>
-
+      <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+      <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=b556f62b89a6b24871453d90532cbc16&plugin=AMap.Geocoder"></script>
+      
 </head>
 <body>
 
@@ -93,7 +95,7 @@
           document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
       }
       function changemapcity(pos) {
-        alert("new"+pos);        
+        // alert("new"+pos);        
         document.getElementById('status').innerHTML='定位成功'
         var str = [];
         str.push('定位结果：' + pos);
@@ -106,7 +108,7 @@
         var newSrc = src.replace(regex, "dest=" + pos);
         // 设置新的 src 属性的值
         $("#map-mapset").attr("src", newSrc);
-        alert();
+        // alert();
       }
   </script>
   
@@ -114,7 +116,7 @@
   <iframe style="display: none;" id="map-mapset" class="map-mapset" src="https://m.amap.com/navi/?dest=116.470098,39.992838&destName=默认城市&hideRouteIcon=1&key=b556f62b89a6b24871453d90532cbc16" frameborder="0"></iframe>
 
   <!-- 天气所需代码 -->
-  <div class="weather-weatherset" id="weather-weatherset" style="display: block;">
+  <div class="weather-weatherset" id="weather-weatherset" style="display: none;">
     <div class="weatherset-top">
       <div class="weather-top-button" onclick="loadweathertoday()">
         <h1></h1>
@@ -190,7 +192,7 @@
   </div>
 
 
-
+  <input id="tmptmptmp" style="display: none;">
   <!-- 改默认城市 -->
   <div id="changecity-map" style="display: none;" ></div>
   <script>
@@ -203,10 +205,60 @@
     map2.on('click', function(e) {
       changemapcity(e.lnglat);
       
-      // var tmp = document.getElementById("changecity-map");
-      // tmp.style.display = "none";
-      // document.getElementById("lnglat").value = e.lnglat.getLng() + ',' + e.lnglat.getLat()
+      document.getElementById('tmptmptmp').value = e.lnglat;
+
+      var lnglat  = document.getElementById('tmptmptmp').value.split(',');
+      getcity();
+        // alert("@@"+lnglat);
+      // map2.setCenter(e.lnglat);
+      // alert(e.lnglat);
+      //获取地图的中心点对象
+      var center = map2.getCenter();
+      //将中心点对象转换为字符串
+      var centerStr = center.toString();
+      //用alert弹出框显示中心点坐标
+      // alert(centerStr);
+      AMap.plugin('AMap.Weather', function() {
+        var weather = new AMap.Weather();
+        //查询实时天气信息, 查询的城市到行政级别的城市，如朝阳区、杭州市
+        weather.getLive('朝阳区', function(err, data) {
+            if (!err) {
+                // alert(data.temperature);
+                // var str = [];
+                // str.push('<h4 >实时天气' + '</h4><hr>');
+                // str.push('<p>城市/区：' + data.city + '</p>');
+                // str.push('<p>天气：' + data.weather + '</p>');
+                // str.push('<p>温度：' + data.temperature + '℃</p>');
+                // str.push('<p>风向：' + data.windDirection + '</p>');
+                // str.push('<p>风力：' + data.windPower + ' 级</p>');
+                // str.push('<p>空气湿度：' + data.humidity + '</p>');
+                // str.push('<p>发布时间：' + data.reportTime + '</p>');
+                // var marker = new AMap.Marker({map: map, position: map.getCenter()});
+                // var infoWin = new AMap.InfoWindow({
+                //     content: '<div class="info" style="position:inherit;margin-bottom:0;">'+str.join('')+'</div><div class="sharp"></div>',
+                //     isCustom:true,
+                //     offset: new AMap.Pixel(0, -37)
+                // });
+                // infoWin.open(map, marker.getPosition());
+                // marker.on('mouseover', function() {
+                //     infoWin.open(map, marker.getPosition());
+                // });
+            }
+        });
+
+    //     //未来4天天气预报
+    //     weather.getForecast('朝阳区', function(err, data) {
+    //         if (err) {return;}
+    //         var str = [];
+    //         for (var i = 0,dayWeather; i < data.forecasts.length; i++) {
+    //             dayWeather = data.forecasts[i];
+    //             str.push(dayWeather.date+' <span class="weather">'+dayWeather.dayWeather+'</span> '+ dayWeather.nightTemp + '~' + dayWeather.dayTemp + '℃');
+    //         }
+    //         document.getElementById('forecast').innerHTML = str.join('<br>');
+    //     });
     });
+    });
+
   </script>  
   <div class="changecity-map-close" id="changecity-map-close" onclick="closeChangeCity()" style="display: none;"> 关闭1 </div>
 
@@ -333,4 +385,26 @@
     </div>
   </div>
 </body>
+<!-- 修改默认城市中获得改城市的具体位置，经纬度逆推 -->
+<script>
+  function getcity() {
+    var geocoder = new AMap.Geocoder({
+        city: "010", //城市设为北京，默认：“全国”
+        radius: 1000 //范围，默认：500
+    });
+    var marker = new AMap.Marker();;
+    var lnglat  = document.getElementById('tmptmptmp').value.split(',');
+    map.add(marker);
+    marker.setPosition(lnglat);
+    geocoder.getAddress(lnglat, function(status, result) {
+      if (status === 'complete'&&result.regeocode) {
+        var address = result.regeocode.formattedAddress;
+        alert("当前默认地点为："+address);
+        weatherchange(address[3]+address[4]+address[5]);
+      }else{
+        log.error('根据经纬度查询地址失败')
+      }
+    });
+  }
+</script>
 </html>

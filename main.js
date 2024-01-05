@@ -9,6 +9,8 @@ function totInit() {
   var weatherbing = document.getElementById("weather-bing");
 
   var history = document.getElementById("history");
+  var historyset = document.getElementById("history-historyset");
+
   var setting = document.getElementById("setting");
   var settingset = document.getElementById("setting-settingset");
 
@@ -22,6 +24,7 @@ function totInit() {
   weatherbing.style.display = "none";
 
   history.style.display = "none";
+  historyset.style.display = "none";
   
   setting.style.display = "none";
   settingset.style.display = "none";
@@ -124,22 +127,6 @@ function loadbing() {
   bing.style.display = "block";
 }
 
-// var qrcode = new QRCode("qrcode", {
-//   width: 200,
-//   height: 200
-// });
-// function loadQRcode() {
-
-//   // var qrcode=getElementById("qrcode");
-//   alert("ASD");
-//   var url = getElementById("url").val();
-//   alert(url);
-//   if(url){
-//     qrcode.makeCode(url);
-//   }else{
-//     alert("请输入网址");
-//   }
-// }
 
 $(function(){
   // 创建一个二维码对象
@@ -167,8 +154,12 @@ function loadhistory() {
   totInit();
   // 获取所有的<div>元素
   var history = document.getElementById("history");
-  // 显示地图元素
   history.style.display = "block";
+  var historyset = document.getElementById("history-historyset");
+  historyset.style.display = "block";
+
+
+
   // 获取 img 元素
   let img = document.querySelector(".md-bt-history img");
   // 获取 img 元素的 src 属性
@@ -214,10 +205,7 @@ function settingaddcity() {
   var open3 = document.getElementById("addcity-close");
   open3.style.display = "block";
 }
-// function settingload() {
-//   var setpage4 = document.getElementById("setting-page4");
-//   setpage4.style.display = "block";
-// }
+
 
 
 
@@ -240,3 +228,51 @@ function closeAddCity() {
   close3.style.display = "none";
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var historyCardMax=2;
+var historyCardNow=0;
+function historysetaddcity(city,wearther,temperature) {
+    historyCardNow=historyCardNow+1;
+    // 创建一个新的div元素
+    var newDiv = document.createElement("div");
+    // 设置新的div元素的innerHTML属性为要插入的代码
+    newDiv.innerHTML = "<div class=\"historyset-page-card\" id=\"historyset-page-card"+historyCardNow+"\">\n    <div class=\"historyset-card-city\">"+city+"</div>\n    <div class=\"historyset-card-wearther\">"+wearther+"&nbsp;&nbsp;"+temperature+" "+historyCardNow+"°C</div>\n</div>";
+    // 获取目标元素
+    var targetDiv = document.getElementById("historyset-page-list");
+    // 把新的div元素添加到目标元素的子节点列表中
+    targetDiv.appendChild(newDiv);
+    for (var id=1; id<=historyCardNow-historyCardMax; id++) {
+      var deleteCard="historyset-page-card"+String(id);
+      // 获取要删除的元素
+      var element = document.getElementById(deleteCard);
+      // 从文档中删除元素
+      if (element) element.remove();      
+    }
+}
+
+function historysetchangecity(city,wearther,temperature) {
+  var newcity=document.getElementById("historyset-card0-city");
+  var newwearther=document.getElementById("historyset-card0-wearther");
+  newcity.innerHTML=city;
+  newwearther.innerHTML=wearther+"&nbsp;&nbsp;"+temperature+"°C";
+
+}

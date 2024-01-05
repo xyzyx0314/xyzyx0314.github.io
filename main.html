@@ -81,7 +81,7 @@
         var newSrc = src.replace(regex, "dest=" + data.position);
 
         document.getElementById('tmptmptmp').value = data.position;
-        getcity();
+        getcity(0);
         $("#map-mapset").attr("src", newSrc);
       }
       //解析定位错误信息
@@ -156,68 +156,12 @@
 
 
   <!-- 历史板块 -->
-  <div class="history-historyset" id="history-historyset" style="display: block;">
-    <div class="historyset-page-title">城市列表</div>
-    <div class="historyset-page-list">      
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区1</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区2</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区3</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区4</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区5</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区1</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区2</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区3</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区4</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区5</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区1</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区2</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区3</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区4</div>
-        <div class="historyset-card-wearther">5-10°C</div>
-      </div>
-      <div class="historyset-page-card">
-        <div class="historyset-card-city">余杭区5</div>
-        <div class="historyset-card-wearther">5-10°C</div>
+  <div class="history-historyset" id="history-historyset" style="display: none;">
+    <div class="historyset-page-title" onclick="historysetaddcity()">城市列表</div>
+    <div class="historyset-page-list" id="historyset-page-list">    
+      <div class="historyset-page-card" id="historyset-page-card0">
+        <div class="historyset-card-city" id="historyset-card0-city">余杭区</div>
+        <div class="historyset-card-wearther" id="historyset-card0-wearther">晴 10°C</div>
       </div>
     </div>
   </div>
@@ -260,7 +204,7 @@
       changemapcity(e.lnglat);
       // 向下改天气选择城市
       document.getElementById('tmptmptmp').value = e.lnglat;
-      getcity();
+      getcity(0);
     });
   </script>  
   <div class="changecity-map-close" id="changecity-map-close" onclick="closeChangeCity()" style="display: none;"> 关闭 </div>
@@ -325,7 +269,7 @@
 
 <!-- 修改默认城市中获得改城市的具体位置，经纬度逆推 经纬度由tmptmptmp提供-->
 <script>
-  function getcity() {
+  function getcity(flag) {
     var geocoder = new AMap.Geocoder({
         city: "010", //城市设为北京，默认：“全国”
         radius: 1000 //范围，默认：500
@@ -338,7 +282,7 @@
       if (status === 'complete'&&result.regeocode) {
         var address = result.regeocode.formattedAddress;
         // alert("当前默认地点为："+address);
-        weatherchange(address[3]+address[4]+address[5]);
+        weatherchange(address[6]+address[7]+address[8],flag);
         
         var city=document.getElementById("weather-today-city");
         city.innerHTML=address[6]+address[7]+address[8];
@@ -350,7 +294,7 @@
     });
   }
 
-  function weatherchange(city) {
+  function weatherchange(city,flag) {
     // alert(city);
     AMap.plugin('AMap.Weather', function() {
       var weather = new AMap.Weather();
@@ -367,6 +311,11 @@
           mess2.innerHTML="风力："+data.windPower+"级";
           var mess3=document.getElementById("weather-today-mess3");
           mess3.innerHTML="空气湿度："+data.humidity;
+          if (flag==0) {
+            historysetchangecity(data.city,data.weather,data.temperature);
+          } else {
+            historysetaddcity(data.city,data.weather,data.temperature);
+          }
         }
       });
       //未来4天天气预报

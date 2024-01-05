@@ -299,7 +299,7 @@ html,body,#changecity-map{
     position: absolute;
     background-color: #d5f9ff;
     width: 100%;
-    height: 95%;
+    height: 96%;
 }
 .historyset-page-title {
     margin-bottom: 4%;
@@ -309,7 +309,7 @@ html,body,#changecity-map{
 }
 .historyset-page-list {
     overflow: scroll;
-    height: inherit;
+    height: 95%;
     /* overflow-x: auto; */
     /* overflow-y: auto; */
 }
@@ -335,8 +335,6 @@ html,body,#changecity-map{
     background-color: #2cc4e0;
 }
 
-
-
 /* 彩色签名 */
 .colorfulword {
     background: -webkit-linear-gradient(135deg,
@@ -361,8 +359,10 @@ html,body,#changecity-map{
 
 /* 下方4按钮css */
 .md-bt{
+    z-index:100;
     height: 5%;
     background-color: #F7F7F7;
+    /* background-color: #05C160; */
     display: flex;
     justify-content: space-between;
     /* align-items: center; */

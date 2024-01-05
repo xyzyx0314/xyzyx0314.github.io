@@ -204,46 +204,39 @@ function settingchangecity() {
   var open1 = document.getElementById("changecity-map");
   open1.style.display = "block";
   var open2 = document.getElementById("changecity-map-close");
-  open2.style.display = "block";
+  open2.style.display = "";
 }
 function settingaddcity() {
-  var setpage3 = document.getElementById("setting-page3");
-  setpage3.style.display = "block";
+  var open1 = document.getElementById("addcity-page");
+  open1.style.display = "block";
+  var open2 = document.getElementById("addcity-add");
+  open2.style.display = "block";
+  var open3 = document.getElementById("addcity-close");
+  open3.style.display = "block";
 }
-function settingload() {
-  var setpage4 = document.getElementById("setting-page4");
-  setpage4.style.display = "block";
-}
-
-
-function setPageEnter() {
-  var setpage1 = document.getElementById("setting-page1");
-  setpage1.style.display = "none";
-  var setpage2 = document.getElementById("setting-page2");
-  setpage2.style.display = "none";
-  var setpage3 = document.getElementById("setting-page3");
-  setpage3.style.display = "none";
-  var setpage4 = document.getElementById("setting-page4");
-  setpage4.style.display = "none";
-}
-
-function setPageClose() {
-  var setpage1 = document.getElementById("setting-page1");
-  setpage1.style.display = "none";
-  var setpage2 = document.getElementById("setting-page2");
-  setpage2.style.display = "none";
-  var setpage3 = document.getElementById("setting-page3");
-  setpage3.style.display = "none";
-  var setpage4 = document.getElementById("setting-page4");
-  setpage4.style.display = "none";
-}
+// function settingload() {
+//   var setpage4 = document.getElementById("setting-page4");
+//   setpage4.style.display = "block";
+// }
 
 
 
-function closeChangeCity(){
+
+
+
+function closeChangeCity() {
   var close1 = document.getElementById("changecity-map-close");
   close1.style.display = "none";
-
   var close2 = document.getElementById("changecity-map");
   close2.style.display = "none";
 }
+
+function closeAddCity() {
+  var close1 = document.getElementById("addcity-page");
+  close1.style.display = "none";
+  var close2 = document.getElementById("addcity-add");
+  close2.style.display = "none";
+  var close3 = document.getElementById("addcity-close");
+  close3.style.display = "none";
+}
+

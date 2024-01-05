@@ -98,7 +98,7 @@ body {
 
 .weather-today-city {
     color: #F7F7F7;
-    font-size: 500%;
+    font-size: 25px;
     text-align: center;
     /* background-color: #000000; */
 }
@@ -109,19 +109,19 @@ body {
 }
 .weather-today-temp {
     color: #F7F7F7;
-    font-size: 1000%;
+    font-size: 26px;
     text-align: center;
     /* background-color: #000000; */
 }
 .weather-today-today {
     color: #F7F7F7;
-    font-size: 200%;
+    font-size: 16px;
     text-align: center;
     /* background-color: #000000; */
 }
 .weather-today-mess {
     color: #F7F7F7;
-    font-size: 18px;
+    font-size: 13px;
     text-align: center;
     /* background-color: #000000; */
 }
@@ -131,13 +131,13 @@ body {
     margin-left: 10%;
     margin-right: 10%;
     color: #F7F7F7;
-    font-size: 200%;
+    font-size: 12px;
     border-bottom: #F7F7F7 solid 1px;
 }
 
 .weather-today-weather {
     color: #F7F7F7;
-    font-size: 200%;
+    font-size: 14px;
     margin-left: 15%;
 }
 

@@ -228,7 +228,16 @@ function closeAddCity() {
   close3.style.display = "none";
 }
 
+function addCityEnter() {
+  // var city=document.getElementById("addCityEnd");
+  // alert(city.innerHTML[0]);
+  var sel = document.getElementById("area"); // 获取下拉列表元素
+  var text = sel.options[sel.selectedIndex].text; // 获取选中的选项的文本
+  // console.log(text); // 输出文本
+  // alert(text);
 
+  weatherchange(text,1);
+}
 
 
 
@@ -275,4 +284,9 @@ function historysetchangecity(city,wearther,temperature) {
   newcity.innerHTML=city;
   newwearther.innerHTML=wearther+"&nbsp;&nbsp;"+temperature+"°C";
 
+}
+
+function changeCardMax() {
+  var tmp=document.getElementById("addcity-max-input");
+  historyCardMax=tmp.value;
 }

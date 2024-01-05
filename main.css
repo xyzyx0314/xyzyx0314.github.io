@@ -98,7 +98,7 @@ body {
 
 .weather-today-city {
     color: #F7F7F7;
-    font-size: 25px;
+    font-size: 20px;
     text-align: center;
     /* background-color: #000000; */
 }
@@ -138,7 +138,7 @@ body {
 .weather-today-weather {
     color: #F7F7F7;
     font-size: 14px;
-    margin-left: 15%;
+    margin-left: 13%;
 }
 
 
@@ -288,10 +288,64 @@ html,body,#changecity-map{
     position: absolute;
     background-color: #fbffee;
     width: 90%;
-    margin-top: 40%;
+    height: 85%;
+    margin-top: 10%;
     margin-left: 5%;
 }
+.addcity-page-title {
+    font-size: 18px;
+    text-align: center;
+}
+.addcity-page-chose {
+    margin-left: 5%;
+    width: 90%;
+}
+.addcity-page-button {
+    display: flex;
+    justify-content: space-evenly;
+}
+.addcity-page-chose select{
+    margin-top: 4%;
+}
+.addcity-page-enter {
+    background-color: rgb(218, 238, 239);
+    width: 15%;
+    margin-top: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    text-align: center;
+    border: #b7cace solid 1px;
+    border-radius: 15px;
+}
+.addcity-page-close {
+    background-color: rgb(218, 238, 239);
+    width: 15%;
+    margin-top: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    text-align: center;
+    border: #b7cace solid 1px;
+    border-radius: 15px;
+}
 
+.addcity-page-max {
+    margin-top: 10%;
+    margin-left: 10%;
+    width: 80%;
+    font-size: 12px;
+    display: flex;
+}
+.addcity-max-button {
+    background-color: rgb(218, 238, 239);
+    width: 15%;
+    margin-left: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-align: center;
+    border: #b7cace solid 1px;
+    border-radius: 15px;
+
+}
 
 
 /* 历史板块 */
@@ -313,6 +367,19 @@ html,body,#changecity-map{
     /* overflow-x: auto; */
     /* overflow-y: auto; */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*隐藏滚动条提升视觉体验*/
 .historyset-page-list::-webkit-scrollbar {
     display: none;

@@ -19,6 +19,7 @@
   <link href="history.css" rel="stylesheet">
   <link href="setting.css" rel="stylesheet"> -->
   <script src="qrcode.min.js"></script>
+  <script src="province.js"></script>
 
   
   
@@ -157,7 +158,7 @@
 
   <!-- 历史板块 -->
   <div class="history-historyset" id="history-historyset" style="display: none;">
-    <div class="historyset-page-title" onclick="historysetaddcity()">城市列表</div>
+    <div class="historyset-page-title" onclick="settingaddcity()">城市列表</div>
     <div class="historyset-page-list" id="historyset-page-list">    
       <div class="historyset-page-card" id="historyset-page-card0">
         <div class="historyset-card-city" id="historyset-card0-city">余杭区</div>
@@ -214,9 +215,25 @@
   <!-- 增加城市 -->
   <div class="addcity-page" style="display: none;" id="addcity-page">
     <div class="addcity-page-title">增加城市</div>
+    <div class="addcity-page-chose">
+      <select id="province" onchange="chooseProvince(this)">
+        <option value="1">请选择省</option>
+      </select>
+      <select id="city" onchange="chooseCity(this)">
+        <option value="2" id="addCityEnd">请选择市</option>
+      </select>
+      <select id="area">
+        <option value="3">请选择区</option>
+      </select>
+    </div>
     <div class="addcity-page-button">
-      <div class="addcity-page-enter" onclick="setPageEnter()"> 增加 </div>
-      <div class="addcity-page-close" onclick="setPageClose()"> 关闭 </div>
+      <div class="addcity-page-enter" onclick="addCityEnter()"> 增加 </div>
+      <div class="addcity-page-close" onclick="closeAddCity()"> 关闭 </div>
+    </div>
+    <div class="addcity-page-max">
+      更改历史城市数量上限(不包括默认城市0-999)
+      <input class="addcity-max-input" id="addcity-max-input"></input>
+      <div class="addcity-max-button" onclick="changeCardMax()"> 确认 </div>
     </div>
   </div>
 
@@ -367,6 +384,8 @@
     updateImg();
   }
 </script>
-
-
+<!-- 增加城市 -->
+<script>
+    getProvince();
+</script>
 </html>

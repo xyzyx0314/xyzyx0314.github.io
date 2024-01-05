@@ -207,56 +207,7 @@
       
       document.getElementById('tmptmptmp').value = e.lnglat;
 
-      var lnglat  = document.getElementById('tmptmptmp').value.split(',');
       getcity();
-        // alert("@@"+lnglat);
-      // map2.setCenter(e.lnglat);
-      // alert(e.lnglat);
-      //获取地图的中心点对象
-      var center = map2.getCenter();
-      //将中心点对象转换为字符串
-      var centerStr = center.toString();
-      //用alert弹出框显示中心点坐标
-      // alert(centerStr);
-      AMap.plugin('AMap.Weather', function() {
-        var weather = new AMap.Weather();
-        //查询实时天气信息, 查询的城市到行政级别的城市，如朝阳区、杭州市
-        weather.getLive('朝阳区', function(err, data) {
-            if (!err) {
-                // alert(data.temperature);
-                // var str = [];
-                // str.push('<h4 >实时天气' + '</h4><hr>');
-                // str.push('<p>城市/区：' + data.city + '</p>');
-                // str.push('<p>天气：' + data.weather + '</p>');
-                // str.push('<p>温度：' + data.temperature + '℃</p>');
-                // str.push('<p>风向：' + data.windDirection + '</p>');
-                // str.push('<p>风力：' + data.windPower + ' 级</p>');
-                // str.push('<p>空气湿度：' + data.humidity + '</p>');
-                // str.push('<p>发布时间：' + data.reportTime + '</p>');
-                // var marker = new AMap.Marker({map: map, position: map.getCenter()});
-                // var infoWin = new AMap.InfoWindow({
-                //     content: '<div class="info" style="position:inherit;margin-bottom:0;">'+str.join('')+'</div><div class="sharp"></div>',
-                //     isCustom:true,
-                //     offset: new AMap.Pixel(0, -37)
-                // });
-                // infoWin.open(map, marker.getPosition());
-                // marker.on('mouseover', function() {
-                //     infoWin.open(map, marker.getPosition());
-                // });
-            }
-        });
-
-    //     //未来4天天气预报
-    //     weather.getForecast('朝阳区', function(err, data) {
-    //         if (err) {return;}
-    //         var str = [];
-    //         for (var i = 0,dayWeather; i < data.forecasts.length; i++) {
-    //             dayWeather = data.forecasts[i];
-    //             str.push(dayWeather.date+' <span class="weather">'+dayWeather.dayWeather+'</span> '+ dayWeather.nightTemp + '~' + dayWeather.dayTemp + '℃');
-    //         }
-    //         document.getElementById('forecast').innerHTML = str.join('<br>');
-    //     });
-    });
     });
 
   </script>  
@@ -401,9 +352,57 @@
         var address = result.regeocode.formattedAddress;
         alert("当前默认地点为："+address);
         weatherchange(address[3]+address[4]+address[5]);
+        
+        var city=document.getElementById("weather-today-city");
+        city.innerHTML=address[6]+address[7]+address[8];
       }else{
         log.error('根据经纬度查询地址失败')
       }
+    });
+  }
+
+
+  function weatherchange(city) {
+    alert(city)
+    AMap.plugin('AMap.Weather', function() {
+        var weather = new AMap.Weather();
+        //查询实时天气信息, 查询的城市到行政级别的城市，如朝阳区、杭州市
+        weather.getLive(city, function(err, data) {
+            if (!err) {
+              var temp=document.getElementById("weather-today-temp");
+              temp.innerHTML=data.temperature+"°C";
+              var today=document.getElementById("weather-today-today");
+              today.innerHTML=data.weather;
+              var mess1=document.getElementById("weather-today-mess1");
+              mess1.innerHTML="风向："+data.windDirection;
+              var mess2=document.getElementById("weather-today-mess2");
+              mess2.innerHTML="风力："+data.windPower+"级";
+              var mess3=document.getElementById("weather-today-mess3");
+              mess3.innerHTML="空气湿度："+data.humidity;
+              
+            }
+        });
+        //未来4天天气预报
+        weather.getForecast(city, function(err, data) {
+            if (err) {return;}
+            
+            var dayweather;
+            dayWeather = data.forecasts[0];
+            var weather1=document.getElementById("weather-today-weather1");
+            weather1.innerHTML=dayWeather.date+"  "+dayWeather.dayWeather+"  "+dayWeather.nightTemp + '~' + dayWeather.dayTemp + '℃';
+
+            dayWeather = data.forecasts[1];
+            var weather2=document.getElementById("weather-today-weather2");
+            weather2.innerHTML=dayWeather.date+"  "+dayWeather.dayWeather+"  "+dayWeather.nightTemp + '~' + dayWeather.dayTemp + '℃';
+            
+            dayWeather = data.forecasts[2];
+            var weather3=document.getElementById("weather-today-weather3");
+            weather3.innerHTML=dayWeather.date+"  "+dayWeather.dayWeather+"  "+dayWeather.nightTemp + '~' + dayWeather.dayTemp + '℃';
+            
+            dayWeather = data.forecasts[3];
+            var weather4=document.getElementById("weather-today-weather4");
+            weather4.innerHTML=dayWeather.date+"  "+dayWeather.dayWeather+"  "+dayWeather.nightTemp + '~' + dayWeather.dayTemp + '℃';
+        });
     });
   }
 </script>

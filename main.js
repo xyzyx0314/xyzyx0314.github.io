@@ -188,9 +188,16 @@ function loadsetting() {
 
 
 function settingpassword() {
-  var setpage1 = document.getElementById("setting-page1");
+  var setpage1 = document.getElementById("password-page");
   setpage1.style.display = "block";
 }
+function changepwdClose() {
+  var page=document.getElementById("password-page");
+  page.style.display="none";
+}
+
+
+
 function settingchangecity() {
   var open1 = document.getElementById("changecity-map");
   open1.style.display = "block";
@@ -340,9 +347,22 @@ function logincreat() {
 
 function changepwd() {
   var nowuser=document.getElementById("username").value;
-  var newpwd=document.getElementById("").value;
-  for (var i=0; i<haduser; i++)
+  var oldpwd=document.getElementById("password0").value;
+  var newpwd1=document.getElementById("password1").value;
+  var newpwd2=document.getElementById("password2").value;
+  if (newpwd1==newpwd2) {
+    alert(nowuser);
+    for (var i=0; i<haduser; i++)
     if (user[i]==nowuser) {
-      pwd[i]=newpwd;
+      if (pwd[i]!=oldpwd) {
+        alert("旧密码错误");
+      } else {
+        pwd[i]=newpwd1;
+        alert("密码更新成功");
+      }
     }
+  } else {
+    alert("俩次密码不同");
+  }
 }
+

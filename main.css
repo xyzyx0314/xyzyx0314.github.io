@@ -369,6 +369,42 @@ html,body,#changecity-map{
 }
 
 
+/* 修改密码 */ 
+.password-page {
+    position: absolute;
+    background-color: #afe8dd;
+    width: 80%;
+    margin-top: 10%;
+    margin-left: 10%;
+    height: 80%;
+    z-index:150;
+}
+
+.password-page-title {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 30%;
+}
+
+.password-input-box {
+    display: flex;
+    width: 70%;
+    margin-top: 2%;
+    margin-left: 20%;
+}
+
+.password-input-box label {
+    width: 20%;
+}
+.password-input-box input {
+    width: 60%;
+}
+.password-input-box div {
+    margin: 10%;
+    padding: 1%;
+    background-color: #b7cace;
+    border: #000000 solid 1px;
+}
 
 /* 登录界面 */
 .loadAPP-page {

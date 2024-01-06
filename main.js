@@ -245,6 +245,16 @@ function addCityEnter() {
 
 
 
+// 关闭登录界面
+function loadAPP() {
+  var page = document.getElementById("loadAPP-page");
+  page.style.display="block";
+
+}
+function loadpageclose() {
+  var page = document.getElementById("loadAPP-page");
+  page.style.display="none";
+}
 
 
 
@@ -254,9 +264,7 @@ function addCityEnter() {
 
 
 
-
-
-
+// 历史界面相关
 var historyCardMax=2;
 var historyCardNow=0;
 function historysetaddcity(city,wearther,temperature) {
@@ -289,4 +297,52 @@ function historysetchangecity(city,wearther,temperature) {
 function changeCardMax() {
   var tmp=document.getElementById("addcity-max-input");
   historyCardMax=tmp.value;
+}
+
+
+// 账号相关
+var user = [];
+var pwd = [];
+var haduser=1;
+// 定义一个固定的账户和密码
+user.push("user");
+pwd.push("pw123!");
+
+function loginbtn() {
+  var newuser=document.getElementById("username").value;
+  var newpwd=document.getElementById("password").value;
+  var flag=1;
+  for (var i=0; i<haduser; i++)
+    if (user[i]==newuser && pwd[i]==newpwd) flag=0;
+  if (flag==0) {
+    loadpageclose();
+    loadmap();
+  } else {
+    alert("账号或密码错误");
+  }
+}
+
+function logincreat() {
+  var newuser=document.getElementById("username").value;
+  var newpwd=document.getElementById("password").value;
+  var flag=1;
+  for (var i=0; i<haduser; i++)
+    if (user[i]==newuser) flag=0;
+  if (flag==1) {
+    haduser++;
+    user.push(newuser);
+    pwd.push(newpwd);
+    alert("注册成功");
+  } else {
+    alert("用户已存在");
+  }
+}
+
+function changepwd() {
+  var nowuser=document.getElementById("username").value;
+  var newpwd=document.getElementById("").value;
+  for (var i=0; i<haduser; i++)
+    if (user[i]==nowuser) {
+      pwd[i]=newpwd;
+    }
 }

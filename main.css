@@ -109,7 +109,7 @@ body {
 }
 .weather-today-temp {
     color: #F7F7F7;
-    font-size: 26px;
+    font-size: 30px;
     text-align: center;
     /* background-color: #000000; */
 }
@@ -137,7 +137,7 @@ body {
 
 .weather-today-weather {
     color: #F7F7F7;
-    font-size: 14px;
+    font-size: 16px;
     margin-left: 13%;
 }
 
@@ -333,7 +333,7 @@ html,body,#changecity-map{
     margin-left: 10%;
     width: 80%;
     font-size: 12px;
-    display: flex;
+    /* display: flex; */
 }
 .addcity-max-button {
     background-color: rgb(218, 238, 239);
@@ -370,14 +370,40 @@ html,body,#changecity-map{
 
 
 
+/* 登录界面 */
+.loadAPP-page {
+    position: absolute;
+    background-color: #afe8dd;
+    width: 100%;
+    height: 100%;
+    z-index:150;
+}
 
+.loadApp-page-title {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 30%;
+}
 
+.loadApp-input-box {
+    display: flex;
+    width: 50%;
+    margin-top: 2%;
+    margin-left: 30%;
+}
 
-
-
-
-
-
+.loadApp-input-box label {
+    width: 20%;
+}
+.loadApp-input-box input {
+    width: 60%;
+}
+.loadApp-input-box div {
+    margin: 10%;
+    padding: 1%;
+    background-color: #b7cace;
+    border: #000000 solid 1px;
+}
 
 
 /*隐藏滚动条提升视觉体验*/

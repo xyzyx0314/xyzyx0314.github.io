@@ -182,6 +182,7 @@
     <div class="setting-changecity setting-container" onclick="settingchangecity()"> 切换城市 </div>
     <div class="setting-addcity setting-container" onclick="settingaddcity()"> 增加城市 </div>    
     <div class="setting-load setting-container"> 自动登录 </div>    
+    <div class="setting-loadAPP setting-container" onclick="loadAPP()"> 退出账号 </div>
     <div class="setting-container2 copyright colorfulword">Copyright © CKZ</div>
   </div>
 
@@ -237,7 +238,22 @@
     </div>
   </div>
 
-
+  <!-- 登录界面 -->
+  <div class="loadAPP-page" style="display: block;" id="loadAPP-page">
+    <div class="loadApp-page-title">欢迎登录</div>
+    <div class="loadApp-input-box">
+      <label for="username">账号：</label>
+      <input type="text" id="username" placeholder="请输入用户名">
+    </div>
+    <div class="loadApp-input-box">
+      <label for="password">密码：</label>
+      <input type="password" id="password" placeholder="请输入密码">
+    </div>
+    <div class="loadApp-input-box">
+        <div id="login-btn" onclick="loginbtn()">登录</div>
+        <div id="login-creat" onclick="logincreat()">注册</div>
+    </div>
+  </div>
 
 
 
@@ -298,7 +314,7 @@
     geocoder.getAddress(lnglat, function(status, result) {
       if (status === 'complete'&&result.regeocode) {
         var address = result.regeocode.formattedAddress;
-        // alert("当前默认地点为："+address);
+        alert("当前默认地点为："+address);
         weatherchange(address[6]+address[7]+address[8],flag);
         
         var city=document.getElementById("weather-today-city");
@@ -333,6 +349,8 @@
           } else {
             historysetaddcity(data.city,data.weather,data.temperature);
           }
+        } else {
+          weather("朝阳区",flag);
         }
       });
       //未来4天天气预报
@@ -384,8 +402,5 @@
     updateImg();
   }
 </script>
-<!-- 增加城市 -->
-<script>
-    getProvince();
-</script>
+
 </html>

@@ -344,7 +344,7 @@ function changepwd() {
   var newpwd1=document.getElementById("password1").value;
   var newpwd2=document.getElementById("password2").value;
   if (newpwd1==newpwd2) {
-    alert(nowuser);
+    // alert(nowuser);
     for (var i=0; i<haduser; i++)
     if (user[i]==nowuser) {
       if (pwd[i]!=oldpwd) {

@@ -264,13 +264,6 @@ function loadpageclose() {
 }
 
 
-
-
-
-
-
-
-
 // 历史界面相关
 var historyCardMax=2;
 var historyCardNow=0;
@@ -279,7 +272,7 @@ function historysetaddcity(city,wearther,temperature) {
     // 创建一个新的div元素
     var newDiv = document.createElement("div");
     // 设置新的div元素的innerHTML属性为要插入的代码
-    newDiv.innerHTML = "<div class=\"historyset-page-card\" id=\"historyset-page-card"+historyCardNow+"\">\n    <div class=\"historyset-card-city\">"+city+"</div>\n    <div class=\"historyset-card-wearther\">"+wearther+"&nbsp;&nbsp;"+temperature+" "+historyCardNow+"°C</div>\n</div>";
+    newDiv.innerHTML = "<div class=\"historyset-page-card\" id=\"historyset-page-card"+historyCardNow+"\">\n    <div class=\"historyset-card-city\">"+city+"</div>\n    <div class=\"historyset-card-wearther\">"+wearther+"&nbsp;&nbsp;"+temperature+"°C "+historyCardNow+"</div>\n</div>";
     // 获取目标元素
     var targetDiv = document.getElementById("historyset-page-list");
     // 把新的div元素添加到目标元素的子节点列表中

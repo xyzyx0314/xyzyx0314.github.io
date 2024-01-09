@@ -1,425 +1,388 @@
-<!-- main.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>主页面</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  
-  <script src="main.js"></script>
-  <script src="index.js"></script>
-  <!-- <script src="weather.js"></script> -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journey</title>
+  <link rel="shortcut icon" href="img/person.svg" type="image/x-icon" />
+  <link href="bootstrap.min.css" rel="stylesheet">
+
+  <!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"> -->
+
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://cdn.staticfile.org/vue/3.0.5/vue.global.js"></script>
+
+  <!-- 代码高亮 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/night-owl.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/languages/go.min.js"></script>
 
 
-  <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+  <!-- 音乐播放器 -->
+  <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script>
 
-  <link href="main.css" rel="stylesheet">
-  <!-- <link href="map.css" rel="stylesheet"> -->
-  <!-- <link href="weather.css" rel="stylesheet">
-  <link href="history.css" rel="stylesheet">
-  <link href="setting.css" rel="stylesheet"> -->
-  <script src="qrcode.min.js"></script>
-  <script src="province.js"></script>
+  <!-- <link rel="stylesheet" href="APlayer-master/dist/APlayer.min.css"> -->
+  <!-- <script src="APlayer-master/dist/APlayer.min.js"></script> -->
+  <!-- <script src="color-thief-master/src/color-thief.js"></script> -->
 
-  
-  
-
-  <script> 
-    window._AMapSecurityConfig = {
-      securityJsCode: '6c569d1bdc12c850627523a56f4c3b3e',
-    }
-  </script>
-      <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
-      <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=b556f62b89a6b24871453d90532cbc16&plugin=AMap.Geocoder"></script>
-      
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/stylesp.css" rel="stylesheet">
+  <link href="css/home.css" rel="stylesheet">
+  <link href="css/note.css" rel="stylesheet">
 </head>
-<body>
 
 
-  
-  <!-- 地图板块 -->
-  <div class="map-map" id='map-map' style="display: none;"></div>
-  <div class="info map-map" style="display: none;">
-      <h4 id='status'></h4><hr>
-      <p id='result'></p><hr>
+
+<body id="body">
+
+  <div class="overlay"></div>
+  <div class="lockscreen" onclick="openblog()" id="lockscreen">
+    <div id="time"></div>
   </div>
-  <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=b556f62b89a6b24871453d90532cbc16"></script>
+  <!-- 上侧导航 -->
+  <div class="m-top" id="m-top">
+    <div class="row">
+      <div class="person">
+        <img src="img\person.svg" class="rounded-circle" alt="Cinque Terre" width="150">
+      </div>
+      <div class="name">
+        Journey's Blog
+      </div>
+      <div class="github" onclick="loadGithub()">
+        <img src="img\github.svg" class="rounded-circle svgshadow" alt="Cinque Terre" width="150">
+      </div>
+      <div class="lock " onclick="locked()">
+        <img src="img\lock.svg" class="rounded-circle svgshadow" alt="Cinque Terre" width="150">
+      </div>
+      <!-- 遮挡无用区域 -->
+      <div class="over bk">
+        <img src="img\lock.svg" class="rounded-circle svgshadow" alt="Cinque Terre" width="150">
+      </div>
+
+      <div class="music">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- 左侧导航 -->
+  <div class="m-lt" id="m-lt">
+    <div class="m-lt-out box-hide-scrollbar">
+      <div class="m-lt-list">
+        <!-- 个人栏 -->
+        <div class="m-lt-person">
+          <img src="img\person.svg" class="rounded-circle" alt="Cinque Terre" width="150">
+          <div class="m-lt-per">
+            <div class="m-lt-name">Journey</div>
+            <div class="m-lt-sign">风之旅人</div>
+          </div>
+        </div>
+        <div class="m-lt-title">导航</div>
+        <!-- 主页 -->
+        <div class="m-lt-card" onclick="loadHome()">
+          <img src="img\home.svg" class="svgshadow" />
+          主页
+        </div>
+        <!-- 笔记 -->
+        <div class="m-lt-card" onclick="loadNote()">
+          <img src="img\write.svg" class="svgshadow" />
+          笔记
+        </div>
+        <!-- 联系 -->
+        <div class="m-lt-card" onclick="loadConnect()">
+          <img src="img\connect.svg" class="svgshadow" />
+          联系
+        </div>
+        <!-- 打赏 -->
+        <div class="m-lt-card" onclick="loadReward()">
+          <img src="img\reward.svg" class="svgshadow" />
+          投喂
+        </div>
+        <div class="m-lt-title">分组</div>
+        <!-- web -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card collapsed" data-bs-toggle="collapse" href="#menuWeb" onclick="open1()">
+            <img src="img\classify.svg" class="svgshadow" />
+            web
+            <h class="open">
+              <img src="img/left.svg" class="svgshadow" id="lt-img1" />
+            </h>
+          </div>
+          <div id="menuWeb" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadWeek1()">
+              <img src="img\text.svg" class="svgshadow" />
+              web week 1
+            </div>
+            <div class="m-lt-card" onclick="loadWeek2()">
+              <img src="img\text.svg" class="svgshadow">
+              web week 2
+            </div>
+            <div class="m-lt-card" onclick="loadWeek3()">
+              <img src="img\text.svg" class="svgshadow" />
+              web week 3
+            </div>
+            <div class="m-lt-card" onclick="loadWeek4()">
+              <img src="img\text.svg" class="svgshadow" />
+              web week 4
+            </div>
+          </div>
+        </div>
+        <!-- 题解 -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card collapsed" data-bs-toggle="collapse" href="#menuNote" onclick="open2()">
+            <img src="img\note.svg" class="svgshadow" />
+            题解
+            <h class="open">
+              <img src="img/left.svg" class="svgshadow" id="lt-img2" />
+            </h>
+          </div>
+          <!-- <div id="menuNote" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadCF1820()">
+              <img src="img\answer.svg" class="svgshadow" />
+              Codeforces Round 866 (Div. 2)
+            </div>
+          </div> -->
+          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadABC301()">
+              <img src="img\answer.svg" class="svgshadow" />
+              AtCoder ABC 301
+            </div>
+          </div>
+          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadJT20230717()">
+              <img src="img\answer.svg" class="svgshadow" />
+              大一Tarjan
+            </div>
+          </div>
+        </div>
+        <!-- <div class="m-lt-menu">
+          <div class="m-lt-card collapsed" data-bs-toggle="collapse" href="#menuXL" onclick="open2()">
+            <img src="img\note.svg" class="svgshadow" />
+            训练
+            <h class="open">
+              <img src="img/left.svg" class="svgshadow" id="lt-img2" />
+            </h>
+          </div>
+          <div id="menuXL" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadXL20230623()">
+              <img src="img\calendar.svg" class="svgshadow" />
+              2023年6月23日 组队+补题
+            </div>
+          </div>
+          <div id="menuXL" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadXL20230624()">
+              <img src="img\calendar.svg" class="svgshadow" />
+              2023年6月24日 刷题
+            </div>
+          </div>
+        </div> -->
+        <!-- 板子 -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuBoard" onclick="open3()">
+            <img src="img\boardmenu.svg" class="svgshadow" />
+            板子
+            <h class="open">
+              <img src="img/left.svg" class="svgshadow" id="lt-img3" />
+            </h>
+          </div>
+          <div id="menuBoard" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadBoardGraph()">
+              <img src="img\board.svg" class="svgshadow" />
+              图论
+            </div>
+          </div>
+        </div>
+        <!-- 日记 -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuDaily" onclick="open4()">
+            <img src="img\daily.svg" class="svgshadow" />
+            日记
+            <h class="open">
+              <img src="img/left.svg" class="svgshadow" id="lt-img4" />
+            </h>
+          </div>
+          <div id="menuDaily" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="load404()">
+              <img src="img\daily.svg" class="svgshadow" />
+              第一篇
+            </div>
+          </div>
+        </div>
+        <!-- 网站 -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuOne" onclick="open5()">
+            <img src="img\commonly.svg" class="svgshadow" />
+            网站
+            <h class="open">
+              <img src="img\left.svg" class="svgshadow" id="lt-img5" />
+            </h>
+          </div>
+          <div id="menuOne" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadHZNUOJ()">
+              <img src="img\hznuoj.svg" />
+              HZNUOJ
+            </div>
+            <div class="m-lt-card" onclick="loadCF()">
+              <img src="img\cf.svg" />
+              Codeforces
+            </div>
+            <div class="m-lt-card" onclick="loadVJ()">
+              <img src="img\vj.svg" />
+              VJ
+            </div>
+            <div class="m-lt-card" onclick="loadLuogu()">
+              <img src="img\luogu.svg" />
+              洛谷
+            </div>
+            <div class="m-lt-card" onclick="loadAT()">
+              <img src="img\AtCoder.svg" />
+              AtCoder
+            </div>
+            <div class="m-lt-card" onclick="loadGE()">
+              <img src="img\Graph.svg" class="svgshadow" />
+              Graph Editor
+            </div>
+            <div class="m-lt-card" onclick="loadQuanta()">
+              <img src="img\quanta.svg" />
+              慢清尘慕课平台
+            </div>
+          </div>
+        </div>
+        <!-- 友链 -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuTwo" onclick="open6()">
+            <img src="img\friend.svg" class="svgshadow" />
+            友链
+            <h class="open">
+              <img src="img\left.svg" class="svgshadow" id="lt-img6" />
+            </h>
+          </div>
+          <div id="menuTwo" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card bk">
+              <img src="img\AD.svg" class="svgshadow" />
+              广告位招租
+            </div>
+          </div>
+        </div>
+        <!-- 底部留白 -->
+        <br>
+      </div>
+    </div>
+  </div>
+  <!-- 中间文章 -->
+  <div class="m-md" id="m-md">
+    <div class="m-md-out box-hide-scrollbar" id="m-md-top">
+      <div class="p-page" id="p-page">
+      </div>
+    </div>
+  </div>
+  <!-- 右侧目录 -->
+  <div class="m-rt" id="m-rt">
+    <div class="m-rt-out box-hide-scrollbar">
+      <div class="p-list" id="p-list">
+      </div>
+    </div>
+  </div>
+  <!-- 右下回顶部 -->
+  <div class="m-rtbt" id="m-rtbt">
+    <div class="backtop" onclick="document.getElementById('m-md-top').scrollTop=0;">
+      <img src="img/top.svg" class="svgshadow" />
+    </div>
+    <div class="moon" onclick="night()">
+      <img src="img/moon.svg" class="svgshadow" />
+    </div>
+  </div>
+
+  <div id="aplayer01" style="z-index: 999999999"></div>
   <script type="text/javascript">
-      var map = new AMap.Map('map-map', {
-          resizeEnable: true,
-      });
-      AMap.plugin('AMap.Geolocation', function() {
-        var geolocation = new AMap.Geolocation({
-          enableHighAccuracy: true,//是否使用高精度定位，默认:true
-          timeout: 10000,          //超过10秒后停止定位，默认：5s
-          buttonPosition:'RB',    //定位按钮的停靠位置
-          buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-          zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
-        });
-        map.addControl(geolocation);
-        geolocation.getCurrentPosition(function(status,result){
-          if(status=='complete'){
-            onComplete(result)
-          }else{
-            onError(result)
-            }
-          });
-      });
-      //解析定位结果
-      function onComplete(data) {
-        document.getElementById('status').innerHTML='定位成功'
-        var str = [];
-        str.push('定位结果：' + data.position);
-        str.push('定位类别：' + data.location_type);
-
-
-        // 更改地图定位
-        // 获取 src 属性的值
-        var src = $("#map-mapset").attr("src");
-        // 使用正则表达式匹配经纬度
-        var regex = /dest=(\d+\.\d+),(\d+\.\d+)/;
-        // 使用 replace 方法替换经纬度为 data.position 的内容
-        var newSrc = src.replace(regex, "dest=" + data.position);
-
-        document.getElementById('tmptmptmp').value = data.position;
-        getcity(0);
-        $("#map-mapset").attr("src", newSrc);
-      }
-      //解析定位错误信息
-      function onError(data) {
-          document.getElementById('status').innerHTML='定位失败'
-          document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
-      }
-      // 传入经纬度修改定位
-      function changemapcity(pos) {
-        // alert("new"+pos);        
-        document.getElementById('status').innerHTML='定位成功'
-        var str = [];
-        str.push('定位结果：' + pos);
-        // 更改地图定位
-        // 获取 src 属性的值
-        var src = $("#map-mapset").attr("src");
-        // 使用正则表达式匹配经纬度
-        var regex = /dest=(\d+\.\d+),(\d+\.\d+)/;
-        // 使用 replace 方法替换经纬度为 data.position 的内容
-        var newSrc = src.replace(regex, "dest=" + pos);
-        // 设置新的 src 属性的值
-        $("#map-mapset").attr("src", newSrc);
-        // alert();
-      }
+    const ap = new APlayer({
+      container: document.getElementById('aplayer01'),
+      fixed: true,
+      lrcType: 3,
+      audio: [{
+          name: '飞舟',
+          artist: '潇梦临',
+          url: 'http://music.163.com/song/media/outer/url?id=545030295.mp3',
+          cover: 'http://p1.music.126.net/0U7_CMTIp9APhfk51OEAzQ==/109951163185806337.jpg?param=130y130',
+          lrc: "lrc/飞舟-潇梦临.lrc",
+        },
+        // {
+        //   name: '莲动下渔舟',
+        //   artist: '谣君',
+        //   url: 'http://music.163.com/song/media/outer/url?id=1834054702.mp3',
+        //   cover: 'http://p2.music.126.net/S2wKE-hdNvhBnE6n8e0uow==/109951165852081671.jpg',
+        //   lrc: "lrc/莲动下渔舟-谣君.lrc",
+        // },
+        // {
+        //   name: '狐言',
+        //   artist: '慵狐',
+        //   url: 'http://music.163.com/song/media/outer/url?id=1934786244.mp3',
+        //   cover: 'http://p2.music.126.net/LtXskTqTmlF9Rqcpl3LbWA==/109951167239056526.jpg',
+        //   lrc: "lrc/狐言-慵狐.lrc",
+        // },
+        // {
+        //   name: '第三十八年夏至',
+        //   artist: '河图',
+        //   url: 'http://music.163.com/song/media/outer/url?id=101126.mp3',
+        //   cover: 'http://p1.music.126.net/Q2dCo2lH53tqJe2zjaC56Q==/3393092900107787.jpg',
+        //   lrc: "lrc/第三十八年夏至-河图.lrc",
+        // },
+        {
+          name: '白马入芦花',
+          artist: '河图',
+          url: 'https://wsaudiobssdlbig.yun.kugou.com/202306222322/ba73fc8bb5d6414775a1789a12e47574/bss/extname/wsaudio/07daa21c5a1ad6c2455cb3f9fc64999d.mp3',
+          cover: 'https://wsingbssdl.kugou.com/568b1fdacafa76d03b55dd68b97b645e.jpg_188x188.jpg',
+          lrc: "lrc/白马入芦花-河图.lrc",
+        },
+        // {
+        //   name: 'GLISTENING♭',
+        //   artist: '安野希世乃',
+        //   url: 'http://music.163.com/song/media/outer/url?id=486194382.mp3',
+        //   cover: 'http://p1.music.126.net/cM9_ZvlbURq5Z-praqaj5w==/18806046883431621.jpg?param=300x300',
+        //   lrc: "lrc/GLISTENING♭-安野希世乃.lrc",
+        // },
+      ]
+    });
   </script>
-  
-  
-  <iframe style="display: block;" id="map-mapset" class="map-mapset" src="https://m.amap.com/navi/?dest=116.470098,39.992838&destName=默认城市&hideRouteIcon=1&key=b556f62b89a6b24871453d90532cbc16" frameborder="0"></iframe>
-
-  <!-- 天气板块 -->
-  <div class="weather-weatherset" id="weather-weatherset" style="display: none;">
-    <div class="weatherset-top">
-      <div class="weather-top-button" onclick="loadweathertoday()">
-        <h1></h1>
-        <img src="img/today.svg">
-      </div>
-      <div class="weather-top-button" onclick="loadweatherbing()">
-        <h1></h1>
-        <img src="img/bing.svg">
-      </div>
-    </div>
-    <!-- 今日信息 -->
-    <div class="weather-today" id="weather-today" style="display: block;">
-      <div class="weather-today-city" id="weather-today-city">余区</div>
-      <div class="weather-today-address" id="weather-today-address">余区</div>
-      <div class="weather-today-temp" id="weather-today-temp">10°C</div>
-      <div class="weather-today-today" id="weather-today-today">晴3-10°C</div>
-      <div class="weather-today-mess" id="weather-today-mess1">风向：西</div>
-      <div class="weather-today-mess" id="weather-today-mess2">风力：≤3 级</div>
-      <div class="weather-today-mess" id="weather-today-mess3">空气湿度：30</div>
-      <div class="weather-today-future" id="weather-today-future">预报天气</div>
-      <div class="weather-today-weather" id="weather-today-weather1">2024-01-05 晴 -4~5℃</div>
-      <div class="weather-today-weather" id="weather-today-weather2">2024-01-06 晴 -12~2℃</div>
-      <div class="weather-today-weather" id="weather-today-weather3">2024-01-07 晴 -9~0℃</div>
-      <div class="weather-today-weather" id="weather-today-weather4">2024-01-08 多云 -6~2℃</div>
-    </div>    
-    <!-- 推荐页面 -->
-    <div class="weather-bing" id="weather-bing" style="display: none;">    
-      <div class="weather-QRcode">
-        <h1>二维码生成器</h1>
-        <p>请输入一个网址，点击生成按钮，即可在下方看到网址的二维码。</p>
-        <input type="text" id="url" placeholder="www.hznu.edu.cn" style="width: 300px;">
-        <button id="generate" onclick="loadQRcode()">生成3</button>
-        <div class="qrcode" id="qrcode"></div>
-      </div>      
-      <div class="weather-bing-title" onclick="loadbing()">点击获得 Bing 每日一图</div>
-      <div class="weather-bing-picture">
-        <img id="Bingpicture" src="https://api.xygeng.cn/bing/view" alt="" style="display: none;">
-      </div>
-    </div>
-  </div>
-
-
-  <!-- 历史板块 -->
-  <div class="history-historyset" id="history-historyset" style="display: none;">
-    <div class="historyset-page-title" onclick="settingaddcity()">城市列表</div>
-    <div class="historyset-page-list" id="historyset-page-list">    
-      <div class="historyset-page-card" id="historyset-page-card0">
-        <div class="historyset-card-city" id="historyset-card0-city">余杭区</div>
-        <div class="historyset-card-wearther" id="historyset-card0-wearther">晴 10°C</div>
-      </div>
-    </div>
-  </div>
-
-
-  
-  <!-- 设置板块 -->
-  <div class="setting-settingset" id="setting-settingset" style="display: none;">
-    <div class="setting-person setting-container">
-      <div class="setting-person-picture">
-        <div class="setting-person-font">心晴头像</div>
-        <img id="img" src="wea/wea (1).svg" alt="图片">
-        <button class="setting-person-button" id="next">换一个</button>
-      </div>
-    </div>
-    <div class="setting-password setting-container" onclick="settingpassword()"> 修改密码 </div>   
-    <div class="setting-changecity setting-container" onclick="settingchangecity()"> 切换城市 </div>
-    <div class="setting-addcity setting-container" onclick="settingaddcity()"> 增加城市 </div>    
-    <div class="setting-load setting-container"> 自动登录 </div>    
-    <div class="setting-loadAPP setting-container" onclick="loadAPP()"> 退出账号 </div>
-    <div class="setting-container2 copyright colorfulword">Copyright © CKZ</div>
-  </div>
-
-
-  <!-- 修改密码 -->
-  <div class="password-page" style="display: none;" id="password-page">
-    <div class="password-page-title">修改密码</div>
-    <div class="password-input-box">
-      <label for="password">旧 密 码：</label>
-      <input type="password" id="password0" placeholder="请输入新密码">
-    </div>
-    <div class="password-input-box">
-      <label for="password">新 密 码：</label>
-      <input type="password" id="password1" placeholder="请输入新密码">
-    </div>
-    <div class="password-input-box">
-      <label for="password">确认密码：</label>
-      <input type="password" id="password2" placeholder="请确认密码">
-    </div>
-    <div class="password-input-box">
-        <div onclick="changepwd()">确认</div>
-        <div onclick="changepwdClose()">关闭</div>
-    </div>
-  </div>
-
-
-  <!-- 切换城市 -->
-  <input id="tmptmptmp" style="display: none;">
-  <div id="changecity-map" style="display: none;" ></div>
-  <script>
-    var map2 = new AMap.Map('changecity-map', {
-      resizeEnable: true,
-      center: [120.01809,30.292206],
-      zoom: 12
-    });
-    //为地图注册click事件获取鼠标点击出的经纬度坐标
-    map2.on('click', function(e) {
-      // 向上传map定位地点
-      changemapcity(e.lnglat);
-      // 向下改天气选择城市
-      document.getElementById('tmptmptmp').value = e.lnglat;
-      getcity(0);
-    });
-  </script>  
-  <div class="changecity-map-close" id="changecity-map-close" onclick="closeChangeCity()" style="display: none;"> 关闭 </div>
-
-
-
-  <!-- 增加城市 -->
-  <div class="addcity-page" style="display: none;" id="addcity-page">
-    <div class="addcity-page-title">增加城市</div>
-    <div class="addcity-page-chose">
-      <select id="province" onchange="chooseProvince(this)">
-        <option value="1">请选择省</option>
-      </select>
-      <select id="city" onchange="chooseCity(this)">
-        <option value="2" id="addCityEnd">请选择市</option>
-      </select>
-      <select id="area">
-        <option value="3">请选择区</option>
-      </select>
-    </div>
-    <div class="addcity-page-button">
-      <div class="addcity-page-enter" onclick="addCityEnter()"> 增加 </div>
-      <div class="addcity-page-close" onclick="closeAddCity()"> 关闭 </div>
-    </div>
-    <div class="addcity-page-max">
-      更改历史城市数量上限(不包括默认城市0-999)
-      <input class="addcity-max-input" id="addcity-max-input"></input>
-      <div class="addcity-max-button" onclick="changeCardMax()"> 确认 </div>
-    </div>
-  </div>
-
-  <!-- 登录界面 -->
-  <div class="loadAPP-page" style="display: block;" id="loadAPP-page">
-    <div class="loadApp-page-title">欢迎登录</div>
-    <div class="loadApp-input-box">
-      <label for="username">账号：</label>
-      <input type="text" id="username" placeholder="请输入用户名">
-    </div>
-    <div class="loadApp-input-box">
-      <label for="password">密码：</label>
-      <input type="password" id="password" placeholder="请输入密码">
-    </div>
-    <div class="loadApp-input-box">
-        <div id="login-btn" onclick="loginbtn()">登录</div>
-        <div id="login-creat" onclick="logincreat()">注册</div>
-    </div>
-  </div>
-
-
-
-
-  <div class="container">
-    <div class="md-md">
-      <!-- 这里放置地图的内容 -->
-      <div class="md-md-map" id="map" style="display: none;">
-        <!-- <div>map</div> -->
-      </div>
-      <!-- 这里放置天气的内容 -->
-      <div class="md-md-weather" id="weather" style="display: none;">            
-        <!-- <div>weather</div> -->
-      </div>
-      <!-- 这里放置历史的内容 -->
-      <div class="md-md-history" id="history" style="display: none;">            
-        <!-- <div>history</div> -->
-      </div>
-      <!-- 这里放置设置的内容 -->
-      <div class="md-md-setting" id="setting" style="display: none;">
-        <!-- <div>setting</div> -->
-      </div>       
-    </div>
-
-    <!-- 下方四按钮 -->
-    <div class="md-bt">
-      <div class="md-bt-button md-bt-map" onclick="loadmap()">
-        <h1></h1>
-        <img src="img/map1.svg">
-      </div>
-      <div class="md-bt-button md-bt-weather" onclick="loadweather()">
-        <h1></h1>
-        <img src="img/weather1.svg">
-      </div>
-      <div class="md-bt-button md-bt-history" onclick="loadhistory()">
-        <h1></h1>
-        <img src="img/history1.svg">
-      </div>
-      <div class="md-bt-button md-bt-setting" onclick="loadsetting()">
-        <h1></h1>
-        <img src="img/setting1.svg">
-      </div>
-    </div>
-  </div>
 </body>
-
-<!-- 修改默认城市中获得改城市的具体位置，经纬度逆推 经纬度由tmptmptmp提供-->
+<script src="index.js"></script>
+<script src="XL.js"></script>
 <script>
-  function getcity(flag) {
-    var geocoder = new AMap.Geocoder({
-        city: "010", //城市设为北京，默认：“全国”
-        radius: 1000 //范围，默认：500
-    });
-    var marker = new AMap.Marker();;
-    var lnglat  = document.getElementById('tmptmptmp').value.split(',');
-    map.add(marker);
-    marker.setPosition(lnglat);
-    geocoder.getAddress(lnglat, function(status, result) {
-      if (status === 'complete'&&result.regeocode) {
-        var address = result.regeocode.formattedAddress;
-        alert("当前默认地点为："+address);
-        weatherchange(address[6]+address[7]+address[8],flag);
-        
-        var city=document.getElementById("weather-today-city");
-        city.innerHTML=address[6]+address[7]+address[8];
-        var address1=document.getElementById("weather-today-address");
-        address1.innerHTML=address;
-      }else{
-        log.error('根据经纬度查询地址失败')
-      }
-    });
-  }
-
-  function weatherchange(city,flag) {
-    // alert(city);
-    AMap.plugin('AMap.Weather', function() {
-      var weather = new AMap.Weather();
-      //查询实时天气信息, 查询的城市到行政级别的城市，如朝阳区、杭州市
-      weather.getLive(city, function(err, data) {
-        if (!err) {
-          var temp=document.getElementById("weather-today-temp");
-          temp.innerHTML=data.temperature+"°C";
-          var today=document.getElementById("weather-today-today");
-          today.innerHTML=data.weather;
-          var mess1=document.getElementById("weather-today-mess1");
-          mess1.innerHTML="风向："+data.windDirection;
-          var mess2=document.getElementById("weather-today-mess2");
-          mess2.innerHTML="风力："+data.windPower+"级";
-          var mess3=document.getElementById("weather-today-mess3");
-          mess3.innerHTML="空气湿度："+data.humidity;
-          if (flag==0) {
-            historysetchangecity(data.city,data.weather,data.temperature);
-          } else {
-            historysetaddcity(data.city,data.weather,data.temperature);
-          }
-        }
-      });
-      //未来4天天气预报
-      weather.getForecast(city, function(err, data) {
-        if (err) {return;}            
-          var dayweather;
-          dayWeather = data.forecasts[0];
-          var weather1=document.getElementById("weather-today-weather1");
-          weather1.innerHTML=dayWeather.date+"&nbsp;&nbsp;&nbsp;"+dayWeather.dayWeather+"&nbsp;&nbsp;&nbsp;"+dayWeather.nightTemp + '&nbsp;~&nbsp;' + dayWeather.dayTemp + '℃';
-          
-          dayWeather = data.forecasts[1];
-          var weather2=document.getElementById("weather-today-weather2");
-          weather2.innerHTML=dayWeather.date+"&nbsp;&nbsp;&nbsp;"+dayWeather.dayWeather+"&nbsp;&nbsp;&nbsp;"+dayWeather.nightTemp + '&nbsp;~&nbsp;' + dayWeather.dayTemp + '℃';
-      
-          dayWeather = data.forecasts[2];
-          var weather3=document.getElementById("weather-today-weather3");
-          weather3.innerHTML=dayWeather.date+"&nbsp;&nbsp;&nbsp;"+dayWeather.dayWeather+"&nbsp;&nbsp;&nbsp;"+dayWeather.nightTemp + '&nbsp;~&nbsp;' + dayWeather.dayTemp + '℃';
-            
-          dayWeather = data.forecasts[3];
-          var weather4=document.getElementById("weather-today-weather4");
-          weather4.innerHTML=dayWeather.date+"&nbsp;&nbsp;&nbsp;"+dayWeather.dayWeather+"&nbsp;&nbsp;&nbsp;"+dayWeather.nightTemp + '&nbsp;~&nbsp;' + dayWeather.dayTemp + '℃';
-        });
-    });
-  }
+  hljs.initHighlightingOnLoad();
 </script>
-
-<!-- 切换头像 -->
 <script>
-  // 获取图片元素
-  var img = document.getElementById("img");
-  // 获取按钮元素
-  var prev = document.getElementById("prev");
-  var next = document.getElementById("next");
-  // 定义一个变量，表示当前图片的索引
-  var index = 1;
-  // 定义一个函数，根据索引更新图片的src属性
-  function updateImg() {
-    img.src = "wea/wea (" + index + ").svg";
-  }
-  // 给下一张按钮添加点击事件
-  next.onclick = function() {
-    // 索引加一
-    index++;
-    // 如果索引大于28，就设置为1
-    if (index > 28) {
-      index = 1;
+  loadHome();
+  // loadABC301()
+  // loadConnect();
+</script>
+<script>
+  function displayTime() {
+    var date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    if (minutes < 10) {
+      minutes = "0" + minutes;
     }
-    // 更新图片
-    updateImg();
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    document.getElementById("time").innerHTML = hours + ":" + minutes + ":" + seconds;
   }
+  setInterval(displayTime, 1000);
 </script>
-<!-- 三级联动 -->
-<script>
-  getProvince();
-</script>
+
+
 </html>

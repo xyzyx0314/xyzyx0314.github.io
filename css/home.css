@@ -1,0 +1,170 @@
+.parent {
+  width: 96%;
+  height: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-content: space-around;
+}
+
+.child {
+  position: relative;
+  box-sizing: border-box;
+  background-color: var(--color3);
+  flex: 0 0 32%;
+  height: 160px;
+  margin-bottom: 1%;
+  margin-left: 1%;
+  padding-top: 0.5%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 4%;
+}
+
+.child img {
+  width: 100%;
+  height: 70.27%;
+}
+
+.home-blog-title {
+  font-size: 19px;
+  /* margin-bottom: 1.5%; */
+  height: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.home-blog-tag {
+  font-size: 14px;
+}
+
+.home-blog-mess {
+  height: auto;
+  font-size: 12px;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.home-blog-date {
+  position: absolute;
+  bottom: 2%;
+  font-size: 14px;
+}
+
+
+
+
+
+.home-person {
+  margin-top: 3%;
+  margin-left: 0%;
+  width: 93%;
+}
+
+.home-person-pho {}
+
+.home-person-pho img {
+  border: var(--color3) solid 5px;
+  width: 60%;
+}
+
+.home-perosn-right {
+  margin-left: -12%;
+}
+
+.home-person-top {
+  margin-left: 5%;
+  margin-top: 2%;
+  height: 50%;
+}
+
+.home-person-bot {
+  padding-top: 3%;
+}
+
+.kg {
+  opacity: 0;
+}
+
+
+.home-person-attention {
+  background-color: aqua;
+  border-radius: 10%;
+}
+
+.home-person-back {
+  background-color: var(--color1);
+  height: 80%;
+  margin-top: -5%;
+  margin-left: -2%;
+  padding-bottom: 5%;
+}
+
+
+
+.welcome {
+  /* 本例12个文字(加标点符号)；有多少个文字，width就是多少个em */
+  font-size: 30px;
+  width: 21em;
+  margin-left: 5%;
+  /* 加上两个动画，一个是打字动画，使用steps让字一个一个的出现，
+     注意step和字数保持一致，光标动画也是同理，*/
+  animation: typingWords 5s steps(21) 1, cursor 0.5s steps(1) infinite;
+  /* 要设置不允许换行，且溢出隐藏 */
+  white-space: nowrap;
+  overflow: hidden;
+  /* 使用右边框作为打印的指针光标 */
+  border-right: 1px solid #000;
+}
+
+@keyframes typingWords {
+  0% {
+    width: 0;
+  }
+}
+
+@keyframes cursor {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.home-notice {
+  font-size: 25px;
+  margin-bottom: 2%;
+}
+
+
+
+/*list*/
+.home-bulletin {
+  margin-top: 5%;
+  margin-left: 5%;
+  font-size: 25px;
+  color: var(--color6);
+}
+
+.home-news {
+  margin-top: 5%;
+  margin-left: 7%;
+  font-size: 13px;
+  color: var(--color6);
+  text-decoration: underline;
+}
+
+.home-new:hover {
+  color: var(--color5);
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>随机点名</title>
+      <style>
+            /* 初始化页面，清除所有元素的内外边距 */
+            * {
+                  padding: 0;
+                  margin: 0;
+                  /* 设置背景颜色为414141 */
+                  background-color: #000000;
+            }
+
+            /* 盒子居中 */
+            div {
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  text-align: center;
+            }
+
+            /* 使用上期视频的文字渐变效果，再加一点点文字阴影 */
+            span,
+            h2 {
+                  text-shadow: 0 0 10px #dfd8d8;
+                  background: linear-gradient(135deg, #14ffe9, #ffeb3b, #ff00e0);
+                  -webkit-background-clip: text;
+                  background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  animation: ff 0.9s linear infinite;
+            }
+
+            @keyframes ff {
+                  to {
+                        filter: hue-rotate(360deg);
+                  }
+            }
+
+            /* 设置一下字体大小 */
+            h2 {
+                  font-size: 60px;
+            }
+
+            span {
+                  font-size: 30px;
+            }
+
+
+            /* 按钮居中 */
+            button {
+                  font-size: 20px;
+                  margin-top: 50px;
+                  position: absolute;
+                  top: 60%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  width: 80px;
+                  height: 40px;
+                  box-shadow: 0 0 10px #fff;
+                  background-color: gray;
+            }
+      </style>
+</head>
+
+<body>
+      <div>
+            <h2>随机点名</h2>
+            <span id="name"></span>
+      </div>
+      <button id="button_text">stop</button>
+</body>
+
+<script>
+      // 获取标签
+      let nametxt = document.getElementById('name');
+      let button = document.getElementById('button_text');
+
+      let uname = ['邵茹怡', '陈俊安', '凌子豪', '章诚益', '张朝', '叶宏健',
+            '尤馨然', '周奕', '吴佳涛', '王欣楠', '江宇帆', '戴子晟', '黄晨烨', '刘桐',
+            '林丰', '蔡宇欣', '何家琛'];
+
+      function getrandom(min, max) {
+            return Math.floor(Math.random() * (max - min - 1) + min);
+      }
+      function clock() {
+            let random = uname[getrandom(0, uname.length - 1)];
+            nametxt.innerHTML = random;
+      };
+      let time = self.setInterval("clock()", 50);
+      let flag = false;
+      button.onclick = function () {
+            if (flag == false) {
+                  time = window.clearInterval(time);
+                  // 按钮文字从stop变为start；
+                  button.innerHTML = 'start';
+                  // 标志变更
+                  flag = true;
+            } else {
+                  // 当flag标志为true时，开始刷新，文字变更
+                  time = self.setInterval("clock()", 30);
+                  button.innerHTML = 'stop';
+                  flag = false;
+            }
+      }
+</script>
+
+</html>

@@ -1,0 +1,1588 @@
+  <body>
+
+    <!-- <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" class="scrollspy-example-2" tabindex="0"> -->
+    <div class="p-m" id="p-m">
+      <div class="p-top">
+        <div class="row">
+          <div class="p-top-postion">
+            <h class="p-top-link" onclick="loadHome()">Journey</h>
+            /
+            <h class="p-top-link" onclick="loadNote()">笔记</h>
+            /
+            <h class="p-top-link" onclick="loadNoteBoard()">板子</h>
+            /
+            <h class="p-top-link" onclick="loadBoardGraph()"> 图论模板 (202207标准) </h>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-title2" id="item">图论模板 (202207标准)</div>
+      <a class="p-title5 nav-link" href="#item-01">01.差分约束 Bellman</a>
+      <a class="p-title5 nav-link" href="#item-02">02.dij</a>
+      <a class="p-title5 nav-link" href="#item-03">03.强连通分量 有向图缩点</a>
+      <a class="p-title5 nav-link" href="#item-04">04.无向图割边</a>
+      <a class="p-title5 nav-link" href="#item-05">05.无向图割点</a>
+      <a class="p-title5 nav-link" href="#item-06">06.边双缩点</a>
+      <a class="p-title5 nav-link" href="#item-07">07.点双缩点</a>
+      <a class="p-title5 nav-link" href="#item-08">08.基环树 点权</a>
+      <a class="p-title5 nav-link" href="#item-09">09.Kruskal重构树 剖分</a>
+      <a class="p-title5 nav-link" href="#item-10">10.kruskal重构树 倍增</a>
+      <a class="p-title5 nav-link" href="#item-11">11.2-sat</a>
+      <a class="p-title5 nav-link" href="#item-12">12.最大流-最小割</a>
+      <a class="p-title5 nav-link" href="#item-13">13.最小费用最大流</a>
+      <a class="p-title5 nav-link" href="#item-14">14.无源汇上下界可行流</a>
+      <a class="p-title5 nav-link" href="#item-15">15.有源汇有上下界最大流</a>
+      <a class="p-title5 nav-link" href="#item-16">16.有源汇有上下界最小流</a>
+
+      <div class="p-problem">
+        <div class="p-title3" id="item-01">01. 差分约束 Bellman</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include <bits/stdc++.h>
+    using namespace std; 
+    const int inf=0x3f3f3f3f;
+    const long long INF=0x3f3f3f3f3f3f3f3f;
+    typedef long long ll;
+    vector <array<int,3>> edge;
+    int d[5050];
+    int main()
+    {
+        std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        long long n,m;
+        cin >> n >> m; 
+        for (int i=1; i<=m; i++)
+        {
+            int x,y,z;
+            cin >> x >> y >> z;
+            edge.push_back({x,y,z});
+        }
+        for (int i=1; i<=n; i++) edge.push_back({0,i,0});
+        for (int i=1; i<=n ; i++) d[i]=-inf;
+        for (int i=0; i<=n; i++)
+        {
+            for (auto [x,y,z]:edge)
+                d[y]=max(d[y],d[x]-z);
+            
+        }
+        
+        for (auto [x,y,z]:edge)
+            if (d[x]-d[y]>z)
+            {
+                cout << "-1\n"; 
+                return 0;
+            }
+        for (int i=1; i<=n; i++)
+            cout << d[i]-d[0] << " ";   
+    }</xmp>
+              </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-02">02. dij</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include <bits/stdc++.h>
+    using namespace std; 
+    const int inf=0x3f3f3f3f;
+    const long long INF=0x3f3f3f3f3f3f3f3f;
+    const int maxn=2e5+50;
+    const int mod=998244353;
+    const int Mod=1e9+7;
+    typedef long long ll;
+    vector <pair<ll,ll>> g[maxn];
+    ll dis[maxn],vis[maxn];
+    void dij(ll s)
+    {
+        memset(dis,0x3f,sizeof(dis));
+        memset(vis,0,sizeof(vis));
+        priority_queue<pair<ll,ll>> q;
+        dis[s]=0;
+        q.push({0,s});
+        while (!q.empty())
+        {
+            int x=q.top().second; q.pop();
+            if (vis[x]) continue; 
+            vis[x]=1;
+            for (int i=0; i<g[x].size(); i++)
+            {
+                int v=g[x][i].first,w=g[x][i].second;
+                if (dis[v]>dis[x]+w) 
+                {
+                    dis[v]=dis[x]+w;
+                    q.push({-dis[v],v});
+                }
+            }
+        }
+    }
+    
+    int main()
+    {
+        std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        ll n,m;
+        cin >> n >> m;
+        for (int i=1; i<=m; i++)
+        {
+            ll x,y,z;
+            cin >> x >> y >> z;
+            g[x].push_back({y,z});
+            g[y].push_back({x,z});
+        }
+        dij(1);
+        for (int i=1; i<=n; i++) cout << dis[i] << " ";	
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-03">03.连通分量 有向图缩点</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include<bits/stdc++.h>
+    using namespace std;
+    const int maxn=3e5+50;
+    int n,m;
+    int head_size=0;
+    struct edge{
+        int x,y,z,nxt;
+    }e[maxn];
+    int head[maxn];
+    int dfncnt=0,sccnt=0,top=0,cnt=0; 
+    int dfn[maxn],low[maxn],scc[maxn],sta[maxn],si[maxn];
+    void add(int x,int y)
+    {
+        e[++head_size].x=x;
+        e[head_size].y=y;
+        e[head_size].nxt=head[x];
+        head[x]=head_size;
+    }
+    void tarjan(int f) 
+    {
+        low[f]=dfn[f]=++dfncnt;
+        sta[++top]=f;
+        for(int i=head[f];i;i=e[i].nxt)
+        {
+            int t=e[i].y;
+            if(!dfn[t])
+            {
+                tarjan(t);
+                low[f]=min(low[f],low[t]);
+            }
+            else if(!scc[t]) low[f]=min(low[f],low[t]);
+        }
+        if(dfn[f]==low[f])
+        {
+            sccnt++;	
+            si[++cnt]++;
+            while(sta[top]!=f)
+            {
+                scc[sta[top]]=sccnt;
+                top--;
+                si[cnt]++;
+            }
+            scc[sta[top]]=sccnt;
+            top--;
+        }
+    }
+    map<int,int> mp;
+    vector <int> ans[100050];
+    map<pair<int,int>,int> mpf;
+    int main()
+    {
+        cin >> n >> m; 
+        for(int i=1;i<=m;i++) 
+        {
+            int x,y;
+            cin >> x >>y;
+            if (mpf[make_pair(x,y)]==0) { add(x,y); mpf[make_pair(x,y)]=1; }
+    
+        }
+        for(int i=1;i<=n;i++) if(!dfn[i]) tarjan(i);
+        long long cntans=0;
+        
+        for (int i=1; i<=n; i++)
+        {
+            long long x=scc[i];
+            if (mp[x]) ans[mp[x]].push_back(i);
+            else { cntans++; mp[x]=cntans; ans[mp[x]].push_back(i); }
+        }
+        for (int i=1; i<=cntans; i++)
+        {
+            for (int j=0; j<ans[i].size(); j++) cout << ans[i][j] << " ";
+            cout << "\n";
+        }
+        return 0;
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-04">04.无向图割边</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include<bits/stdc++.h>
+    using namespace std;
+    const int maxn=1e5+5;
+    const int maxm=2e6+5;
+    int n,m;
+    int dfn[maxn],low[maxn],c[maxn];
+    int head[maxm*2],ver[maxm*2],Next[maxm*2],fro[maxm*2],id[maxm*2];
+    int tot=1,dfncnt,dcc; 
+    vector <long long> BRIDGE;
+    void add(int x,int y,int i)
+    {
+        ver[++tot]=y,Next[tot]=head[x],head[x]=tot;
+        fro[tot]=x; id[tot]=i;
+    } 
+    void tarjan(int x,int in_edge)
+    {
+        dfn[x]=low[x]=++dfncnt;
+        for(int i=head[x];i;i=Next[i])
+        {
+            int y=ver[i];
+            if(!dfn[y])
+            {
+                tarjan(y,i);
+                low[x]=min(low[x],low[y]);
+                if(low[y]>dfn[x])
+                {
+                    BRIDGE.push_back(id[i]);
+                }
+            }
+            else if(i!=(in_edge^1)) low[x]=min(low[x],low[y]);
+        }
+    }
+    int main()
+    {
+        cin >> n >> m;
+        for(int i=1;i<=m;i++) 
+        {
+            long long x,y;
+            cin >> x >> y;
+            add(x,y,i); add(y,x,i);
+        }
+        for(int i=1;i<=n;i++) if(!dfn[i]) tarjan(i,0);
+        sort(BRIDGE.begin(),BRIDGE.end());
+        cout << BRIDGE.size() << "\n";
+        for (int i=0; i<BRIDGE.size(); i++) cout << BRIDGE[i] << " ";
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-05">05.无向图割点</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include <bits/stdc++.h>
+    #define int long long
+    const int inf=0x3f3f3f3f;
+    const long long INF=0x3f3f3f3f3f3f3f3f;
+    const int maxn=100050;
+    typedef long long ll;
+    using namespace std; 
+    int n,m,dfncnt;
+    int head_size=0;
+    int head[maxn], flag[maxn], dfn[maxn], low[maxn];
+    
+    struct edge{
+        int to;
+        int nxt;
+    }e[400050];
+
+    void add(int x, int y)
+    {
+        e[++head_size].to=y;
+        e[head_size].nxt=head[x];
+        head[x]=head_size;
+    }
+    
+    void tarjan(int f,int fa) 
+    {
+        int child=0;
+        dfn[f]=low[f]=++dfncnt;
+        for (int i=head[f]; i; i=e[i].nxt) 
+        {
+            int t=e[i].to;
+            if (!dfn[t]) 
+            {
+                tarjan(t,fa);
+                low[f]=min(low[f],low[t]);
+                if (low[t]>=dfn[f] && f!=fa) flag[f] = 1;
+                if (f==fa) child++;
+            }
+            else low[f]=min(low[f],dfn[t]);
+        }
+        if (child>=2 && f==fa) flag[f]=1;
+    }
+    map<pair<int,int>,int> mp;
+    signed main () 
+    {
+        std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        cin >> n >> m;
+        for (int i = 0; i < m; i++) 
+        {
+            int x,y;
+            cin >> x >> y;
+            if (mp[make_pair(x,y)]==0) { add(x,y); mp[make_pair(x,y)]=1; }
+            if (mp[make_pair(y,x)]==0) { add(y,x); mp[make_pair(y,x)]=1; }
+        }
+        for (int i = 1; i <= n; i++) if (!dfn[i]) tarjan(i, i);
+        ll sum=0; 
+        for (int i = 1; i <= n; i++) if (flag[i]) sum++;
+        cout << sum << "\n";
+        for (int i = 1; i <= n; i++) if (flag[i]) cout << i << " ";
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-06">06.边双缩点</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include<bits/stdc++.h>
+    using namespace std;
+    const int maxn=1e6+5;
+    const int maxm=2e6+5;
+    int n,m;
+    int dfn[maxn],low[maxn],c[maxn];
+    bool bridge[maxm*2];
+    int head[maxm*2],ver[maxm*2],Next[maxm*2],fro[maxm*2];
+    int tot=1,dfncnt,dcc; 
+    vector <pair<int,int>> edge2;
+    void dfs(int x)                           
+    {
+        c[x]=dcc;
+        for(int i=head[x];i;i=Next[i])
+        {
+            int y=ver[i];
+            if(c[y]||bridge[i]) continue;
+            dfs(y);
+        }
+    } 
+    void add(int x,int y)
+    {
+        ver[++tot]=y,Next[tot]=head[x],head[x]=tot;
+        fro[tot]=x;
+    } 
+    void tarjan(int x,int in_edge)
+    {
+        dfn[x]=low[x]=++dfncnt;
+        for(int i=head[x];i;i=Next[i])
+        {
+            int y=ver[i];
+            if(!dfn[y])
+            {
+                tarjan(y,i);
+                low[x]=min(low[x],low[y]);
+                if(low[y]>dfn[x])
+                {
+                    bridge[i]=bridge[i^1]=true;
+                }
+            }
+            else if(i!=(in_edge^1)) low[x]=min(low[x],low[y]);
+        }
+    }
+    vector <long long> ans[maxn];
+    int main()
+    {
+        cin >> n >> m;
+        for(int i=1;i<=m;i++) 
+        {
+            long long x,y;
+            cin >> x >> y;
+            add(x,y); add(y,x);
+        }
+        for(int i=1;i<=n;i++) if(!dfn[i]) tarjan(i,0);
+        for (int i=1; i<=n; i++)
+        {
+            if (!c[i])
+            {
+                ++dcc;
+                dfs(i);
+            }
+         }
+        //已完成边双 
+        long long cnt=0;
+        map<long long,long long> mp;
+        for (int i=1; i<=n; i++) 
+        {
+            int u=c[i];
+            if (mp[u]==0) { cnt++;	 mp[u]=cnt; }
+            ans[mp[u]].push_back(i);
+        }
+        cout << cnt << '\n';
+        for (int i=1; i<=cnt; i++)
+        {
+            cout << ans[i].size() <<' '; 
+            for (int j=0; j<ans[i].size(); j++) cout << ans[i][j] << ' ';
+            cout << "\n";
+        }
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-07">07.点双缩点</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include <bits/stdc++.h>
+    #define ll long long
+    using namespace std;
+    const int N=10010;
+    const int M=10010*4;
+    int head[N];
+    int ver[M];
+    int Next[M];
+    int tot,n,m;
+    void add(int x,int y)
+    {
+        ver[++tot]=y;
+        Next[tot]=head[x];
+        head[x]=tot;
+    }
+    int root;
+    vector<int>dcc[N];
+    int stackk[N];
+    int dfn[N],low[N];
+    int num=0;//时间戳
+    int top;//stackk
+    int cnt=0;//联通块数目
+    bool cut[N];//割点判断
+    void tarjan(int x)
+    {
+        dfn[x]=low[x]=++num;
+        stackk[++top]=x;
+        if(x==root&&head[x]==0)
+        {
+            dcc[++cnt].push_back(x);//cnt联通块标号
+            return ;
+        }
+        int flag=0;
+        for(int i=head[x];i;i=Next[i])
+        {
+            int y=ver[i];
+            if(!dfn[y])
+            {
+                tarjan(y);
+                low[x]=min(low[x],low[y]);
+                if(low[y]>=dfn[x])
+                {
+                    flag++;
+                    if(x!=root||flag>1)cut[x]=true;
+                    cnt++;
+                    int z;
+                    do//弹出的元素与x一起构成一个联通块(或者说割点的子树中的节点+割点?)
+                    {
+                        z=stackk[top--];
+                        dcc[cnt].push_back(z);
+                    }while(z!=y);
+                    dcc[cnt].push_back(x);
+                }
+            }
+            else low[x]=min(low[x],dfn[y]);
+        }
+    }
+    int tot2=1;
+    int new_id[N];
+     
+    int hc[N];
+    int vc[M];
+    int nc[M];
+    void add_c(int x,int y)
+    {
+        vc[++tot2]=y;
+        nc[tot2]=hc[x];
+        hc[x]=tot2;
+    }
+    int main()
+    {
+        std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        while(cin>>n>>m)
+        {
+            tot=1;//方便用^运算访问各边的终点
+            for(int i=1;i<=m;++i)
+            {
+                int x,y;
+                cin>>x>>y;
+                if(x==y)continue;
+                add(x,y);
+                add(y,x);
+            }
+            for(int i=1;i<=n;++i)
+            {
+                if(!dfn[i])root=i,tarjan(i);
+            }
+            /*for(int i=1;i<=n;++i)
+                if(cut[i])printf("%d ",i);*/
+            //上面求割点同时求V-DCC
+            //下面输出每个联通块中的点
+            for(int i=1;i<=cnt;++i)
+            {
+                for(int j=0;j<dcc[i].size();++j)cout<<i<<" "<<dcc[i][j]<<endl;
+            }
+     
+     
+     
+            //缩点
+            tot2=1;
+            int num2=cnt;
+            for(int i=1;i<=n;++i)
+            {
+                if(cut[i])new_id[i]=++num2;//缩点后割点的新编号,相当于每个割点单独作为一个联通块
+            }
+            for(int i=1;i<=cnt;++i)
+            {
+                for(int j=0;j<dcc[i].size();++j)
+                {
+                    int x=dcc[i][j];
+                    if(cut[x])//一个联通块中有且只有一个割点，通过割点们把这些联通块连接起来;
+                    {
+                        add_c(i,new_id[x]);
+                        add_c(new_id[x],i);
+                    }
+                    else new_id[x]=i;//其余点均只属于一个联通块
+                }
+            }
+     
+            //输出缩点后的图中各点之间的邻接关系，再次注意^符号的使用，i从2开始，每次加2，<tot2而非<=；
+            for(int i=2;i<tot2;i+=2)
+                cout<<vc[i^1]<<"   "<<vc[i]<<endl; 
+        }
+        return 0;
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-08">08.基环树 点权</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    //ZJOI 2008, 骑士
+    #include <bits/stdc++.h>
+    using namespace std; 
+    const int inf=0x3f3f3f3f;
+    const long long INF=0x3f3f3f3f3f3f3f3f;
+    const int maxn=1000050;
+    typedef long long ll;
+    bool vis[maxn],oncir[maxn];
+    int fa[maxn],w[maxn];
+    ll dp[maxn][2]; //dp[i][j] 节点i 0不取 1取 
+    ll dpc[maxn][2]; //环上dp 
+    vector <int> G[maxn];
+    int n;
+    void dfs(int x)
+    {
+        vis[x]=1;
+        if (G[x].size()==0)
+        {
+            dp[x][1]=w[x];
+            dp[x][0]=0;
+            return;
+        }
+        dp[x][1]=w[x];
+        for (auto y:G[x])
+        {
+            if (oncir[y]) continue;
+            dfs(y);
+            dp[x][0]+=max(dp[y][1],dp[y][0]); 
+            dp[x][1]+=dp[y][0];
+        }
+    }
+    int main()
+    {
+        std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        cin >> n;
+        for (int i=1; i<=n; i++) 
+        {
+            int q;
+            cin >> w[i] >> q;
+            fa[i]=q;
+            G[q].push_back(i);
+        }
+        ll ans=0;
+        for (int i=1; i<=n; i++)
+        {
+            if (vis[i]) continue;
+            int v=i;
+            ll res=-inf;
+            while (!vis[v])
+            {
+                vis[v]=1;
+                v=fa[v];
+            }
+            
+            int u=v;
+            vector <int> cir;
+            while (1)
+            {
+                cir.push_back(v);  //入圈
+                oncir[v]=1;  //标记在圈上 
+                v=fa[v];
+                if (v==u) break;
+            }
+            
+            for (auto x:cir)  dfs(x);
+            
+            for (int k=0; k<=1; k++)
+            {
+                if (k==0) 
+                {
+                    dpc[0][0]=dp[cir[0]][0];
+                    dpc[0][1]=-INF;
+                }//头不取 
+                else
+                {
+                    dpc[0][1]=dp[cir[0]][1];
+                    dpc[0][0]=-INF;
+                }//头取 
+                for (int i=1; i<cir.size(); i++)
+                {
+                    dpc[i][0]=max(dpc[i-1][1],dpc[i-1][0])+dp[cir[i]][0];				
+                    dpc[i][1]=dpc[i-1][0]+dp[cir[i]][1];
+                }
+                if (k==0)
+                {
+                    res=max(res,max(dpc[cir.size()-1][0],dpc[cir.size()-1][1]));
+                }
+                else
+                {
+                    res=max(res,dpc[cir.size()-1][0]);
+                }
+            }		
+            ans=ans+res;
+        }
+        cout << ans;
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-09">09.Kruskal重构树 剖分</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include<iostream>
+    #include<cstring>
+    #include<cstdio>
+    #include<algorithm>
+    #define re register
+    #define maxn 200001
+    using namespace std;
+    struct node
+    {
+        int v,nxt,w;
+    }e[maxn<<2],a[maxn<<2];
+    int n,m,k,num,Q;
+    int fa[maxn],top[maxn],f[maxn],deep[maxn],head[maxn];
+    int sum[maxn],son[maxn],key[maxn];
+    inline int read()
+    {
+        char c=getchar();
+        int x=0;
+        while(c<'0'||c>'9') c=getchar();
+        while(c>='0'&&c<='9') 
+            x=(x<<3)+(x<<1)+c-48,c=getchar();
+        return x;
+    }
+    inline int find(int x)
+    {
+        if(fa[x]==x) return x;
+        return fa[x]=find(fa[x]);
+    }
+    inline int add_edge(int x,int y)
+    {
+        e[++num].v=y;
+        e[num].nxt=head[x];
+        head[x]=num;
+    }
+    void dfs1(int r)
+    {
+        sum[r]=1;
+        int maxx=-1;
+        for(re int i=head[r];i;i=e[i].nxt)
+        if(!deep[e[i].v])
+        {
+            deep[e[i].v]=deep[r]+1;
+            f[e[i].v]=r;
+            dfs1(e[i].v);
+            sum[r]+=sum[e[i].v];
+            if(sum[e[i].v]>maxx) maxx=sum[e[i].v],son[r]=e[i].v;
+        }
+    }
+    void dfs2(int r,int topf)
+    {
+        top[r]=topf;
+        if(!son[r]) return;
+        dfs2(son[r],topf);
+        for(re int i=head[r];i;i=e[i].nxt)
+        if(deep[e[i].v]>deep[r]&&son[r]!=e[i].v) dfs2(e[i].v,e[i].v); 
+    }
+    inline int LCA(int x,int y)
+    {
+        while(top[x]!=top[y])
+        {
+            if(deep[top[x]]<deep[top[y]]) swap(x,y);
+            x=f[top[x]];
+        }
+        if(deep[x]<deep[y]) return x;
+        return y;
+    }
+    inline int cmp(node aa,node bb)
+    {
+        return aa.w<bb.w;
+    }
+    int main()
+    {
+        n=read();
+        m=read();
+        for(re int i=1;i<=m;i++)
+        {
+            a[i].v=read();
+            a[i].nxt=read();
+            a[i].w=read();
+        }
+        sort(a+1,a+m+1,cmp);
+        for(re int i=1;i<=(n<<1);i++) fa[i]=i;
+        k=n;
+        for(re int i=1;i<=m;i++)
+        {
+            int xx=find(a[i].v);
+            int yy=find(a[i].nxt);
+            if(xx==yy) continue;
+            fa[xx]=fa[yy]=++k;
+            add_edge(k,xx);
+            add_edge(xx,k);
+            add_edge(k,yy);
+            add_edge(yy,k);
+            key[k]=a[i].w;
+        }
+        for(re int i=k;i;i--)
+        if(!deep[i]) deep[i]=1,dfs1(i),dfs2(i,i);
+        Q=read();
+        int x,y;
+        while(Q--)
+        {
+            x=read();
+            y=read();
+            if(find(x)!=find(y)) puts("impossible");
+            else printf("%d",key[LCA(x,y)]),putchar(10);
+        }
+        return 0;
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-10">10.kruskal重构树 倍增</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include <bits/stdc++.h>
+    using namespace std; 
+    const int inf=0x3f3f3f3f;
+    const long long INF=0x3f3f3f3f3f3f3f3f;
+    const int maxn=4e5+10;
+    typedef long long ll;
+    ll n,m; 
+    struct stu{ int a,b; };
+    vector <stu> ve[maxn];
+    struct node{ int x,y,z; }a[maxn];
+    bool cmp(node A,node B){ return A.z<B.z; }
+    void add(int x,int y) { /*cout << x << " " << y <<"\n";*/ ve[x].push_back({y,1}); }
+    int key[maxn],fa[maxn][50];
+    int mark[maxn],step[maxn];
+    ll depth[maxn];
+    ll bits[50];
+    bool vis[maxn];
+    void init(){
+        bits[0]=1;
+        for (int i=1; i<=49; i++) bits[i]=bits[i-1]<<1;
+    }
+    
+    void dfs(int x,int y){
+        vis[x]=1;
+        depth[x]=depth[y]+1;
+        fa[x][0]=y;
+        for(int i=0;i<ve[x].size();i++){
+            if(ve[x][i].a==y){
+                step[x]=step[y]+ve[x][i].b;
+            }
+        }
+        for(int i=1;i<30;i++) fa[x][i]=fa[fa[x][i-1]][i-1];
+        for(int i=0;i<ve[x].size();i++){
+            int x1=ve[x][i].a;    
+            if(x1!=y){
+                dfs(x1,x);
+            }
+        }
+    }
+    
+    int lca(int x,int y){    
+        if(depth[x]<depth[y]) swap(x,y);
+        int dif=depth[x]-depth[y];
+        for(int i=29;i>=0;i--){
+            if(dif>=bits[i]){
+                x=fa[x][i];
+                dif-=bits[i];
+            }
+        }
+        if(x==y) return x;
+        for(int i=29;i>=0;i--){
+            if(depth[x]>=bits[i]&&fa[x][i]!=fa[y][i]){
+                x=fa[x][i];
+                y=fa[y][i];
+            } 
+        }
+        return fa[x][0];
+    }
+    int fat[500050];
+    int find(int x)
+    {
+        if (fat[x]==x) return x;
+        return fat[x]=find(fat[x]);
+    }
+    signed main()
+    {
+        std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        cin >> n >> m;
+        for (int i=1; i<=m; i++) cin >> a[i].x >> a[i].y >> a[i].z;	
+        sort(a+1,a+1+m,cmp);
+        for (int i=1; i<=(n<<1); i++) fat[i]=i;
+        int k=n;//节点数 
+        for (int i=1; i<=m; i++)
+        {
+            int x=find(a[i].x);
+            int y=find(a[i].y);
+            if (x==y) continue;
+            fat[x]=fat[y]=++k;
+            add(k,x); add(x,k);
+            add(k,y); add(y,k);
+            key[k]=a[i].z;
+        }
+        init();
+        for (int i=k; i>=1; i--)
+            if (vis[i]==0) 
+                dfs(i,0);
+        
+        int q; cin >> q; 
+        while (q--)
+        {
+            int x,y;
+            cin >> x >> y;
+            if (find(x)!=find(y)) cout << "impossible\n";
+            else cout << key[lca(x,y)] << "\n";
+        }
+        
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-11">11.2-sat</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    /*
+	USACO2011 Jan, 奶牛议会
+	不同的特点，判断YES/NO不是靠scc[i*2]与scc[i*2+1]比大小，而是判断i*2与i*2+1之间的连通性，不连通就是 二者都可 
+    */
+    #include<bits/stdc++.h>
+    using namespace std;
+    const int maxn=3e5+50;
+    int n,m;
+    int head_size=0;
+    struct edge{
+        int x,y,z,nxt;
+    }e[maxn];
+    int head[maxn];
+    int dfncnt=0,sccnt=0,top=0,cnt=0; 
+    int dfn[maxn],low[maxn],scc[maxn],sta[maxn],si[maxn];
+    void add(int x,int y)
+    {
+        e[++head_size].x=x;
+        e[head_size].y=y;
+        e[head_size].nxt=head[x];
+        head[x]=head_size;
+    }
+    void tarjan(int f) 
+    {
+        low[f]=dfn[f]=++dfncnt;
+        sta[++top]=f;
+        for(int i=head[f];i;i=e[i].nxt)
+        {
+            int t=e[i].y;
+            if(!dfn[t])
+            {
+                tarjan(t);
+                low[f]=min(low[f],low[t]);
+            }
+            else if(!scc[t]) low[f]=min(low[f],low[t]);
+        }
+        if(dfn[f]==low[f])
+        {
+            sccnt++;	
+            si[++cnt]++;
+            while(sta[top]!=f)
+            {
+                scc[sta[top]]=sccnt;
+                top--;
+                si[cnt]++;
+            }
+            scc[sta[top]]=sccnt;
+            top--;
+        }
+    }
+    void init(int n)
+    {
+        for (int i=0; i<=(n+1)*2; i++)
+        {
+            e[i].x=0; e[i].y=0;	e[i].nxt=0;
+            head[i]=0;
+            dfn[i]=0; low[i]=0;
+            scc[i]=0; sta[i]=0;	si[i]=0;
+        }
+        head_size=0;
+        dfncnt=0; sccnt=0; top=0; cnt=0; 
+    }
+    map<pair<int,int>,int> mpf;
+    bool vis[maxn];
+    bool dfs(int x,int y)
+    {
+        vis[x]=1;	
+        if (x==y) return 1;
+        for(int i=head[x];i;i=e[i].nxt)
+        {
+            int t=e[i].y;
+            if (!vis[t]) 
+                if (dfs(t,y)) return 1;
+        }
+        return 0;
+    }
+    bool check(int x,int y)
+    {
+        for (int i=0; i<2*n; i++) vis[i]=0;
+        dfs(x,y);
+        return vis[y];
+    }
+    void solve()
+    {
+        cin >> n >> m; 
+        init(n);
+        for(int i=1;i<=m;i++) 
+        {
+            char sx,sy;
+            int x,y;
+            cin >> x >> sx >> y >> sy;
+            x--; y--;
+            x=x*2+(sx=='Y');
+            y=y*2+(sy=='Y');
+            add(x^1,y);
+            add(y^1,x);
+        }
+        for(int i=0;i<2*n;i++) if(!dfn[i]) tarjan(i);
+        long long cntans=0;
+        for (int i=0; i<n; i++)
+            if (scc[i*2]==scc[i*2+1]) { cout << "IMPOSSIBLE\n"; return ;}
+        for (int i=0; i<n; i++) 
+        { 
+            if (check(2*i,2*i+1)) cout << "Y";
+            else if (check(2*i+1,2*i)) cout << "N";
+            else cout << "?";
+        }
+    }
+    int main()
+    {
+        int T=1;
+    //	cin >> T;
+        while (T--)
+        {
+            solve();
+        }
+    } </xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-12">12.最大流-最小割</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include <bits/stdc++.h>
+    using namespace std;
+    using ll = long long;
+    const int inf=0x3f3f3f3f;
+    const long long INF=0x3f3f3f3f3f3f3f3f;
+    
+    const int V = 300010;
+    const int E = 601000;
+    template<typename T>
+    struct FlowGraph {
+        int s, t, vtot;
+        int head[V], etot;
+        int dis[V], cur[V];
+        struct edge 
+        {
+            int v, nxt;
+            T f;
+        } e[E * 2];
+        void addedge(int u,int v, T f)
+        {
+            e[etot]= {v, head[u], f}; head[u] = etot++;
+            e[etot]= {u, head[v], 0}; head[v] = etot++;
+        }
+        bool bfs() {
+            for (int i = 1; i <= vtot; i++) { dis[i] = 0; cur[i] = head[i]; }
+            queue<int> q;
+            q.push(s); dis[s] = 1;
+            while (!q.empty()) {
+                int u = q.front(); q.pop();
+                for (int i = head[u]; ~i; i = e[i].nxt) {
+                    if (e[i].f && !dis[e[i].v]) {
+                        int v = e[i].v;
+                        dis[v] = dis[u] + 1;
+                        if (v == t) return true;
+                        q.push(v);
+                    }
+                }
+            }
+            return false;
+        }
+        T dfs(int u, T m) 
+        {
+            if (u == t) return m;
+            T flow = 0;
+            for (int i = cur[u]; ~i; cur[u] = i = e[i].nxt)
+                if (e[i].f && dis[e[i].v] == dis[u] + 1) 
+                {
+                    T f = dfs(e[i].v, min(m, e[i].f));
+                    e[i].f -= f;
+                    e[i ^ 1].f += f;
+                    m -= f;
+                    flow += f;
+                    if (!m) break;
+                }
+            if (!flow) dis[u] = -1;
+            return flow;
+        }
+        T dinic()
+        {
+            T flow=0;
+            while (bfs()) flow += dfs(s, numeric_limits<T>::max());
+            return flow;
+        }
+        void init(int s_, int t_, int vtot_) 
+        {
+            s = s_; t = t_;	vtot = vtot_; etot = 0;
+            for (int i = 1; i <= vtot; i++) head[i] = -1;
+        }
+    };
+    FlowGraph<ll> g;
+    
+    int n, m, s, t;
+    int main() 
+    {	
+        std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        cin >> n >> m >> s >> t;
+        g.init(s, t, n);
+        for (int i = 1; i <= m; i++) 
+        {
+            int u, v, w;
+            cin >> u >> v >> w;
+            g.addedge(u, v, w);
+        }
+        cout << g.dinic();
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-13">13.最小费用最大流</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include <bits/stdc++.h>
+    using namespace std;
+    using ll = long long;
+    const int inf=0x3f3f3f3f;
+    const long long INF=0x3f3f3f3f3f3f3f3f;
+    
+    const int V = 20100;
+    const int E = 201000;
+    template<typename T>
+    struct MinCostGraph 
+    {
+        int s, t, vtot;
+        int head[V], etot;
+        T dis[V], flow, cost;
+        int pre[V];
+        bool vis[V];
+    
+        struct edge {
+            int v, nxt;
+            T f, c;
+        } e[E * 2];
+        void addedge(int u,int v, T f, T c, T f2 = 0){
+            e[etot]= {v, head[u], f, c}; head[u] = etot++;
+            e[etot]= {u, head[v], f2, -c}; head[v] = etot++;
+        }
+        bool spfa() {
+            T inf = numeric_limits<T>::max() / 2;
+            for (int i = 1; i <= vtot; i++) {
+                dis[i] = inf;
+                vis[i] = false;
+                pre[i] = -1;
+            }
+            dis[s] = 0;
+            vis[s] = true;
+            queue<int> q;
+            q.push(s);
+            while (!q.empty()) {
+                int u = q.front();
+                for (int i = head[u]; ~i; i = e[i].nxt) {
+                    int v = e[i].v;
+                    if (e[i].f && dis[v] > dis[u] + e[i].c) {
+                        dis[v] = dis[u] + e[i].c;
+                        pre[v] = i;
+                        if (!vis[v]) {
+                            vis[v] = 1;
+                            q.push(v);
+                        }
+                    }
+                }
+                q.pop();
+                vis[u] = false;
+            }
+            return dis[t] != inf;
+        }
+        void augment() {
+            int u = t;
+            T f = numeric_limits<T>::max();
+            while (~pre[u]) {
+                f = min(f, e[pre[u]].f);
+                u = e[pre[u] ^ 1].v;
+            }
+            flow += f;
+            cost += f * dis[t];
+            u = t;
+            while (~pre[u]) {
+                e[pre[u]].f -= f;
+                e[pre[u] ^ 1].f += f;
+                u = e[pre[u] ^ 1].v;
+            }
+        }
+        pair<T, T> solve() {
+            flow = 0;
+            cost = 0;
+            while (spfa()) augment();
+            return {flow, cost};
+        }
+        void init(int s_, int t_, int vtot_) {
+            s = s_;
+            t = t_;
+            vtot = vtot_;
+            etot = 0;
+            for (int i = 1; i <= vtot; i++) head[i] = -1;
+        }
+    };
+    
+    MinCostGraph<int> g;
+    int n, m;
+    array<int, 3> e[E];
+    int main() {
+        std:ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        cin >> n >> m;
+        g.init(1, n, n);
+        for (int i = 1; i <= m; i++) 
+        {
+            int u, v, f, c;
+            cin >> u >> v >> f >> c;
+            g.addedge(u, v, f, c);
+        }
+        pair<int,int> ans;
+        ans=g.solve();
+        cout << ans.first << " " << ans.second << '\n' ;
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-14">14.无源汇上下界可行流</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include <bits/stdc++.h>
+    using namespace std;
+    using ll = long long;
+    const int inf=0x3f3f3f3f;
+    const long long INF=0x3f3f3f3f3f3f3f3f;
+    
+    const int V = 300010;
+    const int E = 601000;
+    template<typename T>
+    struct FlowGraph {
+        int s, t, vtot;
+        int head[V], etot;
+        int dis[V], cur[V];
+        int l[E*2];
+        int du[V];
+        struct edge 
+        {
+            int v, nxt;
+            T f;
+        } e[E * 2];
+        void addedge(int u,int v, T fl, T fr)
+        {
+            l[etot]=fl;
+            e[etot]= {v, head[u], fr-fl}; head[u] = etot++;
+            e[etot]= {u, head[v], 0}; head[v] = etot++;
+        }
+        bool bfs() {
+            for (int i = 1; i <= vtot; i++) { dis[i] = 0; cur[i] = head[i]; }
+            queue<int> q;
+            q.push(s); dis[s] = 1;
+            while (!q.empty()) {
+                int u = q.front(); q.pop();
+                for (int i = head[u]; ~i; i = e[i].nxt) {
+                    if (e[i].f && !dis[e[i].v]) {
+                        int v = e[i].v;
+                        dis[v] = dis[u] + 1;
+                        if (v == t) return true;
+                        q.push(v);
+                    }
+                }
+            }
+            return false;
+        }
+        T dfs(int u, T m) 
+        {
+            if (u == t) return m;
+            T flow = 0;
+            for (int i = cur[u]; ~i; cur[u] = i = e[i].nxt)
+                if (e[i].f && dis[e[i].v] == dis[u] + 1) 
+                {
+                    T f = dfs(e[i].v, min(m, e[i].f));
+                    e[i].f -= f;
+                    e[i ^ 1].f += f;
+                    m -= f;
+                    flow += f;
+                    if (!m) break;
+                }
+            if (!flow) dis[u] = -1;
+            return flow;
+        }
+        T dinic()
+        {
+            T flow=0;
+            while (bfs()) flow += dfs(s, numeric_limits<T>::max());
+            return flow;
+        }
+        void init(int s_, int t_, int vtot_) 
+        {
+            s = s_; t = t_;	vtot = vtot_; etot = 0;
+            for (int i = 1; i <= vtot; i++) 
+            {
+                head[i] = -1;
+                du[i]=0;
+            }
+        }
+    };
+    FlowGraph<ll> g;
+    
+    int n, m, s, t;
+    int main() 
+    {	
+        std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        ll T=1;
+    //	cin >> T;
+        while (T--)
+        {
+            cin >> n >> m;
+            s=n+1; t=s+1; 
+            g.init(s, t, t);
+            for (int i = 1; i <= m; i++) 
+            {
+                int u, v, wl, wr;
+                cin >> u >> v >> wl >> wr;
+                g.addedge(u, v, wl, wr);
+                g.du[u]-=wl; g.du[v]+=wl;
+            }
+            int SF=0;
+            for (int i=1; i<=n; i++)
+                if (g.du[i]>0) { g.addedge(s,i,0,g.du[i]); SF+=g.du[i]; }
+                else if (g.du[i]<0) g.addedge(i,t,0,-g.du[i]);
+            
+            if (g.dinic()!=SF) cout << "NO\n";
+            else
+            {
+                cout << "YES\n";
+                for (int i=0; i<m*2; i+=2)
+                    cout <<  g.e[i^1].f + g.l[i] << "\n";
+            }		
+        }	
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-15">15.有源汇有上下界最大流</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include <bits/stdc++.h>
+    using namespace std;
+    using ll = long long;
+    const int inf=0x3f3f3f3f;
+    const long long INF=0x3f3f3f3f3f3f3f3f;
+    
+    const int V = 300010;
+    const int E = 601000;
+    template<typename T>
+    struct FlowGraph {
+        int s, t, vtot;
+        int head[V], etot;
+        int dis[V], cur[V];
+        int l[E*2];
+        int du[V];
+        struct edge 
+        {
+            int v, nxt;
+            T f;
+        } e[E * 2];
+        void addedge(int u,int v, T fl, T fr)
+        {
+            l[etot]=fl;
+            e[etot]= {v, head[u], fr-fl}; head[u] = etot++;
+            e[etot]= {u, head[v], 0}; head[v] = etot++;
+        }
+        bool bfs() {
+            for (int i = 1; i <= vtot; i++) { dis[i] = 0; cur[i] = head[i]; }
+            queue<int> q;
+            q.push(s); dis[s] = 1;
+            while (!q.empty()) {
+                int u = q.front(); q.pop();
+                for (int i = head[u]; ~i; i = e[i].nxt) {
+                    if (e[i].f && !dis[e[i].v]) {
+                        int v = e[i].v;
+                        dis[v] = dis[u] + 1;
+                        if (v == t) return true;
+                        q.push(v);
+                    }
+                }
+            }
+            return false;
+        }
+        T dfs(int u, T m) 
+        {
+            if (u == t) return m;
+            T flow = 0;
+            for (int i = cur[u]; ~i; cur[u] = i = e[i].nxt)
+                if (e[i].f && dis[e[i].v] == dis[u] + 1) 
+                {
+                    T f = dfs(e[i].v, min(m, e[i].f));
+                    e[i].f -= f;
+                    e[i ^ 1].f += f;
+                    m -= f;
+                    flow += f;
+                    if (!m) break;
+                }
+            if (!flow) dis[u] = -1;
+            return flow;
+        }
+        T dinic()
+        {
+            T flow=0;
+            while (bfs()) flow += dfs(s, numeric_limits<T>::max());
+            return flow;
+        }
+        void init(int s_, int t_, int vtot_) 
+        {
+            s = s_; t = t_;	vtot = vtot_; etot = 0;
+            for (int i = 1; i <= vtot; i++) 
+            {
+                head[i] = -1;
+                du[i]=0;
+            }
+        }
+    };
+    FlowGraph<ll> g;
+    
+    int n, m, s, t;
+    int main() 
+    {	
+        std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        ll T=1;
+    //	cin >> T;
+        while (T--)
+        {
+            cin >> n >> m >> s >> t;
+            int S=n+1,T=S+1;
+            g.init(S, T, T);
+            for (int i = 1; i <= m; i++) 
+            {
+                int u, v, wl, wr;
+                cin >> u >> v >> wl >> wr;
+                g.addedge(u, v, wl, wr);
+                g.du[u]-=wl; g.du[v]+=wl;
+            }
+            int SF=0;
+            for (int i=1; i<=n; i++)
+                if (g.du[i]>0) { g.addedge(S,i,0,g.du[i]); SF+=g.du[i]; }
+                else if (g.du[i]<0) g.addedge(i,T,0,-g.du[i]);
+            g.addedge(t,s,0,inf);
+            if (g.dinic()!=SF) cout << "please go home to sleep\n";
+            else
+            {
+                int ans=g.e[g.etot-1].f;
+                g.s=s; g.t=t;
+                g.e[g.etot-1].f=g.e[g.etot-2].f=0;
+                cout << ans+g.dinic() << "\n"; 
+            }		
+        }	
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+      <div class="p-problem">
+        <div class="p-title3" id="item-16">16.有源汇有上下界最小流</div>
+        <div class="p-code">
+          <pre><code class="cpp">
+<xmp>
+    #include <bits/stdc++.h>
+    using namespace std;
+    using ll = long long;
+    const int inf=0x3f3f3f3f;
+    const long long INF=0x3f3f3f3f3f3f3f3f;
+    
+    const int V = 300010;
+    const int E = 601000;
+    template<typename T>
+    struct FlowGraph {
+        int s, t, vtot;
+        int head[V], etot;
+        int dis[V], cur[V];
+        int l[E*2];
+        int du[V];
+        struct edge 
+        {
+            int v, nxt;
+            T f;
+        } e[E * 2];
+        void addedge(int u,int v, T fl, T fr)
+        {
+            l[etot]=fl;
+            e[etot]= {v, head[u], fr-fl}; head[u] = etot++;
+            e[etot]= {u, head[v], 0}; head[v] = etot++;
+        }
+        bool bfs() {
+            for (int i = 1; i <= vtot; i++) { dis[i] = 0; cur[i] = head[i]; }
+            queue<int> q;
+            q.push(s); dis[s] = 1;
+            while (!q.empty()) {
+                int u = q.front(); q.pop();
+                for (int i = head[u]; ~i; i = e[i].nxt) {
+                    if (e[i].f && !dis[e[i].v]) {
+                        int v = e[i].v;
+                        dis[v] = dis[u] + 1;
+                        if (v == t) return true;
+                        q.push(v);
+                    }
+                }
+            }
+            return false;
+        }
+        T dfs(int u, T m) 
+        {
+            if (u == t) return m;
+            T flow = 0;
+            for (int i = cur[u]; ~i; cur[u] = i = e[i].nxt)
+                if (e[i].f && dis[e[i].v] == dis[u] + 1) 
+                {
+                    T f = dfs(e[i].v, min(m, e[i].f));
+                    e[i].f -= f;
+                    e[i ^ 1].f += f;
+                    m -= f;
+                    flow += f;
+                    if (!m) break;
+                }
+            if (!flow) dis[u] = -1;
+            return flow;
+        }
+        T dinic()
+        {
+            T flow=0;
+            while (bfs()) flow += dfs(s, numeric_limits<T>::max());
+            return flow;
+        }
+        void init(int s_, int t_, int vtot_) 
+        {
+            s = s_; t = t_;	vtot = vtot_; etot = 0;
+            for (int i = 1; i <= vtot; i++) 
+            {
+                head[i] = -1;
+                du[i]=0;
+            }
+        }
+    };
+    FlowGraph<ll> g;
+    
+    int n, m, s, t;
+    int main() 
+    {	
+        std::ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+        ll T=1;
+    //	cin >> T;
+        while (T--)
+        {
+            cin >> n >> m >> s >> t;
+            int S=n+1,T=S+1;
+            g.init(S, T, T);
+            for (int i = 1; i <= m; i++) 
+            {
+                int u, v, wl, wr;
+                cin >> u >> v >> wl >> wr;
+                g.addedge(u, v, wl, wr);
+                g.du[u]-=wl; g.du[v]+=wl;
+            }
+            int SF=0;
+            for (int i=1; i<=n; i++)
+                if (g.du[i]>0) { g.addedge(S,i,0,g.du[i]); SF+=g.du[i]; }
+                else if (g.du[i]<0) g.addedge(i,T,0,-g.du[i]);
+            g.addedge(t,s,0,inf);
+            if (g.dinic()!=SF) cout << "please go home to sleep\n";
+            else
+            {
+                int ans=g.e[g.etot-1].f;
+                g.s=t; g.t=s;
+                g.e[g.etot-1].f=g.e[g.etot-2].f=0;
+                cout << ans-g.dinic() << "\n"; 
+            }		
+        }	
+    }</xmp>
+                </code></pre>
+        </div>
+      </div>
+
+      <div class="p-bot">
+        <div class="p-date">
+          <div>
+            首次发布时间:2023年5月22日
+          </div>
+          <div>
+            最后修改时间:2023年5月23日
+          </div>
+          <div>
+            发布者:@Journey
+          </div>
+        </div>
+      </div>
+      <div class="copyright colorfulword">Copyright © CKZ</div>
+
+    </div>
+  </body>

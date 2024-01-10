@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journey</title>
+  <link rel="shortcut icon" href="img/person.svg" type="image/x-icon" />
+  <link href="bootstrap.min.css" rel="stylesheet">
+
+  <!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"> -->
+
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://cdn.staticfile.org/vue/3.0.5/vue.global.js"></script>
+
+  <!-- 代码高亮 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/night-owl.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/languages/go.min.js"></script>
+
+
+  <!-- 音乐播放器 -->
+  <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script>
+
+  <!-- <link rel="stylesheet" href="APlayer-master/dist/APlayer.min.css"> -->
+  <!-- <script src="APlayer-master/dist/APlayer.min.js"></script> -->
+  <!-- <script src="color-thief-master/src/color-thief.js"></script> -->
+
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/stylesp.css" rel="stylesheet">
+  <link href="css/home.css" rel="stylesheet">
+  <link href="css/note.css" rel="stylesheet">
+</head>
+
+
+
+<body id="body">
+
+  <div class="overlay"></div>
+  <div class="lockscreen" onclick="openblog()" id="lockscreen">
+    <div id="time"></div>
+  </div>
+  <!-- 上侧导航 -->
+  <div class="m-top" id="m-top">
+    <div class="row">
+      <div class="person">
+        <img src="img\person.svg" class="rounded-circle" alt="Cinque Terre" width="150">
+      </div>
+      <div class="name">
+        Journey's Blog
+      </div>
+      <div class="github" onclick="loadGithub()">
+        <img src="img\github.svg" class="rounded-circle svgshadow" alt="Cinque Terre" width="150">
+      </div>
+      <div class="lock " onclick="locked()">
+        <img src="img\lock.svg" class="rounded-circle svgshadow" alt="Cinque Terre" width="150">
+      </div>
+      <!-- 遮挡无用区域 -->
+      <div class="over bk">
+        <img src="img\lock.svg" class="rounded-circle svgshadow" alt="Cinque Terre" width="150">
+      </div>
+
+      <div class="music">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- 左侧导航 -->
+  <div class="m-lt" id="m-lt">
+    <div class="m-lt-out box-hide-scrollbar">
+      <div class="m-lt-list">
+        <!-- 个人栏 -->
+        <div class="m-lt-person">
+          <img src="img\person.svg" class="rounded-circle" alt="Cinque Terre" width="150">
+          <div class="m-lt-per">
+            <div class="m-lt-name">Journey</div>
+            <div class="m-lt-sign">风之旅人</div>
+          </div>
+        </div>
+        <div class="m-lt-title">导航</div>
+        <!-- 主页 -->
+        <div class="m-lt-card" onclick="loadHome()">
+          <img src="img\home.svg" class="svgshadow" />
+          主页
+        </div>
+        <!-- 笔记 -->
+        <div class="m-lt-card" onclick="loadNote()">
+          <img src="img\write.svg" class="svgshadow" />
+          笔记
+        </div>
+        <!-- 联系 -->
+        <div class="m-lt-card" onclick="loadConnect()">
+          <img src="img\connect.svg" class="svgshadow" />
+          联系
+        </div>
+        <!-- 打赏 -->
+        <div class="m-lt-card" onclick="loadReward()">
+          <img src="img\reward.svg" class="svgshadow" />
+          投喂
+        </div>
+        <div class="m-lt-title">分组</div>
+        <!-- web -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card collapsed" data-bs-toggle="collapse" href="#menuWeb" onclick="open1()">
+            <img src="img\classify.svg" class="svgshadow" />
+            web
+            <h class="open">
+              <img src="img/left.svg" class="svgshadow" id="lt-img1" />
+            </h>
+          </div>
+          <div id="menuWeb" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadWeek1()">
+              <img src="img\text.svg" class="svgshadow" />
+              web week 1
+            </div>
+            <div class="m-lt-card" onclick="loadWeek2()">
+              <img src="img\text.svg" class="svgshadow">
+              web week 2
+            </div>
+            <div class="m-lt-card" onclick="loadWeek3()">
+              <img src="img\text.svg" class="svgshadow" />
+              web week 3
+            </div>
+            <div class="m-lt-card" onclick="loadWeek4()">
+              <img src="img\text.svg" class="svgshadow" />
+              web week 4
+            </div>
+          </div>
+        </div>
+        <!-- 题解 -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card collapsed" data-bs-toggle="collapse" href="#menuNote" onclick="open2()">
+            <img src="img\note.svg" class="svgshadow" />
+            题解
+            <h class="open">
+              <img src="img/left.svg" class="svgshadow" id="lt-img2" />
+            </h>
+          </div>
+          <!-- <div id="menuNote" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadCF1820()">
+              <img src="img\answer.svg" class="svgshadow" />
+              Codeforces Round 866 (Div. 2)
+            </div>
+          </div> -->
+          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadABC301()">
+              <img src="img\answer.svg" class="svgshadow" />
+              AtCoder ABC 301
+            </div>
+          </div>
+          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadJT20230717()">
+              <img src="img\answer.svg" class="svgshadow" />
+              大一Tarjan
+            </div>
+          </div>
+        </div>
+        <!-- <div class="m-lt-menu">
+          <div class="m-lt-card collapsed" data-bs-toggle="collapse" href="#menuXL" onclick="open2()">
+            <img src="img\note.svg" class="svgshadow" />
+            训练
+            <h class="open">
+              <img src="img/left.svg" class="svgshadow" id="lt-img2" />
+            </h>
+          </div>
+          <div id="menuXL" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadXL20230623()">
+              <img src="img\calendar.svg" class="svgshadow" />
+              2023年6月23日 组队+补题
+            </div>
+          </div>
+          <div id="menuXL" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadXL20230624()">
+              <img src="img\calendar.svg" class="svgshadow" />
+              2023年6月24日 刷题
+            </div>
+          </div>
+        </div> -->
+        <!-- 板子 -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuBoard" onclick="open3()">
+            <img src="img\boardmenu.svg" class="svgshadow" />
+            板子
+            <h class="open">
+              <img src="img/left.svg" class="svgshadow" id="lt-img3" />
+            </h>
+          </div>
+          <div id="menuBoard" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadBoardGraph()">
+              <img src="img\board.svg" class="svgshadow" />
+              图论
+            </div>
+          </div>
+        </div>
+        <!-- 日记 -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuDaily" onclick="open4()">
+            <img src="img\daily.svg" class="svgshadow" />
+            日记
+            <h class="open">
+              <img src="img/left.svg" class="svgshadow" id="lt-img4" />
+            </h>
+          </div>
+          <div id="menuDaily" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="load404()">
+              <img src="img\daily.svg" class="svgshadow" />
+              第一篇
+            </div>
+          </div>
+        </div>
+        <!-- 网站 -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuOne" onclick="open5()">
+            <img src="img\commonly.svg" class="svgshadow" />
+            网站
+            <h class="open">
+              <img src="img\left.svg" class="svgshadow" id="lt-img5" />
+            </h>
+          </div>
+          <div id="menuOne" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadHZNUOJ()">
+              <img src="img\hznuoj.svg" />
+              HZNUOJ
+            </div>
+            <div class="m-lt-card" onclick="loadCF()">
+              <img src="img\cf.svg" />
+              Codeforces
+            </div>
+            <div class="m-lt-card" onclick="loadVJ()">
+              <img src="img\vj.svg" />
+              VJ
+            </div>
+            <div class="m-lt-card" onclick="loadLuogu()">
+              <img src="img\luogu.svg" />
+              洛谷
+            </div>
+            <div class="m-lt-card" onclick="loadAT()">
+              <img src="img\AtCoder.svg" />
+              AtCoder
+            </div>
+            <div class="m-lt-card" onclick="loadGE()">
+              <img src="img\Graph.svg" class="svgshadow" />
+              Graph Editor
+            </div>
+            <div class="m-lt-card" onclick="loadQuanta()">
+              <img src="img\quanta.svg" />
+              慢清尘慕课平台
+            </div>
+          </div>
+        </div>
+        <!-- 友链 -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuTwo" onclick="open6()">
+            <img src="img\friend.svg" class="svgshadow" />
+            友链
+            <h class="open">
+              <img src="img\left.svg" class="svgshadow" id="lt-img6" />
+            </h>
+          </div>
+          <div id="menuTwo" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card bk">
+              <img src="img\AD.svg" class="svgshadow" />
+              广告位招租
+            </div>
+          </div>
+        </div>
+        <!-- 底部留白 -->
+        <br>
+      </div>
+    </div>
+  </div>
+  <!-- 中间文章 -->
+  <div class="m-md" id="m-md">
+    <div class="m-md-out box-hide-scrollbar" id="m-md-top">
+      <div class="p-page" id="p-page">
+      </div>
+    </div>
+  </div>
+  <!-- 右侧目录 -->
+  <div class="m-rt" id="m-rt">
+    <div class="m-rt-out box-hide-scrollbar">
+      <div class="p-list" id="p-list">
+      </div>
+    </div>
+  </div>
+  <!-- 右下回顶部 -->
+  <div class="m-rtbt" id="m-rtbt">
+    <div class="backtop" onclick="document.getElementById('m-md-top').scrollTop=0;">
+      <img src="img/top.svg" class="svgshadow" />
+    </div>
+    <div class="moon" onclick="night()">
+      <img src="img/moon.svg" class="svgshadow" />
+    </div>
+  </div>
+
+  <div id="aplayer01" style="z-index: 999999999"></div>
+  <script type="text/javascript">
+    const ap = new APlayer({
+      container: document.getElementById('aplayer01'),
+      fixed: true,
+      lrcType: 3,
+      audio: [{
+          name: '飞舟',
+          artist: '潇梦临',
+          url: 'http://music.163.com/song/media/outer/url?id=545030295.mp3',
+          cover: 'http://p1.music.126.net/0U7_CMTIp9APhfk51OEAzQ==/109951163185806337.jpg?param=130y130',
+          lrc: "lrc/飞舟-潇梦临.lrc",
+        },
+        // {
+        //   name: '莲动下渔舟',
+        //   artist: '谣君',
+        //   url: 'http://music.163.com/song/media/outer/url?id=1834054702.mp3',
+        //   cover: 'http://p2.music.126.net/S2wKE-hdNvhBnE6n8e0uow==/109951165852081671.jpg',
+        //   lrc: "lrc/莲动下渔舟-谣君.lrc",
+        // },
+        // {
+        //   name: '狐言',
+        //   artist: '慵狐',
+        //   url: 'http://music.163.com/song/media/outer/url?id=1934786244.mp3',
+        //   cover: 'http://p2.music.126.net/LtXskTqTmlF9Rqcpl3LbWA==/109951167239056526.jpg',
+        //   lrc: "lrc/狐言-慵狐.lrc",
+        // },
+        // {
+        //   name: '第三十八年夏至',
+        //   artist: '河图',
+        //   url: 'http://music.163.com/song/media/outer/url?id=101126.mp3',
+        //   cover: 'http://p1.music.126.net/Q2dCo2lH53tqJe2zjaC56Q==/3393092900107787.jpg',
+        //   lrc: "lrc/第三十八年夏至-河图.lrc",
+        // },
+        {
+          name: '白马入芦花',
+          artist: '河图',
+          url: 'https://wsaudiobssdlbig.yun.kugou.com/202306222322/ba73fc8bb5d6414775a1789a12e47574/bss/extname/wsaudio/07daa21c5a1ad6c2455cb3f9fc64999d.mp3',
+          cover: 'https://wsingbssdl.kugou.com/568b1fdacafa76d03b55dd68b97b645e.jpg_188x188.jpg',
+          lrc: "lrc/白马入芦花-河图.lrc",
+        },
+        // {
+        //   name: 'GLISTENING♭',
+        //   artist: '安野希世乃',
+        //   url: 'http://music.163.com/song/media/outer/url?id=486194382.mp3',
+        //   cover: 'http://p1.music.126.net/cM9_ZvlbURq5Z-praqaj5w==/18806046883431621.jpg?param=300x300',
+        //   lrc: "lrc/GLISTENING♭-安野希世乃.lrc",
+        // },
+      ]
+    });
+  </script>
+</body>
+<script src="index.js"></script>
+<script src="XL.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<script>
+  loadHome();
+  // loadABC301()
+  // loadConnect();
+</script>
+<script>
+  function displayTime() {
+    var date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    document.getElementById("time").innerHTML = hours + ":" + minutes + ":" + seconds;
+  }
+  setInterval(displayTime, 1000);
+</script>
+
+
+</html>

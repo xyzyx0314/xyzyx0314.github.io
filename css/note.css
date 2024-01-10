@@ -1,0 +1,110 @@
+.note-list {
+  height: 250%;
+  width: 98%;
+}
+
+.note-blog {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding-top: 1%;
+  padding-bottom: 4%;
+  border-radius: 1rem;
+  background-color: var(--color1);
+  box-shadow: 0px -2px 15px 1px var(--color4);
+}
+
+.note-blog-inf {}
+
+.note-blog-title {
+  height: auto;
+  font-size: 25px;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.note-blog-mess {
+  height: autp;
+  font-size: 14px;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.note-blog-tag {
+  height: autp;
+  font-size: 14px;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.note-pho {
+  margin-top: 1%;
+}
+
+.note-pho img {
+  width: 120%;
+  height: 120%;
+  border-radius: 5%;
+}
+
+.note-blog-inf {
+  position: absolute;
+  margin-left: 22.5%;
+  width: 58%;
+  height: 20%;
+}
+
+.note-blog-bot {
+  position: absolute;
+  bottom: 0%;
+  font-size: 12px;
+  width: 100%;
+}
+
+.note-blog-bot div {
+  margin-right: -4%;
+}
+
+.note-blog-bot img {
+  width: 10%;
+}
+
+/*list*/
+.note-title {
+  margin-top: 5%;
+  margin-left: 5%;
+  font-size: 25px;
+  color: var(--color6);
+}
+
+.note-title:hover {
+  color: var(--color5);
+}
+
+.note-choose {
+  margin-left: 7%;
+  font-size: 13px;
+  color: var(--color6);
+  text-decoration: underline;
+}
+
+.note-choose:hover {
+  color: var(--color5);
+}

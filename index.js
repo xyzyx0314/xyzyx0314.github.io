@@ -137,70 +137,70 @@ function loadReward()
 function loadWeek1()
 {
   load();
-  xmlhttp.open("GET","html/week1.html",true);
+  xmlhttp.open("GET","html/blog/week1.html",true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/week1_list.html",true);
+  xmlhttp2.open("GET","html/blog/week1_list.html",true);
   xmlhttp2.send();
 }
 function loadWeek2()
 {
   load();
-  xmlhttp.open("GET","html/week2.html",true);
+  xmlhttp.open("GET","html/blog/week2.html",true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/week2_list.html",true);
+  xmlhttp2.open("GET","html/blog/week2_list.html",true);
   xmlhttp2.send();
 }  
 function loadWeek3()
 {
   load();
-  xmlhttp.open("GET","html/week3.html",true);
+  xmlhttp.open("GET","html/blog/week3.html",true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/week3_list.html",true);
+  xmlhttp2.open("GET","html/blog/week3_list.html",true);
   xmlhttp2.send();
 }
 function loadWeek4()
 {
   load();
-  xmlhttp.open("GET","html/week4.html",true);
+  xmlhttp.open("GET","html/blog/week4.html",true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/week4_list.html",true);
+  xmlhttp2.open("GET","html/blog/week4_list.html",true);
   xmlhttp2.send();
 }
 function loadWeek5()
 {
   load();
-  xmlhttp.open("GET","html/week5.html",true);
+  xmlhttp.open("GET","html/blog/week5.html",true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/week5_list.html",true);
+  xmlhttp2.open("GET","html/blog/week5_list.html",true);
   xmlhttp2.send();
 }
 
 function loadCF1820()
 {
   load();
-  xmlhttp.open("GET","html/cf1820.html",true);
+  xmlhttp.open("GET","html/XL/cf1820.html",true);
   xmlhttp.send();
   
-  xmlhttp2.open("GET","html/cf1820_list.html",true);
+  xmlhttp2.open("GET","html/XL/cf1820_list.html",true);
   xmlhttp2.send();
 }
 
 function loadABC301()
 {
   load();
-  xmlhttp.open("GET","html/ABC301.html",true);
+  xmlhttp.open("GET","html/XL/ABC301.html",true);
   xmlhttp.send();
   
-  xmlhttp2.open("GET","html/ABC301_list.html",true);
+  xmlhttp2.open("GET","html/XL/ABC301_list.html",true);
   xmlhttp2.send();
 }
 
 function loadBoardGraph()
 {
   load();
-  xmlhttp.open("GET","html/board_Graph.html",true);
+  xmlhttp.open("GET","html/XL/board_Graph.html",true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/board_Graph_list.html",true);
+  xmlhttp2.open("GET","html/XL/board_Graph_list.html",true);
   xmlhttp2.send();
 }
 

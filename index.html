@@ -51,7 +51,7 @@
         <img src="img\person.svg" class="rounded-circle" alt="Cinque Terre" width="150">
       </div>
       <div class="name">
-        Journey's Blog
+        不系舟UnmooredZ's Blog
       </div>
       <div class="github" onclick="loadGithub()">
         <img src="img\github.svg" class="rounded-circle svgshadow" alt="Cinque Terre" width="150">
@@ -85,8 +85,8 @@
         <div class="m-lt-person">
           <img src="img\person.svg" class="rounded-circle" alt="Cinque Terre" width="150">
           <div class="m-lt-per">
-            <div class="m-lt-name">Journey</div>
-            <div class="m-lt-sign">风之旅人</div>
+            <div class="m-lt-name">UnmooredZ</div>
+            <div class="m-lt-sign">不系舟</div>
           </div>
         </div>
         <div class="m-lt-title">导航</div>
@@ -115,7 +115,7 @@
         <div class="m-lt-menu">
           <div class="m-lt-card collapsed" data-bs-toggle="collapse" href="#menuWeb" onclick="open1()">
             <img src="img\classify.svg" class="svgshadow" />
-            web
+            更新日志
             <h class="open">
               <img src="img/left.svg" class="svgshadow" id="lt-img1" />
             </h>
@@ -137,13 +137,17 @@
               <img src="img\text.svg" class="svgshadow" />
               web week 4
             </div>
+            <div class="m-lt-card" onclick="loadWeek5()">
+              <img src="img\text.svg" class="svgshadow" />
+              web week 5
+            </div>
           </div>
         </div>
         <!-- 题解 -->
         <div class="m-lt-menu">
           <div class="m-lt-card collapsed" data-bs-toggle="collapse" href="#menuNote" onclick="open2()">
             <img src="img\note.svg" class="svgshadow" />
-            题解
+            ACM
             <h class="open">
               <img src="img/left.svg" class="svgshadow" id="lt-img2" />
             </h>
@@ -164,6 +168,30 @@
             <div class="m-lt-card" onclick="loadJT20230717()">
               <img src="img\answer.svg" class="svgshadow" />
               大一Tarjan
+            </div>
+          </div>
+          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadXL20230621()">
+              <img src="img\calendar.svg" class="svgshadow" />
+              2023年6月21日
+            </div>
+          </div>
+          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadXL20230622()">
+              <img src="img\calendar.svg" class="svgshadow" />
+              2023年6月22日
+            </div>
+          </div>      
+          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadXL20230623()">
+              <img src="img\calendar.svg" class="svgshadow" />
+              2023年6月23日 组队+补题
+            </div>
+          </div>
+          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="loadBoardGraph()">
+              <img src="img\board.svg" class="svgshadow" />
+              图论
             </div>
           </div>
         </div>
@@ -189,7 +217,7 @@
           </div>
         </div> -->
         <!-- 板子 -->
-        <div class="m-lt-menu">
+        <!-- <div class="m-lt-menu">
           <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuBoard" onclick="open3()">
             <img src="img\boardmenu.svg" class="svgshadow" />
             板子
@@ -203,6 +231,22 @@
               图论
             </div>
           </div>
+        </div> -->
+        <!-- 项目 -->
+        <div class="m-lt-menu">
+          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuProject" onclick="open4()">
+            <img src="img\boardmenu.svg" class="svgshadow" />
+            项目记录(暂无)
+            <h class="open">
+              <img src="img/left.svg" class="svgshadow" id="lt-img4" />
+            </h>
+          </div>
+          <!-- <div id="menuProject" class="collapse" data-bs-parent="#accordion">
+            <div class="m-lt-card" onclick="load404()">
+              <img src="img\daily.svg" class="svgshadow" />
+              第一篇
+            </div>
+          </div> -->
         </div>
         <!-- 日记 -->
         <div class="m-lt-menu">
@@ -221,7 +265,7 @@
           </div>
         </div>
         <!-- 网站 -->
-        <div class="m-lt-menu">
+        <!-- <div class="m-lt-menu">
           <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuOne" onclick="open5()">
             <img src="img\commonly.svg" class="svgshadow" />
             网站
@@ -259,7 +303,7 @@
               慢清尘慕课平台
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- 友链 -->
         <div class="m-lt-menu">
           <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuTwo" onclick="open6()">

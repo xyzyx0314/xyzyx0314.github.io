@@ -166,6 +166,14 @@ function loadWeek4()
   xmlhttp2.open("GET","html/week4_list.html",true);
   xmlhttp2.send();
 }
+function loadWeek5()
+{
+  load();
+  xmlhttp.open("GET","html/week5.html",true);
+  xmlhttp.send();
+  xmlhttp2.open("GET","html/week5_list.html",true);
+  xmlhttp2.send();
+}
 
 function loadCF1820()
 {

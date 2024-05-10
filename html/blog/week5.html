@@ -46,6 +46,27 @@
                     </div>
                 </div>
                 <img src="img/week5/week5-1.svg" />
+
+                <div class="p-title3" id="item-B">2024.5.9</div>
+                <div class="p-title4" id="item-B-1">进度</div>
+                <div class="p-word">
+                    <div>
+                        因为审批不知道什么时候才可以通过就直接拿了309一台空的机子试验了一下，还算顺利，已经docker部署成功了
+                    </div>
+                    <div>
+                        感觉如果这样子部署docker，每次更新后全部重新来过有点大，所以未来如果有2.0的话，会想办法实现分离？大概
+                    </div>
+                </div>
+                <div class="p-code">
+                    <pre><code class="docker">docker build -t unmooredz/unmooredz-blog:v1.2 .  //构建Docker镜像
+docker push unmooredz/unmooredz-blog:v1.2 //推送Docker镜像
+docker pull unmooredz/unmooredz-blog:v1.2 //下载Docker镜像
+docker stop ID //停下原来的docker
+docker rm ID //删除原来的docker
+docker run -d -p 80:80 unmooredz/unmooredz-blog:v1.2 //运行Docker镜像
+docker update --restart always ID//保持开机启动</code></pre>
+                  </div>
+
             </div>
             <div class="p-bot">
                 <div class="p-date">
@@ -53,7 +74,7 @@
                         首次发布时间:2024年5月8日
                     </div>
                     <div>
-                        首次发布时间:2024年5月8日
+                        首次发布时间:2024年5月10日
                     </div>
                     <div>
                         发布者:@不系舟UnmooredZ

@@ -24,4 +24,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: unmooredz/unmooredz-blog:v1.3
+          tags: unmooredz/unmooredz-blog:v1.4

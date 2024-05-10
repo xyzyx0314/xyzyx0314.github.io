@@ -63,10 +63,13 @@ docker push unmooredz/unmooredz-blog:v1.2 //推送Docker镜像
 docker pull unmooredz/unmooredz-blog:v1.2 //下载Docker镜像
 docker stop ID //停下原来的docker
 docker rm ID //删除原来的docker
-docker run -d -p 80:80 unmooredz/unmooredz-blog:v1.2 //运行Docker镜像
-docker update --restart always ID//保持开机启动</code></pre>
+docker run -d --name blog --restart unless-stopped -p 80:80 unmooredz/unmooredz-blog:v1.2 //运行Docker镜像保持开机启动</code></pre>
                   </div>
-
+                  <div class="p-word">
+                    <div>
+                        已经通过yaml实现了上传github的同时同步上传到docker hub，同时上传时tag需要在yaml里面修改
+                    </div>
+                </div>
             </div>
             <div class="p-bot">
                 <div class="p-date">

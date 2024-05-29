@@ -1,0 +1,153 @@
+<body>
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" class="scrollspy-example-2"
+        tabindex="0">
+        <div class="p-m">
+            <div class="p-top">
+                <div class="row">
+                    <div class="p-top-postion">
+                        <h class="p-top-link" onclick="loadHome()">Journey</h>
+                        /
+                        <h class="p-top-link" onclick="loadNote()">笔记</h>
+                        /
+                        <h class="p-top-link" onclick="loadNoteWeb()"> web </h>
+                        /
+                        <h class="p-top-link" onclick="loadWeek5()">博客更新6</h>
+                    </div>
+                </div>
+            </div>
+            <nav id="navbar-example3">
+                <a class="navbar-brand p-title2" href="#item" id="item">blog更新6</a>
+                <a class="nav-link p-title5" href="#item-A">5.29</a>
+            </nav>
+            <div class="p-problem">
+                <div class="p-title3" id="item-A">2024.5.29</div>
+                <div class="p-title4" id="item-A-1">进度</div>
+                <div class="p-word">
+                    <div>
+                        把之前审批通过的ssl证书部署了一下，在不搞8月就过期了
+                    </div>
+                    <div>
+                        搞了挺久，遇到一堆情况，最终靠着copilot调出来了
+                    </div>
+                    <div>
+                        选择了nginx，因为Apache下载不了
+                    </div>
+                    <div>
+                        可能是因为docker的问题，所以出了一推状况？？但好像也不是
+                    </div>
+                    <div>
+                        先是端口冲突，就给nginx换到了443端口，copilot生成的还是有问题，就直接用了华为那个，然后让copilot生成location块内容，主要是反向代理
+                    </div>
+                    <div>
+                        但是问题还在，打开的网页还是不安全，后面不知怎么就可以有https了（可能缓存更新了？）但是502
+                    </div>
+                    <div>
+                        使用curl http://localhost:80 也是链接失败，但是同意docker内网那台机器确实可以链接的
+                    </div>
+                    <div>
+                        根据控制变量法，怀疑是nginx原因，就停掉了nginx，然后curl还是失败，恼了，选择删除docker重新安装
+                    </div>
+                    <div>
+                        重新安装了v1.4版本的blog，成功curl了，之后nginx reload等一气呵成，直接通了（）
+                    </div>
+                    <div>
+                        最后发现一个情况是edge浏览器是只能访问https，火狐则是https有无皆可，同时火狐认为有https的网站也不安全
+                    </div>
+                    <div>
+                        火狐可能是认为有图片什么的不安全，但是没找到具体问题在哪里，
+                    </div>
+                    <div>
+                        话说回来网页在火狐的前端适配本来就差，比如侧边隐藏的滚动条在火狐比例大了就会出现
+                    </div>
+                </div>
+                <img src="img/week6/week6-1.svg" />
+
+                <div class="p-word">
+                    <div>
+                        nginx.conf代码如下
+                    </div>
+                </div>
+                <div class="p-code">
+                    <pre><code class="docker">user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+    worker_connections 768;
+    # multi_accept on;
+}
+
+http {
+    # Basic Settings
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+    server_tokens off;
+
+    # SSL Settings
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384";
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_tickets off;
+
+    # Server Settings
+    server {
+        listen 443 ssl http2;
+        server_name www.unmooredz.com unmooredz.com; # 替换为您的域名
+
+        ssl_certificate /etc/nginx/ssl/scs1715421146354_www.unmooredz.com_server.crt; # 您的SSL证书文件路径
+        ssl_certificate_key /etc/nginx/ssl/scs1715421146354_www.unmooredz.com_server.key; # 您的私钥文件路径
+
+        # ... 其他SSL设置 ...
+   #     ssl_session_cache    shared:SSL:1m;
+  #      ssl_session_timeout  5m;
+ #       ssl_ciphers  HIGH:!aNULL:!MD5; #加密套件。
+#        ssl_prefer_server_ciphers  on;
+
+        location / {
+            proxy_pass http://localhost:80; # 假设Docker容器的Web服务在8080端口上运行
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
+        # ... 其他location设置 ...
+    }
+
+    # ... 其他server块和设置 ...
+}
+
+                    </code></pre>
+                </div>
+                  <div class="p-word">
+                        <div>
+                            希望v1.5一遍过啊
+                        </div>
+                        <div>
+                            有机会得改改js了，不然每次都得写一个js函数
+                        </div>
+                    </div>
+            </div>
+            <div class="p-bot">
+                <div class="p-date">
+                    <div>
+                        首次发布时间:2024年5月29日
+                    </div>
+                    <div>
+                        首次发布时间:2024年5月29日
+                    </div>
+                    <div>
+                        发布者:@不系舟UnmooredZ
+                    </div>
+                </div>
+            </div>
+            <div class="copyright colorfulword">Copyright © CKZ</div>
+        </div>
+    </div>
+</body>

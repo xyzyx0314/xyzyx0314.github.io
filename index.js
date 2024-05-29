@@ -174,6 +174,14 @@ function loadWeek5()
   xmlhttp2.open("GET","html/blog/week5_list.html",true);
   xmlhttp2.send();
 }
+function loadWeek6()
+{
+  load();
+  xmlhttp.open("GET","html/blog/week6.html",true);
+  xmlhttp.send();
+  xmlhttp2.open("GET","html/blog/week6_list.html",true);
+  xmlhttp2.send();
+}
 
 function loadCF1820()
 {

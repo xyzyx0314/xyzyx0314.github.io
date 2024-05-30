@@ -1,6 +1,4 @@
 
-
-
 var btn = document.getElementById("btn");
 var fnight=0;
 function night() {
@@ -23,7 +21,6 @@ function night() {
     fnight=0;
   }
 };
-
 
 var xmlhttp,xmlhttp2;
 
@@ -59,200 +56,42 @@ function load(){
   }
 }
 /*载入对应*/
-function loadHome()
-{
+
+function loadPage(pageId) {
   load();
-  xmlhttp.open("GET","html/home.html",true);
+  xmlhttp.open("GET", "html/" + pageId + ".html", true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/home_list.html",true);
-  xmlhttp2.send();
-}
-function loadNote()
-{
-  load();
-  xmlhttp.open("GET","html/note/note.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/note/note_list.html",true);
+  xmlhttp2.open("GET", "html/" + pageId + "_list.html", true);
   xmlhttp2.send();
 }
 
-function loadNoteWeb()
-{
+function loadNote(noteId) {
   load();
-  xmlhttp.open("GET","html/note/noteWeb.html",true);
+  xmlhttp.open("GET", "html/note/note" + noteId + ".html", true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/note/note_list.html",true);
+  xmlhttp2.open("GET", "html/note_list.html", true);
   xmlhttp2.send();
 }
 
-function loadNoteProblem()
-{
+function loadWeek(weekId) {
   load();
-  xmlhttp.open("GET","html/note/noteProblem.html",true);
+  xmlhttp.open("GET", "html/blog/week" + weekId + ".html", true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/note/note_list.html",true);
+  xmlhttp2.open("GET", "html/blog/week" + weekId + "_list.html", true);
   xmlhttp2.send();
 }
 
-function loadNoteBoard()
-{
+function loadXL(acmId) {
   load();
-  xmlhttp.open("GET","html/note/noteBoard.html",true);
+  xmlhttp.open("GET", "html/acm/" + acmId + ".html", true);
   xmlhttp.send();
-  xmlhttp2.open("GET","html/note/note_list.html",true);
+  xmlhttp2.open("GET", "html/acm/" + acmId + "_list.html", true);
   xmlhttp2.send();
-}
-
-
-
-
-
-function loadNoteDaily()
-{
-  load();
-  xmlhttp.open("GET","html/note/noteDaily.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/note/note_list.html",true);
-  xmlhttp2.send();
-}
-
-
-function loadConnect()
-{
-  load();
-  xmlhttp.open("GET","html/connect.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/connect_list.html",true);
-  xmlhttp2.send();
-}
-function loadReward()
-{
-  load();
-  xmlhttp.open("GET","html/reward.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/reward_list.html",true);
-  xmlhttp2.send();
-}
-
-function loadWeek1()
-{
-  load();
-  xmlhttp.open("GET","html/blog/week1.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/blog/week1_list.html",true);
-  xmlhttp2.send();
-}
-function loadWeek2()
-{
-  load();
-  xmlhttp.open("GET","html/blog/week2.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/blog/week2_list.html",true);
-  xmlhttp2.send();
-}  
-function loadWeek3()
-{
-  load();
-  xmlhttp.open("GET","html/blog/week3.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/blog/week3_list.html",true);
-  xmlhttp2.send();
-}
-function loadWeek4()
-{
-  load();
-  xmlhttp.open("GET","html/blog/week4.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/blog/week4_list.html",true);
-  xmlhttp2.send();
-}
-function loadWeek5()
-{
-  load();
-  xmlhttp.open("GET","html/blog/week5.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/blog/week5_list.html",true);
-  xmlhttp2.send();
-}
-function loadWeek6()
-{
-  load();
-  xmlhttp.open("GET","html/blog/week6.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/blog/week6_list.html",true);
-  xmlhttp2.send();
-}
-
-function loadCF1820()
-{
-  load();
-  xmlhttp.open("GET","html/XL/cf1820.html",true);
-  xmlhttp.send();
-  
-  xmlhttp2.open("GET","html/XL/cf1820_list.html",true);
-  xmlhttp2.send();
-}
-
-function loadABC301()
-{
-  load();
-  xmlhttp.open("GET","html/XL/ABC301.html",true);
-  xmlhttp.send();
-  
-  xmlhttp2.open("GET","html/XL/ABC301_list.html",true);
-  xmlhttp2.send();
-}
-
-function loadBoardGraph()
-{
-  load();
-  xmlhttp.open("GET","html/XL/board_Graph.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/XL/board_Graph_list.html",true);
-  xmlhttp2.send();
-}
-
-
-function loadHZNUOJ()
-{
-  window.open("https://acm.hznu.edu.cn/OJ/userinfo.php?user=2021212205006");
-} 
-function loadCF()
-{
-  window.open("https://codeforces.com/");
-}
-function loadVJ()
-{
-  window.open("https://vjudge.net/group/hznuacm21");
-}
-function loadLuogu()
-{
-  window.open("https://www.luogu.com.cn/");
-}     
-function loadAT()
-{
-  window.open("https://atcoder.jp/");
-}     
-function loadGE()
-{
-  window.open("https://csacademy.com/app/graph_editor/");
-}     
-function loadQuanta()
-{
-  window.open("https://mooc.hznu.edu.cn/#/");
 }
 
 function loadGithub()
 {
   window.open("https://github.com/xyzyx0314");
-}
-function load404()
-{
-  load();
-  xmlhttp.open("GET","html/404.html",true);
-  xmlhttp.send();
-  xmlhttp2.open("GET","html/home_list.html",true);
-  xmlhttp2.send();
 }
 
 function locked(){
@@ -272,73 +111,11 @@ function openblog(){
   document.getElementById('m-rtbt').style.display='block';
 }
 
+function toggleImage(imageId) {
+  var x = document.getElementById(imageId);
+  x.src = x.src.match("img/left.svg") ? 'img/open.svg' : "img/left.svg";
+}
 
-function open1() {
-  var x=document.getElementById("lt-img1");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
-function open2() {
-  var x=document.getElementById("lt-img2");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
-function open3() {
-  var x=document.getElementById("lt-img3");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
-function open4() {
-  var x=document.getElementById("lt-img4");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
-function open5() {
-  var x=document.getElementById("lt-img5");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
-function open6() {
-  var x=document.getElementById("lt-img6");
-  if (x.src.match("img/left.svg"))
-  {
-    x.src = 'img/open.svg';
-  }
-  else 
-  {
-    x.src = "img/left.svg";
-  }
-}
 
 window.onhashchange=function(event){
   var url = window.location.href;

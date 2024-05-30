@@ -5,13 +5,13 @@
             <div class="p-top">
                 <div class="row">
                     <div class="p-top-postion">
-                        <h class="p-top-link" onclick="loadHome()">Journey</h>
+                        <h class="p-top-link" onclick="loadPage('home')">Journey</h>
                         /
-                        <h class="p-top-link" onclick="loadNote()">笔记</h>
+                        <h class="p-top-link" onclick="loadPage('note')">笔记</h>
                         /
-                        <h class="p-top-link" onclick="loadNoteWeb()"> web </h>
+                        <h class="p-top-link" onclick="loadNote('Web')"> web </h>
                         /
-                        <h class="p-top-link" onclick="loadWeek5()">博客更新6</h>
+                        <h class="p-top-link" onclick="loadWeek('6')">博客更新6</h>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,6 @@
             </nav>
             <div class="p-problem">
                 <div class="p-title3" id="item-A">2024.5.29</div>
-                <div class="p-title4" id="item-A-1">进度</div>
                 <div class="p-word">
                     <div>
                         把之前审批通过的ssl证书部署了一下，在不搞8月就过期了
@@ -122,25 +121,46 @@ http {
 
     # ... 其他server块和设置 ...
 }
-
                     </code></pre>
                 </div>
-                  <div class="p-word">
-                        <div>
-                            希望v1.5一遍过啊
-                        </div>
-                        <div>
-                            有机会得改改js了，不然每次都得写一个js函数
-                        </div>
+                <div class="p-word">
+                    <div>
+                        希望v1.5一遍过啊
                     </div>
+                    <div>
+                        有机会得改改js了，不然每次都得写一个js函数
+                    </div>
+                </div>
             </div>
+
+            <div class="p-problem">
+                <div class="p-title3" id="item-B">2024.5.29</div>
+                <div class="p-word">
+                    <div>
+                        v1.5确实一遍过了，但是遇到了点浏览器缓存问题，缓存更新了，但是只更新了一半，edge是更新出了侧边栏的Change 6但是js没更新上所以根本打不开，火狐是更新了js但是侧边栏名称有问题好像
+                    </div>
+                    <div>
+                        修改了点忘记更新的内容
+                    </div>
+                    <div>
+                        重新写了一点index.js, 原来的太长了，这次从400+行变成了120行左右，有机会把index.html也修改了
+                    </div>
+                    <div>
+                        因为改了js，所以很多html里面都改过了
+                    </div>
+                    <div>
+                        问了一下jyj，知道缓存更新的原因了，先去学一下
+                    </div>
+                </div>
+
+            </div>            
             <div class="p-bot">
                 <div class="p-date">
                     <div>
                         首次发布时间:2024年5月29日
                     </div>
                     <div>
-                        首次发布时间:2024年5月29日
+                        首次发布时间:2024年5月30日
                     </div>
                     <div>
                         发布者:@不系舟UnmooredZ

@@ -118,11 +118,11 @@
 .welcome {
   /* 本例12个文字(加标点符号)；有多少个文字，width就是多少个em */
   font-size: 30px;
-  width: 21em;
+  width: 15em;
   margin-left: 5%;
   /* 加上两个动画，一个是打字动画，使用steps让字一个一个的出现，
      注意step和字数保持一致，光标动画也是同理，*/
-  animation: typingWords 5s steps(21) 1, cursor 0.5s steps(1) infinite;
+  animation: typingWords 5s steps(15) 1, cursor 0.5s steps(1) infinite;
   /* 要设置不允许换行，且溢出隐藏 */
   white-space: nowrap;
   overflow: hidden;
@@ -167,4 +167,18 @@
 
 .home-new:hover {
   color: var(--color5);
+}
+
+/* ICP */
+.ICP {
+  position: absolute;
+  color: var(--color5);
+  font-size: 10px;
+  bottom: 0;
+  left: 90%;
+  width: 10%;
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }

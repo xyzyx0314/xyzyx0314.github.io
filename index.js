@@ -89,6 +89,15 @@ function loadXL(acmId) {
   xmlhttp2.send();
 }
 
+function loadBlog(blogId) {
+  load();
+  xmlhttp.open("GET", "html/" + blogId + ".html", true);
+  xmlhttp.send();
+  xmlhttp2.open("GET", "html/" + blogId + "_list.html", true);
+  xmlhttp2.send();
+
+}
+
 function loadGithub()
 {
   window.open("https://github.com/xyzyx0314");

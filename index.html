@@ -80,166 +80,6 @@
             <div class="m-lt-sign">不系舟</div>
           </div>
         </div>
-        <div class="m-lt-title">导航</div>
-        <!-- 主页 -->
-        <div class="m-lt-card" onclick="loadPage('home')">
-          <img src="img\home.svg" class="svgshadow" />
-          主页
-        </div>
-        <!-- 笔记 -->
-        <div class="m-lt-card" onclick="loadPage('note')">
-          <img src="img\write.svg" class="svgshadow" />
-          笔记
-        </div>
-        <!-- 联系 -->
-        <div class="m-lt-card" onclick="loadPage('connect')">
-          <img src="img\connect.svg" class="svgshadow" />
-          联系
-        </div>
-        <!-- 打赏 -->
-        <div class="m-lt-card" onclick="loadPage('reward')">
-          <img src="img\reward.svg" class="svgshadow" />
-          投喂
-        </div>
-        <div class="m-lt-title">分组</div>
-        <!-- web -->
-        <div class="m-lt-menu">
-          <div class="m-lt-card collapsed" data-bs-toggle="collapse" href="#menuWeb" onclick="toggleImage('lt-img1')">
-            <img src="img\classify.svg" class="svgshadow" />
-            更新日志
-            <h class="open">
-              <img src="img/left.svg" class="svgshadow" id="lt-img1" />
-            </h>
-          </div>
-          <div id="menuWeb" class="collapse" data-bs-parent="#accordion">
-            <div class="m-lt-card" onclick="loadWeek(1)">
-              <img src="img\text.svg" class="svgshadow" />
-              web week 1
-            </div>
-            <div class="m-lt-card" onclick="loadWeek(2)">
-              <img src="img\text.svg" class="svgshadow">
-              web week 2
-            </div>
-            <div class="m-lt-card" onclick="loadWeek(3)">
-              <img src="img\text.svg" class="svgshadow" />
-              web week 3
-            </div>
-            <div class="m-lt-card" onclick="loadWeek(4)">
-              <img src="img\text.svg" class="svgshadow" />
-              web week 4
-            </div>
-            <div class="m-lt-card" onclick="loadWeek(5)">
-              <img src="img\text.svg" class="svgshadow" />
-              Change 5
-            </div>
-            <div class="m-lt-card" onclick="loadWeek(6)">
-              <img src="img\text.svg" class="svgshadow" />
-              Change 6
-            </div>
-          </div>
-        </div>
-        <!-- 题解 -->
-        <div class="m-lt-menu">
-          <div class="m-lt-card collapsed" data-bs-toggle="collapse" href="#menuNote" onclick="toggleImage('lt-img2')">
-            <img src="img\note.svg" class="svgshadow" />
-            ACM
-            <h class="open">
-              <img src="img/left.svg" class="svgshadow" id="lt-img2" />
-            </h>
-          </div>
-          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
-            <div class="m-lt-card" onclick="loadXL('cf1820')">
-              <img src="img\answer.svg" class="svgshadow" />
-              Codeforces Round 866 (Div. 2)
-            </div>
-          </div>
-          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
-            <div class="m-lt-card" onclick="loadXL('ABC301')">
-              <img src="img\answer.svg" class="svgshadow" />
-              AtCoder ABC 301
-            </div>
-          </div>
-          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
-            <div class="m-lt-card" onclick="loadXL('JT20230717')">
-              <img src="img\answer.svg" class="svgshadow" />
-              大一Tarjan
-            </div>
-          </div>
-          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
-            <div class="m-lt-card" onclick="loadXL('XL20230621')">
-              <img src="img\calendar.svg" class="svgshadow" />
-              2023年6月21日
-            </div>
-          </div>
-          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
-            <div class="m-lt-card" onclick="loadXL('XL20230622')">
-              <img src="img\calendar.svg" class="svgshadow" />
-              2023年6月22日
-            </div>
-          </div>      
-          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
-            <div class="m-lt-card" onclick="loadXL('XL20230623')">
-              <img src="img\calendar.svg" class="svgshadow" />
-              2023年6月23日 组队+补题
-            </div>
-          </div>
-          <div id="menuNote" class="collapse" data-bs-parent="#accordion">
-            <div class="m-lt-card" onclick="loadXL('board_Graph')">
-              <img src="img\board.svg" class="svgshadow" />
-              图论
-            </div>
-          </div>
-        </div>
-        <!-- 项目 -->
-        <div class="m-lt-menu">
-          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuProject" onclick="toggleImage('lt-img4')">
-            <img src="img\boardmenu.svg" class="svgshadow" />
-            项目记录(暂无)
-            <h class="open">
-              <img src="img/left.svg" class="svgshadow" id="lt-img4" />
-            </h>
-          </div>
-          <!-- <div id="menuProject" class="collapse" data-bs-parent="#accordion">
-            <div class="m-lt-card" onclick="load404()">
-              <img src="img\daily.svg" class="svgshadow" />
-              第一篇
-            </div>
-          </div> -->
-        </div>
-        <!-- 日记 -->
-        <div class="m-lt-menu">
-          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuDaily" onclick="toggleImage('lt-img4')">
-            <img src="img\daily.svg" class="svgshadow" />
-            日记
-            <h class="open">
-              <img src="img/left.svg" class="svgshadow" id="lt-img4" />
-            </h>
-          </div>
-          <div id="menuDaily" class="collapse" data-bs-parent="#accordion">
-            <div class="m-lt-card" onclick="loadPage('404')">
-              <img src="img\daily.svg" class="svgshadow" />
-              第一篇
-            </div>
-          </div>
-        </div>
-        <!-- 友链 -->
-        <div class="m-lt-menu">
-          <div class="m-lt-card bk collapsed" data-bs-toggle="collapse" href="#menuTwo" onclick="toggleImage('lt-img6')">
-            <img src="img\friend.svg" class="svgshadow" />
-            友链
-            <h class="open">
-              <img src="img\left.svg" class="svgshadow" id="lt-img6" />
-            </h>
-          </div>
-          <div id="menuTwo" class="collapse" data-bs-parent="#accordion">
-            <div class="m-lt-card bk">
-              <img src="img\AD.svg" class="svgshadow" />
-              广告位招租
-            </div>
-          </div>
-        </div>
-        <!-- 底部留白 -->
-        <br>
       </div>
     </div>
   </div>
@@ -296,8 +136,6 @@
 </script>
 <script>
   loadPage('home');
-  // loadABC301()
-  // loadConnect();
 </script>
 <script>
   function displayTime() {
@@ -316,5 +154,6 @@
   setInterval(displayTime, 1000);
 </script>
 
+<script src="list.js"></script> 
 
 </html>

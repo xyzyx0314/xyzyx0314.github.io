@@ -121,6 +121,7 @@
     {img: 'text', url: 'blog/week4', text: 'web week 4' },
     {img: 'text', url: 'blog/week5', text: 'Change 5' },
     {img: 'text', url: 'blog/week6', text: 'Change 6' },
+    {img: 'text', url: 'blog/week7', text: 'Change 7' },
   ]);
 
   createMenuItems('#menuNote', [

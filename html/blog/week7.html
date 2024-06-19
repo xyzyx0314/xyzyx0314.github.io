@@ -1,0 +1,94 @@
+<body>
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" class="scrollspy-example-2"
+        tabindex="0">
+        <div class="p-m">
+            <div class="p-top">
+                <div class="row">
+                    <div class="p-top-postion">
+                        <h class="p-top-link" onclick="loadPage('home')">Journey</h>
+                        /
+                        <h class="p-top-link" onclick="loadPage('note')">笔记</h>
+                        /
+                        <h class="p-top-link" onclick="loadNote('Web')"> web </h>
+                        /
+                        <h class="p-top-link" onclick="loadWeek('7')">博客更新7</h>
+                    </div>
+                </div>
+            </div>
+            <nav id="navbar-example3">
+                <a class="navbar-brand p-title2" href="#item" id="item">blog更新7</a>
+                <a class="nav-link p-title5" href="#item-A">6.19</a>
+            </nav>
+            <div class="p-problem">
+                <div class="p-title3" id="item-A">2024.6.19</div>
+                <div class="p-word">
+                    <div>
+                        小更新，更新了博客更新方式，从服务器下载docker变成了通过github的action自动对比更新
+                    </div>
+                </div>
+                <div class="p-word">
+                    <div>
+                        change.yml代码如下
+                    </div>
+                </div>
+                <div class="p-code">
+                    <pre><code class="docker">name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - '**' # This will match all branches
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install sshpass
+      run: sudo apt-get install sshpass
+
+    - name: Create known_hosts
+      run: |
+        mkdir -p ~/.ssh
+        touch ~/.ssh/known_hosts
+
+    - name: Add server to known hosts
+      run: ssh-keyscan IP >> ~/.ssh/known_hosts
+
+    - name: Deploy to server
+      run: |
+        sshpass -p ${{ secrets.SERVER_SSH_PRIVATE_KEY }} rsync -r . root@IP:/tmp/html
+        sshpass -p ${{ secrets.SERVER_SSH_PRIVATE_KEY }} ssh root@IP "docker cp /tmp/html blog:/usr/share/nginx && docker restart blog"
+                    </code></pre>
+                </div>
+                <div class="p-word">
+                    <div>
+                        应该会在最近推出v2.0，使用vue，之后博客更新方式为向数据库内添加记录即可，因为渲染在index.html上都完成了，ajax请求只需要文本，前端这块适配应该都是通的
+                    </div>
+                    <div>
+                        现在的难题应该是所有文章都是一个网址，怎么通过输入不同网址获得不同文章，这个应该需要试一下
+                    </div>
+                </div>
+            </div>
+   
+
+            <div class="p-bot">
+                <div class="p-date">
+                    <div>
+                        首次发布时间:2024年5月29日
+                    </div>
+                    <div>
+                        首次发布时间:2024年6月2日
+                    </div>
+                    <div>
+                        发布者:@不系舟UnmooredZ
+                    </div>
+                </div>
+            </div>
+            <div class="copyright colorfulword">Copyright © CKZ</div>
+        </div>
+    </div>
+</body>

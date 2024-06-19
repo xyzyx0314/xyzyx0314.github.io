@@ -60,8 +60,8 @@ jobs:
 
     - name: Deploy to server
       run: |
-        sshpass -p ${{ secrets.SERVER_SSH_PRIVATE_KEY }} rsync -r . root@IP:/tmp/html
-        sshpass -p ${{ secrets.SERVER_SSH_PRIVATE_KEY }} ssh root@IP "docker cp /tmp/html blog:/usr/share/nginx && docker restart blog"
+        sshpass -p ${{ secrets.SERVER_PASSWORD }} rsync -r . root@IP:/tmp/html
+        sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh root@IP "docker cp /tmp/html blog:/usr/share/nginx && docker restart blog"
                     </code></pre>
                 </div>
                 <div class="p-word">

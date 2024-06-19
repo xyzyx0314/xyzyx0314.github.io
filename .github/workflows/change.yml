@@ -1,0 +1,21 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - '**' # This will match all branches
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy to server
+      run: |
+        rsync -r . root@60.204.251.220:/tmp/blog
+        ssh root@60.204.251.220 "docker cp /tmp/blog blog:/usr/share/nginx/html && docker restart blog"
+      env:
+        PRIVATE_KEY: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}

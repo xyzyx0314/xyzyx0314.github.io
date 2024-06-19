@@ -1,0 +1,84 @@
+<body>
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" class="scrollspy-example-2"
+        tabindex="0">
+        <div class="p-m">
+            <div class="p-top">
+                <div class="row">
+                    <div class="p-top-postion">
+                        <h class="p-top-link" onclick="loadPage('home')">Journey</h>
+                        /
+                        <h class="p-top-link" onclick="loadPage('note')">笔记</h>
+                        /
+                        <h class="p-top-link" onclick="loadNote('project')"> 项目 </h>
+                        /
+                        <h class="p-top-link" onclick="loadBlog('project/project1')">远程桌面&内网穿透</h>
+                    </div>
+                </div>
+            </div>
+            <nav id="navbar-example3">
+                <a class="navbar-brand p-title2" href="#item" id="item">远程桌面&内网穿透</a>
+                <a class="nav-link p-title5" href="#item-A">1.Sunshine+Moonlight</a>
+                <a class="nav-link p-title5" href="#item-B">2.向日葵</a>
+                <a class="nav-link p-title5" href="#item-C">3.frp</a>
+            </nav>
+            <div class="p-word">
+                <div>
+                    花了俩天时间尝试了各种方案的远程桌面以及在309的一台机器上实现了内网穿透。
+                </div>
+                <div>
+                    关于远程桌面的开机，通过修改笔记本BIOS设置通电启动，配合米家智能开关实现，但是没法通过米家这种物理方法远程关机，也就是说如果开机了然后没连上，那么就无法关机。实际因为向日葵每日验证码，遇到过这个尴尬情况，现在已经改成密码了。
+                </div>
+                <div>
+                    破解的华为电脑管家没有远程桌面还是挺遗憾的
+                </div>
+            </div>
+            <div class="p-problem">
+                <div class="p-title3" id="item-A">1.Sunshine+Moonlight</div>
+                <div class="p-word">
+                    <div>
+                        电脑端安装Sunshine，然后平板端安装Moonlight，就可以实现平板控制电脑，体验下来延迟挺低的，但是只能在同一个局域网内，那么为什么不直接选择华为多屏协调呢？只需要让拯救者装个破解的华为电脑管家就可以了。
+                    </div>
+                </div>
+                <div class="p-title4">配合ZeroTier</div>
+                <div class="p-word">
+                    <div>
+                        ZeroTier的原理是将设备编入同一个“局域网”，这样子就可以用Sunshine+Moonlight实现远程访问，但是实际体验很差，而且只在手机端实现了远程访问，平板根本加入不了目标局域网
+                    </div>
+                </div>
+
+                <div class="p-title3" id="item-B">2.向日葵</div>
+                <div class="p-word">
+                    <div>
+                        安装就可以使用，上手很简单，而且延迟还行
+                    </div>
+                </div>
+
+
+                <div class="p-title3" id="item-B">3.frp</div>
+                <div class="p-word">
+                    <div>
+                        为了在外可以联上309的机器，所以还是得内网穿透，基本上看视频教程就可以实现，但是github中现在的版本和教程使用方法有点区别（也可能是我一开始路径不对或者文件没权限导致的）
+                    </div>
+                </div>
+
+
+            </div>
+   
+
+            <div class="p-bot">
+                <div class="p-date">
+                    <div>
+                        首次发布时间:2024年6月19日
+                    </div>
+                    <div>
+                        首次发布时间:2024年6月19日
+                    </div>
+                    <div>
+                        发布者:@不系舟UnmooredZ
+                    </div>
+                </div>
+            </div>
+            <div class="copyright colorfulword">Copyright © CKZ</div>
+        </div>
+    </div>
+</body>

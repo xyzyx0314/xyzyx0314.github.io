@@ -43,7 +43,7 @@
   var menuItems = [
     { id: 'menuWeb', img: 'classify.svg', title: ' 更新日志', imgId: 'lt-img1' },
     { id: 'menuNote', img: 'note.svg', title: ' ACM', imgId: 'lt-img2' },
-    { id: 'menuProject', img: 'boardmenu.svg', title: ' 项目记录(暂无)', imgId: 'lt-img4' },
+    { id: 'menuProject', img: 'boardmenu.svg', title: ' 实验', imgId: 'lt-img4' },
     { id: 'menuDaily', img: 'daily.svg', title: ' 日记', imgId: 'lt-img4' },
     { id: 'menuTwo', img: 'friend.svg', title: ' 友链', imgId: 'lt-img6' },
   ];
@@ -132,6 +132,10 @@
     {img: 'calendar', url: 'acm/XL20230622', text: '2023年6月22日' },
     {img: 'calendar', url: 'acm/XL20230623', text: '2023年6月23日 组队+补题' },
     {img: 'board', url: 'acm/board_Graph', text: '图论' },
+  ]);
+
+  createMenuItems('#menuProject', [
+    {img: 'text', url: 'project/project1', text: '远程桌面&内网穿透' },
   ]);
 
   createMenuItems('#menuDaily', [

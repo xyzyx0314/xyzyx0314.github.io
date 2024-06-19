@@ -16,6 +16,9 @@ jobs:
     - name: Install sshpass
       run: sudo apt-get install sshpass
 
+    - name: Add server to known hosts
+      run: ssh-keyscan 60.204.251.220 >> ~/.ssh/known_hosts
+
     - name: Deploy to server
       run: |
         sshpass -p ${{ secrets.SERVER_PASSWORD }} rsync -r . root@60.204.251.220:/tmp/blog

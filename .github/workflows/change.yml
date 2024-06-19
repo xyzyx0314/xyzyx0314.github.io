@@ -16,6 +16,11 @@ jobs:
     - name: Install sshpass
       run: sudo apt-get install sshpass
 
+    - name: Create known_hosts
+      run: |
+        mkdir -p ~/.ssh
+        touch ~/.ssh/known_hosts
+
     - name: Add server to known hosts
       run: ssh-keyscan 60.204.251.220 >> ~/.ssh/known_hosts
 

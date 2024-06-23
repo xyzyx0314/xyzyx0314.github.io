@@ -1,9 +1,9 @@
 name: Publish Docker image
 on:
   push:
-    paths-ignore:
-        - '**' # 忽略所有文件
-        - '!README.md' # 除了README.md
+    # paths-ignore:
+    #     - '**' # 忽略所有文件
+    #     - '!README.md' # 除了README.md
     branches: [ main ]
   pull_request:
     branches: [ main ]
